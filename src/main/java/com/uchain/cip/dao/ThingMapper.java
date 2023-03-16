@@ -14,4 +14,6 @@ import org.springframework.stereotype.Repository;
 @Mapper
 public interface ThingMapper extends BaseMapper<Thing> {
     public int add(Thing thing);
+
+    public int deleteByid(Integer id);
 }

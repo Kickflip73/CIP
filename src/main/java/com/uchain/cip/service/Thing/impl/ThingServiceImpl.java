@@ -66,4 +66,13 @@ public class ThingServiceImpl extends ServiceImpl<ThingMapper, Thing>
            return new ResultVO(0,"插入失败，请联系管理员",null);
        }
     }
+
+    @Override
+    public ResultVO deletePageThing(Integer id) {
+        if(thingMapper.deleteByid(id)>0){
+            return new ResultVO(1000,"删除成功",null);
+        }else{
+            return new ResultVO(0,"删除失败，请联系zxc",null);
+        }
+    }
 }

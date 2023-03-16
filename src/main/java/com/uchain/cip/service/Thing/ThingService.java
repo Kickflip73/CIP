@@ -13,5 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 */
 public interface ThingService extends IService<Thing> {
     ResultVO getPageThingByCondition(ThingCondition condition);
-    ResultVO addPageThing(@RequestBody Thing thing );
+    ResultVO addPageThing( Thing thing );
+
+    ResultVO deletePageThing(Integer id);
+
 }
