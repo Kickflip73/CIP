@@ -1,16 +1,19 @@
-package com.uchain.cip.service.impl;
+package com.uchain.cip.service.Thing.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.uchain.cip.enums.ResultEnum;
 import com.uchain.cip.pojo.Thing;
-import com.uchain.cip.service.ThingService;
+import com.uchain.cip.service.Thing.ThingService;
 import com.uchain.cip.dao.ThingMapper;
 import com.uchain.cip.util.ThingCondition;
 import com.uchain.cip.vo.ResultVO;
+import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 /**
 * @author 30652
@@ -18,6 +21,7 @@ import org.springframework.stereotype.Service;
 * @createDate 2023-03-16 10:24:20
 */
 @Service
+@Slf4j
 public class ThingServiceImpl extends ServiceImpl<ThingMapper, Thing>
     implements ThingService{
     @Autowired
@@ -50,5 +54,16 @@ public class ThingServiceImpl extends ServiceImpl<ThingMapper, Thing>
         } else {
             return new ResultVO(ResultEnum.SUCCESS.getCode(), ResultEnum.SUCCESS.getMessage(), thingPage.getRecords());
         }
+    }
+
+    @Override
+    public ResultVO addPageThing(Thing thing) {
+        int result = thingMapper.add(thing);
+        log.info(String.valueOf(result));
+       if(result>0){
+           return new ResultVO(ResultEnum.SUCCESS.getCode(),"插入成功",null);
+       }else {
+           return new ResultVO(0,"插入失败，请联系管理员",null);
+       }
     }
 }

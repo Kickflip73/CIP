@@ -1,11 +1,10 @@
-package com.uchain.cip.service;
+package com.uchain.cip.service.Thing;
 
 import com.uchain.cip.pojo.Thing;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.uchain.cip.util.ThingCondition;
 import com.uchain.cip.vo.ResultVO;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.RequestBody;
 
 /**
 * @author 30652
@@ -14,4 +13,5 @@ import java.util.List;
 */
 public interface ThingService extends IService<Thing> {
     ResultVO getPageThingByCondition(ThingCondition condition);
+    ResultVO addPageThing(@RequestBody Thing thing );
 }
