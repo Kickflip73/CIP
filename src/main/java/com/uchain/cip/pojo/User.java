@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
+import java.util.Date;
+
 import lombok.Data;
 
 /**
@@ -84,6 +86,25 @@ public class User implements Serializable {
      * 平均学分绩点
      */
     private Double gpa;
+
+    /**
+     * 注册时间
+     * */
+    private Date registrationDate;
+
+    public User() {
+        type = 2;
+        name = null;
+        gender = -1;
+        phone = null;
+        number = null;
+        description = null;
+        grade = -1;
+        department = null;
+        major = null;
+        gpa = -1.0;
+        registrationDate = new Date();
+    }
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

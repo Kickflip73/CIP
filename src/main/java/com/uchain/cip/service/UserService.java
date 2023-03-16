@@ -13,4 +13,8 @@ public interface UserService extends IService<User> {
 
     public ResultVO getUserById(long id);
 
+    public ResultVO getAllUser();
+
+    public ResultVO register(User user);
+
 }

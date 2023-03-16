@@ -5,9 +5,9 @@ public enum ResultEnum {
     /**
      * */
     SUCCESS(1000, "成功"),
-    NOT_FIND_USER(1001, "未找到相应用户"),
-    PASSWORD_ERROR(1002, "密码错误"),
-    QUERY_FAIL(2001, "帖子查询失败")
+    FAIL(1001, "失败"),
+    NOT_FIND_USER(1003, "未找到相应用户"),
+    PASSWORD_ERROR(1004, "密码错误"),
     ;
 
 

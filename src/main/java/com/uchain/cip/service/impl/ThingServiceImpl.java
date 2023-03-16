@@ -28,7 +28,7 @@ public class ThingServiceImpl extends ServiceImpl<ThingMapper, Thing>
         Page<Thing> page = new Page<>(condition.getPageIndex(), condition.getPageSize());
         LambdaQueryWrapper<Thing> wrapper = new LambdaQueryWrapper<>();
         wrapper.like(condition.getTitle() != null, Thing::getTitle, condition.getTitle())
-                .eq(Thing::getType, condition.getType());
+                .eq(condition.getType() != 0,Thing::getType, condition.getType());
 
         if (condition.getOrderBy() == 0 && condition.getAscOrDesc() == 0) {
             wrapper.orderByAsc(Thing::getCreateDateTime);
@@ -46,7 +46,7 @@ public class ThingServiceImpl extends ServiceImpl<ThingMapper, Thing>
 
         Page<Thing> thingPage = thingMapper.selectPage(page, wrapper);
         if (thingPage == null) {
-            return new ResultVO(ResultEnum.QUERY_FAIL.getCode(), ResultEnum.QUERY_FAIL.getMessage(), null);
+            return new ResultVO(ResultEnum.FAIL.getCode(), "帖子查询失败", null);
         } else {
             return new ResultVO(ResultEnum.SUCCESS.getCode(), ResultEnum.SUCCESS.getMessage(), thingPage.getRecords());
         }
