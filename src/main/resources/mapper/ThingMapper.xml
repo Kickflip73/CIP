@@ -18,7 +18,7 @@
         title,content,money
     </sql>
     <insert id="add" parameterType="com.uchain.cip.pojo.Thing" >
-        insert into thing(user_id,type,title,content,money) values (#{userId}, #{type}, #{title}, #{content}, #{money});
+        insert into thing(user_id,type,title,content,money,create_date_time,views,comments_num) values (#{userId}, #{type}, #{title}, #{content}, #{money},#{createDateTime},#{views},#{commentsNum});
     </insert>
 
 

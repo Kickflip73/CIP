@@ -63,6 +63,12 @@ public class Thing implements Serializable {
      * */
     private int commentsNum;
 
+    public Thing() {
+        this.createDateTime = new Date(new java.util.Date().getTime());
+        this.views = 0;
+        this.commentsNum = 0;
+    }
+
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 
