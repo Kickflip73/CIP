@@ -9,6 +9,8 @@ import com.uchain.cip.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
 * @author 30652
 * @description 针对表【user】的数据库操作Service实现
@@ -16,7 +18,7 @@ import org.springframework.stereotype.Service;
 */
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User>
-    implements UserService{
+    implements UserService {
 
     @Autowired
     UserMapper userMapper;
@@ -30,4 +32,25 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             return new ResultVO(ResultEnum.SUCCESS.getCode(), ResultEnum.SUCCESS.getMessage(), user);
         }
     }
+
+    @Override
+    public ResultVO getAllUser() {
+        List<User> users = userMapper.selectList(null);
+        if (users == null) {
+            return new ResultVO(ResultEnum.FAIL.getCode(), ResultEnum.FAIL.getMessage(), null);
+        } else {
+            return new ResultVO(ResultEnum.SUCCESS.getCode(), ResultEnum.SUCCESS.getMessage(), users);
+        }
+    }
+
+    @Override
+    public ResultVO register(User user) {
+        int insert = userMapper.insert(user);
+        if (insert > 0) {
+            return new ResultVO(ResultEnum.SUCCESS.getCode(), "注册成功", null);
+        } else {
+            return new ResultVO(ResultEnum.FAIL.getCode(), "注册失败", null);
+        }
+    }
+
 }

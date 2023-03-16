@@ -1,5 +1,8 @@
 package com.uchain.cip.vo;
 
+/**
+ * 返回视图
+ * */
 public class ResultVO {
     private int code;
     private String message;
