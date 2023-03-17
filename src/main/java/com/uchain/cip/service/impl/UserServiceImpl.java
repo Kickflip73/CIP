@@ -46,13 +46,19 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
 
     @Override
     public ResultVO register(User user) {
+        if (userMapper.getUserByNickNameOrEmail(user.getEmail()) != null) {
+            return new ResultVO(ResultEnum.EMAIL_ALREADY_EXISTS.getCode(), ResultEnum.EMAIL_ALREADY_EXISTS.getMessage(), null);
+        }
+        if (userMapper.getUserByNickNameOrEmail(user.getNickName()) != null) {
+            return new ResultVO(ResultEnum.NICKNAME_ALREADY_EXISTS.getCode(), ResultEnum.NICKNAME_ALREADY_EXISTS.getMessage(), null);
+        }
 
         //满足条件，插入数据库
         int insert = userMapper.insert(user);
         if (insert > 0) {
-            return new ResultVO(ResultEnum.SUCCESS.getCode(), "注册成功", null);
+            return new ResultVO(ResultEnum.REGISTER_SUCCESS.getCode(), ResultEnum.REGISTER_SUCCESS.getMessage(), user);
         } else {
-            return new ResultVO(ResultEnum.FAIL.getCode(), "注册失败", null);
+            return new ResultVO(ResultEnum.REGISTER_FAIL.getCode(), ResultEnum.REGISTER_FAIL.getMessage(), null);
         }
     }
 

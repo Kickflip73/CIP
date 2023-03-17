@@ -2,9 +2,8 @@ package com.uchain.cip.service.Thing;
 
 import com.uchain.cip.pojo.Thing;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.uchain.cip.util.ThingCondition;
+import com.uchain.cip.tools.ThingCondition;
 import com.uchain.cip.vo.ResultVO;
-import org.springframework.web.bind.annotation.RequestBody;
 
 /**
 * @author 30652

@@ -1,4 +1,4 @@
-package com.uchain.cip.util;
+package com.uchain.cip.tools;
 
 import lombok.Getter;
 
