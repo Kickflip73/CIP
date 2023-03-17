@@ -75,4 +75,31 @@ public class ThingServiceImpl extends ServiceImpl<ThingMapper, Thing>
             return new ResultVO(0,"删除失败，请联系zxc",null);
         }
     }
+
+    @Override
+    public ResultVO updateContent(Integer id, String content) {
+        if(thingMapper.updateContent(id,content)>0){
+            return new ResultVO(1000,"修改内容成功",null);
+        }else{
+            return new ResultVO(0,"修改内容失败",null);
+        }
+    }
+
+    @Override
+    public ResultVO updateMoney(Integer id, Integer money) {
+        if(thingMapper.updateMoney(id,money)>0){
+            return new ResultVO(1000,"修改悬赏金额成功",null);
+        }else{
+            return new ResultVO(0,"修改悬赏金额失败",null);
+        }
+    }
+
+    @Override
+    public ResultVO updateTitle(Integer id, String title) {
+        if(thingMapper.updateTitle(id,title)>0){
+            return new ResultVO(1000,"修改文章标题成功",null);
+        }else{
+            return new ResultVO(0,"修改文章标题失败",null);
+        }
+    }
 }

@@ -17,4 +17,12 @@ public interface ThingService extends IService<Thing> {
 
     ResultVO deletePageThing(Integer id);
 
+    ResultVO updateContent(Integer id,String content);
+    /*修改悬赏金额*/
+
+    ResultVO updateMoney(Integer id,Integer money);
+    /*修改帖子标题*/
+    ResultVO updateTitle(Integer id,String title);
 }
+
+

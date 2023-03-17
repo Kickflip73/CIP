@@ -23,6 +23,15 @@
     <delete id="deleteByid" parameterType="integer">
         delete from thing  where  id = #{id};
     </delete>
+    <update id="updateContent" >
+        update thing set  content=#{param2} where id =#{id}
+    </update>
+    <update id="updateMoney" >
+        update thing set money =#{param2} where id =#{id}
+    </update>
+    <update id="updateTitle" >
+        update thing set title = #{param2} where id =#{id}
+    </update>
 
 
 </mapper>

@@ -13,7 +13,16 @@ import org.springframework.stereotype.Repository;
 */
 @Mapper
 public interface ThingMapper extends BaseMapper<Thing> {
+    /*添加帖子*/
     public int add(Thing thing);
+    /*删除帖子*/
 
     public int deleteByid(Integer id);
+    /*修改帖子内容*/
+    int updateContent(Integer id,String content);
+    /*修改悬赏金额*/
+
+    int updateMoney(Integer id,Integer money);
+    /*修改帖子标题*/
+    int updateTitle(Integer id,String title);
 }
