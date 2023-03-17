@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>注册</title>
+    <link rel="stylesheet" type="text/css" href="../css/register.css">
+    <meta charset="UTF-8">
+</head>
+<body>
+<script src="../js/registerUser.js"></script>
+
+<div class="container">
+    <h1>注册</h1>
+    <form id="register-form" action="http://localhost:8099/cip/users" method="POST">
+        <label for="email">邮箱：</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="nickName">昵称：</label>
+        <input type="text" id="nickName" name="nickName" required>
+
+        <label for="password">密码：</label>
+        <input type="password" id="password" name="password" required>
+
+        <label for="confirm_password">确认密码：</label>
+        <input type="password" id="confirm_password" name="confirm_password" required>
+
+        <button type="submit" id="register-button" onclick="registerUser()">注册</button>
+    </form>
+
+    <p>已有账号？<a href="http://localhost:8099/cip/html/login.html">立即登录</a></p>
+
+</div>
+</body>
+</html>

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
 * @author 30652
@@ -45,11 +46,23 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
 
     @Override
     public ResultVO register(User user) {
+
+        //满足条件，插入数据库
         int insert = userMapper.insert(user);
         if (insert > 0) {
             return new ResultVO(ResultEnum.SUCCESS.getCode(), "注册成功", null);
         } else {
             return new ResultVO(ResultEnum.FAIL.getCode(), "注册失败", null);
+        }
+    }
+
+    @Override
+    public ResultVO login(String nickNameOrEmail, String password) {
+        User user = userMapper.getUserByNickNameOrEmail(nickNameOrEmail);
+        if (user != null && Objects.equals(user.getPassword(), password)) {
+            return new ResultVO(ResultEnum.LOGIN_SUCCESS.getCode(), ResultEnum.LOGIN_SUCCESS.getMessage(), user);
+        } else {
+            return new ResultVO(ResultEnum.LOGIN_FAIL.getCode(), ResultEnum.LOGIN_FAIL.getMessage(), null);
         }
     }
 

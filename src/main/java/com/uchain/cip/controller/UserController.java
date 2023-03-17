@@ -65,4 +65,12 @@ public class UserController {
             return new ResultVO(ResultEnum.FAIL.getCode(), ResultEnum.FAIL.getMessage(), null);
         }
     }
+
+    /**
+     * 用户登录
+     * */
+    @PostMapping("/login")
+    public ResultVO login(@RequestParam String  nickNameOrEmail, @RequestParam String password) {
+        return userService.login(nickNameOrEmail, password);
+    }
 }

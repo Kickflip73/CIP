@@ -6,8 +6,10 @@ public enum ResultEnum {
      * */
     SUCCESS(1000, "成功"),
     FAIL(1001, "失败"),
-    NOT_FIND_USER(1003, "未找到相应用户"),
-    PASSWORD_ERROR(1004, "密码错误"),
+    LOGIN_SUCCESS(1002, "登陆成功"),
+    LOGIN_FAIL(1003, "账号或密码错误，请检查后重试"),
+    NOT_FIND_USER(1004, "未找到相应用户"),
+    PASSWORD_ERROR(1005, "密码错误"),
     ;
 
 

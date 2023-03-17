@@ -17,4 +17,5 @@ public interface UserService extends IService<User> {
 
     public ResultVO register(User user);
 
+    public ResultVO login(String nickNameOrEmail, String password);
 }

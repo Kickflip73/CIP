@@ -28,4 +28,9 @@
         description,grade,department,
         major,GPA
     </sql>
+
+    <!--依据用户昵称或者邮箱获取用户信息-->
+    <select id="getUserByNickNameOrEmail" resultType="com.uchain.cip.pojo.User">
+        SELECT * FROM user WHERE nick_name = #{nickNameOrEmail} OR email = #{nickNameOrEmail};
+    </select>
 </mapper>
