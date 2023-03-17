@@ -7,6 +7,9 @@ import com.uchain.cip.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.Objects;
+
 /**
  * author: kickflip
  * date: 2023.3.16 17:35
@@ -38,8 +41,21 @@ public class UserController {
      * 注册用户
      * */
     @PostMapping
-    public ResultVO register(@RequestBody User user) {
-        return userService.register(user);
+    public ResultVO register(@RequestBody User user, HttpServletRequest request) {
+        ResultEnum resultEnum = userService.formatValidationAndSendVerifyCode(user, request);
+        return new ResultVO(resultEnum.getCode(), resultEnum.getMessage(), null);
+    }
+
+    /**
+     * 验证验证码
+     * */
+    @PostMapping("/verification")
+    public ResultVO verification(@RequestParam String verifyCode, HttpServletRequest request) {
+        if (Objects.equals(request.getSession().getAttribute("verifyCode"), verifyCode)) {
+            return new ResultVO(ResultEnum.REGISTER_SUCCESS.getCode(), ResultEnum.REGISTER_SUCCESS.getMessage(), null);
+        } else {
+            return new ResultVO(ResultEnum.VERIFY_CODE_ERROR.getCode(), ResultEnum.VERIFY_CODE_ERROR.getMessage(), null);
+        }
     }
 
     /**
