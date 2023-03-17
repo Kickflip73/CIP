@@ -1,8 +1,12 @@
 package com.uchain.cip.service;
 
+import com.uchain.cip.enums.ResultEnum;
 import com.uchain.cip.pojo.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.uchain.cip.vo.ResultVO;
+import org.springframework.http.HttpRequest;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
 * @author 30652
@@ -15,7 +19,9 @@ public interface UserService extends IService<User> {
 
     public ResultVO getAllUser();
 
-    public ResultVO register(User user);
-
     public ResultVO login(String nickNameOrEmail, String password);
+
+    public ResultEnum formatValidationAndSendVerifyCode(User user, HttpServletRequest request);
+
+    public ResultVO saveUser(User user);
 }

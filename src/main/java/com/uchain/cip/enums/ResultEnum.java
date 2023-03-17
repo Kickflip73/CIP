@@ -13,8 +13,9 @@ public enum ResultEnum {
     EMAIL_ALREADY_EXISTS(1050, "邮箱已被注册"),
     NICKNAME_ALREADY_EXISTS(1060, "用户昵称已存在"),
     REGISTER_SUCCESS(1071, "注册成功"),
-    REGISTER_FAIL(1070, "注册失败"),
-    ;
+    REGISTER_FAIL(1070, "验证码错误"),
+    EMAIL_SEN_FAIL(1080, "邮件发送失败"),
+    VERIFY_CODE_ERROR(1090, "验证码错误");
 
 
     private int code;

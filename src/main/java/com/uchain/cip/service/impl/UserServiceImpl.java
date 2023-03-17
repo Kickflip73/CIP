@@ -5,12 +5,16 @@ import com.uchain.cip.enums.ResultEnum;
 import com.uchain.cip.pojo.User;
 import com.uchain.cip.service.UserService;
 import com.uchain.cip.dao.UserMapper;
+import com.uchain.cip.tools.EmailUtil;
 import com.uchain.cip.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 
 /**
 * @author 30652
@@ -23,6 +27,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
 
     @Autowired
     UserMapper userMapper;
+
+    @Autowired
+    EmailUtil emailUtil;
 
     @Override
     public ResultVO getUserById(long id) {
@@ -45,15 +52,31 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     }
 
     @Override
-    public ResultVO register(User user) {
+    public ResultEnum formatValidationAndSendVerifyCode(User user, HttpServletRequest request) {
+        //验证信息合法性
         if (userMapper.getUserByNickNameOrEmail(user.getEmail()) != null) {
-            return new ResultVO(ResultEnum.EMAIL_ALREADY_EXISTS.getCode(), ResultEnum.EMAIL_ALREADY_EXISTS.getMessage(), null);
+            return ResultEnum.EMAIL_ALREADY_EXISTS;
         }
         if (userMapper.getUserByNickNameOrEmail(user.getNickName()) != null) {
-            return new ResultVO(ResultEnum.NICKNAME_ALREADY_EXISTS.getCode(), ResultEnum.NICKNAME_ALREADY_EXISTS.getMessage(), null);
+            return ResultEnum.NICKNAME_ALREADY_EXISTS;
         }
 
-        //满足条件，插入数据库
+        //发送验证码
+        try {
+            String verifyCode = String.format("%04d", new Random().nextInt(9999 - 1000 + 1) + 1000);
+            String text = "您正在注册校园互助平台账户，验证码为：" + verifyCode + "，若非本人操作，请忽略此条信息~";
+            emailUtil.sendSimpleMailMessage(user.getEmail(), "验证码来咯~", text);
+            request.getSession().setAttribute("verifyCode", verifyCode);
+        } catch (Exception e) {
+            return ResultEnum.EMAIL_SEN_FAIL;
+        }
+
+        return ResultEnum.SUCCESS;
+    }
+
+    @Override
+    public ResultVO saveUser(User user) {
+        //插入数据库
         int insert = userMapper.insert(user);
         if (insert > 0) {
             return new ResultVO(ResultEnum.REGISTER_SUCCESS.getCode(), ResultEnum.REGISTER_SUCCESS.getMessage(), user);
@@ -71,5 +94,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             return new ResultVO(ResultEnum.LOGIN_FAIL.getCode(), ResultEnum.LOGIN_FAIL.getMessage(), null);
         }
     }
+
+
 
 }
