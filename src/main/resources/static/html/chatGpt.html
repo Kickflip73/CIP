@@ -2,61 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>GPT问答系统</title>
-    <style>
-        #container {
-            width: 500px;
-            margin: 50px auto;
-        }
-        #question-input {
-            width: 100%;
-            height: 50px;
-            margin-bottom: 20px;
-            font-size: 16px;
-            padding: 10px;
-        }
-        #answer-output {
-            width: 100%;
-            height: 200px;
-            font-size: 16px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            overflow-y: scroll;
-        }
-        #send-btn {
-            width: 100%;
-            height: 50px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            font-size: 16px;
-            cursor: pointer;
-        }
-    </style>
+    <title>GPT Chat</title>
+    <link rel="stylesheet" href="../css/chatGpt.css">
 </head>
 <body>
-<div id="container">
-    <input id="question-input" type="text" placeholder="请输入您的问题">
-    <button id="send-btn">发送</button>
-    <div id="answer-output"></div>
+<div class="chat-container">
+    <div class="chat-header">
+        <h1>Chat GPT</h1>
+    </div>
+    <div class="chat-messages" id="chat-messages">
+        <div class="message">
+            <img src="../image/chatGpt.png" alt="avatar">
+            <div class="message-content">
+                <div class="message-text">
+                    <p>欢迎使用GPT聊天！请在下面输入您的消息：</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="chat-form">
+        <form id="chat-form">
+            <label for="user-input"></label>
+            <input type="text" id="user-input" placeholder="在此处键入你的消息。。。">
+            <button type="submit" id="send-btn">Send</button>
+        </form>
+    </div>
 </div>
-<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>
-    $(function () {
-        $("#send-btn").click(function () {
-            var question = $("#question-input").val();
-            $.ajax({
-                url: "/GPT",
-                type: "POST",
-                data: {
-                    prompt: question
-                },
-                success: function (data) {
-                    $("#answer-output").html(data);
-                }
-            });
-        });
-    });
-</script>
+
+<script src="../js/chatGpt.js"></script>
 </body>
 </html>

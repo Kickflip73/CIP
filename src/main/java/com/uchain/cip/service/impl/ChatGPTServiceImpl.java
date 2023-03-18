@@ -25,7 +25,7 @@ public class ChatGPTServiceImpl implements ChatGPTService {
     private int proxyPort;
 
     @Override
-    public String putQuest(String prompt) {
+    public String putQuest(String message) {
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(new OpenAILogger());
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
@@ -39,13 +39,18 @@ public class ChatGPTServiceImpl implements ChatGPTService {
                 .proxy(proxy)
                 .apiHost(openAiApiBaseUrl)
                 .build();
-        CompletionResponse completions = openAiClient.completions(prompt);
+        CompletionResponse completions = openAiClient.completions(message);
 
         StringBuilder stringBuilder = new StringBuilder();
         for (Choice choice : completions.getChoices()) {
             stringBuilder.append(choice);
         }
+        String context = stringBuilder.toString();
+        String prefix = "Choice(text= ";
+        String suffix = ", index=0, logprobs=null, finishReason=stop)";
+        context = context.substring(prefix.length());
+        context = context.substring(0, context.length() - suffix.length());
 
-        return stringBuilder.toString();
+        return context;
     }
 }
