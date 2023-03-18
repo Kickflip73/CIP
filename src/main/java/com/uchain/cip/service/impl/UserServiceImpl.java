@@ -67,6 +67,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             String text = "您正在注册校园互助平台账户，验证码为：" + verifyCode + "，若非本人操作，请忽略此条信息~";
             emailUtil.sendSimpleMailMessage(user.getEmail(), "验证码来咯~", text);
             request.getSession().setAttribute("verifyCode", verifyCode);
+            request.getSession().setAttribute("user", user);
         } catch (Exception e) {
             return ResultEnum.EMAIL_SEN_FAIL;
         }
@@ -94,7 +95,5 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             return new ResultVO(ResultEnum.LOGIN_FAIL.getCode(), ResultEnum.LOGIN_FAIL.getMessage(), null);
         }
     }
-
-
 
 }

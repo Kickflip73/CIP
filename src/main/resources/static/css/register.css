@@ -28,7 +28,7 @@ input[type="password"] {
     margin-bottom: 20px;
 }
 
-button[type="submit"] {
+button[type="button"] {
     background-color: #008CBA;
     color: white;
     padding: 10px;
@@ -38,7 +38,7 @@ button[type="submit"] {
     margin-top: 10px;
 }
 
-button[type="submit"]:hover {
+button[type="button"]:hover {
     background-color: #0077b3;
 }
 

@@ -38,21 +38,21 @@ public class UserController {
     }
 
     /**
-     * 注册用户
+     * 验证账户信息，发送验证码
      * */
-    @PostMapping
+    @PostMapping("/register")
     public ResultVO register(@RequestBody User user, HttpServletRequest request) {
         ResultEnum resultEnum = userService.formatValidationAndSendVerifyCode(user, request);
         return new ResultVO(resultEnum.getCode(), resultEnum.getMessage(), null);
     }
 
     /**
-     * 验证验证码
+     * 验证验证码，注册用户
      * */
     @PostMapping("/verification")
     public ResultVO verification(@RequestParam String verifyCode, HttpServletRequest request) {
         if (Objects.equals(request.getSession().getAttribute("verifyCode"), verifyCode)) {
-            return new ResultVO(ResultEnum.REGISTER_SUCCESS.getCode(), ResultEnum.REGISTER_SUCCESS.getMessage(), null);
+            return userService.saveUser((User) request.getSession().getAttribute("user"));
         } else {
             return new ResultVO(ResultEnum.VERIFY_CODE_ERROR.getCode(), ResultEnum.VERIFY_CODE_ERROR.getMessage(), null);
         }
