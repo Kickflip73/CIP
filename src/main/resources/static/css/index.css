@@ -1,0 +1,191 @@
+/* 导航栏样式 */
+nav {
+    background-color: #333;
+    height: 60px;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+nav li {
+    position: relative;
+}
+
+nav a {
+    display: block;
+    color: #fff;
+    text-align: center;
+    padding: 20px 25px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    background-color: #555;
+}
+
+nav ul ul {
+    display: none;
+    position: absolute;
+    top: 60px;
+}
+
+nav ul li:hover > ul {
+    display: inherit;
+}
+
+nav ul ul li {
+    width: 200px;
+    float: none;
+    display: list-item;
+    position: relative;
+}
+
+nav ul ul ul li {
+    position: relative;
+    top: -60px;
+    left: 200px;
+}
+
+/* 用户信息样式 */
+#user-info {
+    margin-left: auto;
+}
+
+#avatar {
+    width: 40px;
+    height: 40px;
+    background-color: #fff;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+#nickname {
+    display: inline-block;
+    color: #fff;
+}
+
+#user-info ul {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    border-radius: 5px;
+    padding: 10px;
+    top: 60px;
+    right: 0;
+}
+
+#user-info:hover ul {
+    display: block;
+}
+
+#user-info ul li {
+    margin: 10px 0;
+}
+
+/* 页面主体样式 */
+.content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.module {
+    width: 31%;
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.module h2 {
+    font-size: 24px;
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.module p {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* 响应式设计 */
+@media (max-width: 1024px) {
+    .content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .module {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+    }
+
+    nav li {
+        position: static;
+        margin-bottom: 5px;
+    }
+
+    nav ul ul {
+        position: static;
+        display: none;
+        margin-left: 20px;
+    }
+
+    nav ul ul li {
+        width: 100%;
+        display: block;
+    }
+
+    #user-info {
+        margin-left: 0;
+        margin-right: 20px;
+    }
+
+    #user-info ul {
+        position: static;
+        display: none;
+        margin-top: 10px;
+        right:0;
+    }
+
+    #user-info:hover ul {
+        display: block;
+    }
+}
+
+@media (max-width: 480px) {
+    nav a {
+        padding: 10px 15px;
+    }
+
+    #avatar {
+        width: 30px;
+        height: 30px;
+    }
+
+    #nickname {
+        font-size: 14px;
+    }
+
+    .module {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
