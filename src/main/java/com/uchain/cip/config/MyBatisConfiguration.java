@@ -8,10 +8,11 @@ import org.springframework.context.annotation.Bean;
 /**
  * MyBatisPlus配置类
  * */
-public class myBatisConfiguration {
+public class MyBatisConfiguration {
     @Bean
     public MybatisPlusInterceptor mybatisPlusInterceptor() {
         MybatisPlusInterceptor mybatisPlusInterceptor = new MybatisPlusInterceptor();
+        //添加分页插件
         mybatisPlusInterceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.MYSQL));
 
         return mybatisPlusInterceptor;

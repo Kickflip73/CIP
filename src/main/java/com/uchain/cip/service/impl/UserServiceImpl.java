@@ -53,7 +53,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
 
     @Override
     public ResultEnum formatValidationAndSendVerifyCode(User user, HttpServletRequest request) {
-        //验证信息合法性
+        //验证信息是否重合
         if (userMapper.getUserByNickNameOrEmail(user.getEmail()) != null) {
             return ResultEnum.EMAIL_ALREADY_EXISTS;
         }

@@ -28,3 +28,10 @@ server:
   port: 8099
   servlet:
     context-path: "/cip"
+
+chatGPT:
+  openAiApiBaseUrl: https://api.openai.com/
+  openAiApiKey: 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
+  #代理
+  proxyHostName: kaolacode.f3322.net
+  proxyPort: 10809

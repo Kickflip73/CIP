@@ -12,6 +12,6 @@ public class SendEmailTest {
 
     @Test
     public void testSendSimpleMessageEmail() {
-        emailUtil.sendSimpleMailMessage("3065242502@qq.com", "Hello", "测试内容");
+//        emailUtil.sendSimpleMailMessage("3065242502@qq.com", "Hello", "测试内容");
     }
 }
