@@ -1,33 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>注册</title>
-    <link rel="stylesheet" type="text/css" href="../css/register.css">
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册</title>
 </head>
 <body>
-<script src="../js/registerUser.js"></script>
 
-<div class="container">
-    <h1>注册</h1>
-    <form id="register-form" action="http://localhost:8099/cip/users/register" method="POST">
-        <label for="email">邮箱：</label>
-        <input type="email" id="email" name="email" required>
+    <link rel="stylesheet" type="text/css" href="../css/register.css">
 
-        <label for="nickName">昵称：</label>
-        <input type="text" id="nickName" name="nickName" required>
+    <div class="container">
 
-        <label for="password">密码：</label>
-        <input type="password" id="password" name="password" required>
+        <form id="form" class="form" action="http://localhost:8099/cip/users/register" method="POST">
+            <h2>注册</h2>
 
-        <label for="confirm_password">确认密码：</label>
-        <input type="password" id="confirm_password" name="confirm_password" required>
+            <div class="form-control">
+                <label for="username">用户名</label>
+                <input type="text" id="username" placeholder="请输入用户名" />
+                <small>错误信息</small>
+            </div>
 
-        <button type="button" id="register-button" onclick="registerUser()">注册</button>
-    </form>
+            <div class="form-control">
+                <label for="email">邮箱</label>
+                <input type="text" id="email" placeholder="请输入邮箱" />
+                <small>错误信息</small>
+            </div>
 
-    <p>已有账号？<a href="http://localhost:8099/cip/html/login.html">立即登录</a></p>
+            <div class="form-control">
+                <label for="password">密码</label>
+                <input type="password" id="password" placeholder="请输入密码" />
+                <small>错误信息</small>
+            </div>
 
-</div>
+            <div class="form-control">
+                <label for="password2">确认密码</label>
+                <input type="password" id="password2" placeholder="请再次输入密码" />
+                <small>错误信息</small>
+            </div>
+
+            <button type="submit" onclick="registerUser()">注册</button>
+
+            <p>已有账号？<a href="http://localhost:8099/cip/html/login.html">立即登录</a></p>
+        </form>
+    </div>
+
+    <script src="../js/registerUser.js"></script>
+
 </body>
 </html>
