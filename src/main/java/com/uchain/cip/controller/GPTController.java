@@ -1,17 +1,20 @@
 package com.uchain.cip.controller;
-import com.uchain.cip.service.ChatGPTService;
+import com.uchain.cip.service.impl.ChatGPTServiceImpl;
+import com.uchain.cip.service.impl.ChatGPTServiceImpl2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
 
 
 @RestController
 @RequestMapping("/GPT")
 public class GPTController {
     @Autowired
-    private ChatGPTService chatGPTService;
+    private ChatGPTServiceImpl chatGPTService;
 
     @PostMapping
-    public String getResponse(@RequestBody String userInput) {
+    public String getResponse(@RequestBody String userInput) throws IOException {
         return chatGPTService.putQuest(userInput);
     }
 }

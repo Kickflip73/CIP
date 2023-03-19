@@ -32,13 +32,14 @@ public class ChatGPTServiceImpl implements ChatGPTService {
         Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyHostName, proxyPort));
         OpenAiClient openAiClient = OpenAiClient.builder()
                 .apiKey(openAiApiKey)
-                .connectTimeout(50)
-                .writeTimeout(50)
-                .readTimeout(50)
+                .connectTimeout(100)
+                .writeTimeout(100)
+                .readTimeout(100)
                 .interceptor(Collections.singletonList(httpLoggingInterceptor))
                 .proxy(proxy)
                 .apiHost(openAiApiBaseUrl)
                 .build();
+//        openAiClient.model("gpt-3.5-turbo");
         CompletionResponse completions = openAiClient.completions(message);
 
         StringBuilder stringBuilder = new StringBuilder();
