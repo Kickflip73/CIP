@@ -14,9 +14,10 @@ public enum ResultEnum {
     NICKNAME_ALREADY_EXISTS(1060, "用户昵称已存在"),
     REGISTER_SUCCESS(1071, "注册成功"),
     REGISTER_FAIL(1070, "验证码错误"),
-    EMAIL_SEN_FAIL(1080, "邮件发送失败"),
-    VERIFY_CODE_ERROR(1090, "验证码错误");
-
+    EMAIL_SEN_FAIL(1080, "邮件发送失败，请检查邮箱是否正确"),
+    VERIFY_CODE_ERROR(1090, "验证码错误"),
+    UNKNOWN_ERROR(9999, "未知错误，请刷新页面后重试")
+    ;
 
     private int code;
     private String message;

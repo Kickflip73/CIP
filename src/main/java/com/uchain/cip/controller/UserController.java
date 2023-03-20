@@ -43,8 +43,9 @@ public class UserController {
     @PostMapping("/register")
     public ResultVO register(@RequestBody User user, HttpServletRequest request) {
         ResultEnum resultEnum = userService.formatValidationAndSendVerifyCode(user, request);
-        return new ResultVO(resultEnum.getCode(), resultEnum.getMessage(), null);
+        return new ResultVO(resultEnum.getCode(), resultEnum.getMessage(), user);
     }
+
 
     /**
      * 验证验证码，注册用户
@@ -54,7 +55,7 @@ public class UserController {
         if (Objects.equals(request.getSession().getAttribute("verifyCode"), verifyCode)) {
             return userService.saveUser((User) request.getSession().getAttribute("user"));
         } else {
-            return new ResultVO(ResultEnum.VERIFY_CODE_ERROR.getCode(), ResultEnum.VERIFY_CODE_ERROR.getMessage(), null);
+            return new ResultVO(ResultEnum.VERIFY_CODE_ERROR.getCode(), ResultEnum.VERIFY_CODE_ERROR.getMessage(), (User) request.getSession().getAttribute("user"));
         }
     }
 

@@ -64,8 +64,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         //发送验证码
         try {
             String verifyCode = String.format("%04d", new Random().nextInt(9999 - 1000 + 1) + 1000);
-            String text = "您正在注册校园互助平台账户，验证码为：" + verifyCode + "，若非本人操作，请忽略此条信息~";
-            emailUtil.sendSimpleMailMessage(user.getEmail(), "验证码来咯~", text);
+            String text = "您正在注册智慧校园互助平台账户\n昵称：" + user.getNickName() + "\n\t验证码：" + verifyCode + "\n若非本人操作，请忽略此条信息~";
+            emailUtil.sendSimpleMailMessage(user.getEmail(), "智慧校园互助平台", text);
             request.getSession().setAttribute("verifyCode", verifyCode);
             request.getSession().setAttribute("user", user);
         } catch (Exception e) {
@@ -78,7 +78,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     @Override
     public ResultVO saveUser(User user) {
         //插入数据库
-        int insert = userMapper.insert(user);
+        int insert = 0;
+        try {
+            insert = userMapper.insert(user);
+        } catch (Exception e) {
+            return new ResultVO(ResultEnum.UNKNOWN_ERROR.getCode(), ResultEnum.UNKNOWN_ERROR.getMessage(), null);
+        }
         if (insert > 0) {
             return new ResultVO(ResultEnum.REGISTER_SUCCESS.getCode(), ResultEnum.REGISTER_SUCCESS.getMessage(), user);
         } else {

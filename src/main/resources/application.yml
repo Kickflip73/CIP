@@ -11,7 +11,7 @@ spring:
     port: 465
     username: '3065242502@qq.com'
     #授权码
-    password: 'imylhxznlumcdgcb'
+    password: 'neaymokwnojhdfad'
     properties:
       mail:
         smtp:
@@ -25,13 +25,14 @@ spring:
               class: javax.net.ssl.SSLSocketFactory
 
 server:
-  port: 8080
+  port: 8099
   servlet:
     context-path: "/cip"
 
 chatGPT:
   openAiApiBaseUrl: https://api.openai.com/
-  openAiApiKey: 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
+  openAiApiKey: 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
   #代理
   proxyHostName: kaolacode.f3322.net
+  proxyHostIp: 115.216.106.90
   proxyPort: 10809

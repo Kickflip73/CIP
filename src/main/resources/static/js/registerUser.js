@@ -1,6 +1,6 @@
 const formInit = document.getElementById('form');
 
-const usernameInput = document.getElementById('username');
+const nickNameInput = document.getElementById('nickName');
 const emailInput = document.getElementById('email');
 const passwordInput = document.getElementById('password');
 const password2Input = document.getElementById('password2');
@@ -73,8 +73,8 @@ function getFieldName(input) {
 formInit.addEventListener('submit', function(e) {
     e.preventDefault();
 
-    if (!checkRequired([usernameInput, emailInput, passwordInput, password2Input])) {
-        checkLength(usernameInput, 3, 15);
+    if (!checkRequired([nickNameInput, emailInput, passwordInput, password2Input])) {
+        checkLength(nickNameInput, 3, 15);
         checkLength(passwordInput, 6, 18);
         checkEmail(emailInput);
         checkPasswordsMatch(passwordInput, password2Input);
@@ -84,21 +84,21 @@ formInit.addEventListener('submit', function(e) {
 
 function registerUser() {
     // 获取表单元素
-    const usernameInput = document.getElementById('username');
+    const nickNameInput = document.getElementById('nickName');
     const emailInput = document.getElementById('email');
     const passwordInput = document.getElementById('password');
     const password2Input = document.getElementById('password2');
 
     // 获取表单数据
     const email = emailInput.value;
-    const username = usernameInput.value;
+    const nickName = nickNameInput.value;
     const password = passwordInput.value;
     const password2 = password2Input.value;
 
     // 封装用户对象数据
     const user = {
         email: email,
-        username: username,
+        nickName: nickName,
         password: password,
     };
 

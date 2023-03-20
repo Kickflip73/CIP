@@ -9,9 +9,9 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/GPT")
-public class GPTController {
+public class ChatGPTController {
     @Autowired
-    private ChatGPTServiceImpl chatGPTService;
+    private ChatGPTServiceImpl2 chatGPTService;
 
     @PostMapping
     public String getResponse(@RequestBody String userInput) throws IOException {
