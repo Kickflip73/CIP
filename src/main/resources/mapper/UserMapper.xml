@@ -27,4 +27,8 @@
         department,major,GPA,
         registerr_date_time
     </sql>
+
+    <select id="getUserByNickNameOrEmail" resultType="com.uchain.cip.pojo.User">
+        SELECT * FROM user WHERE nick_name = #{nickNameOrEmail} OR email = #{nickNameOrEmail};
+    </select>
 </mapper>

@@ -2,6 +2,7 @@ package com.uchain.cip.mapper;
 
 import com.uchain.cip.pojo.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.springframework.stereotype.Repository;
 
 /**
 * @author 30652
@@ -9,10 +10,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @createDate 2023-03-21 18:40:45
 * @Entity com.uchain.cip.pojo.User
 */
+@Repository
 public interface UserMapper extends BaseMapper<User> {
-
+    public User getUserByNickNameOrEmail(String nickNameOrEmail);
 }
-
-
-
-

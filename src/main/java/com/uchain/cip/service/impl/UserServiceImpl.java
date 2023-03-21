@@ -2,13 +2,12 @@ package com.uchain.cip.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.uchain.cip.enums.ResultEnum;
+import com.uchain.cip.mapper.UserMapper;
 import com.uchain.cip.pojo.User;
 import com.uchain.cip.service.UserService;
-import com.uchain.cip.dao.UserMapper;
 import com.uchain.cip.tools.EmailUtil;
 import com.uchain.cip.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
