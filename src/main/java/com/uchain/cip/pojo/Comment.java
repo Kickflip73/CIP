@@ -5,9 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.sql.Date;
-import java.util.Objects;
-
+import java.util.Date;
 import lombok.Data;
 
 /**
@@ -40,44 +38,56 @@ public class Comment implements Serializable {
 
     /**
      * 发布日期时间
-     * */
+     */
     private Date createDateTime;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 
     @Override
-    public String toString() {
-        return "Comment{" +
-                "id=" + id +
-                ", thingId=" + thingId +
-                ", userId=" + userId +
-                ", content='" + content + '\'' +
-                ", createDateTime=" + createDateTime +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Comment comment = (Comment) o;
-
-        if (!Objects.equals(id, comment.id)) return false;
-        if (!Objects.equals(thingId, comment.thingId)) return false;
-        if (!Objects.equals(userId, comment.userId)) return false;
-        if (!Objects.equals(content, comment.content)) return false;
-        return Objects.equals(createDateTime, comment.createDateTime);
+    public boolean equals(Object that) {
+        if (this == that) {
+            return true;
+        }
+        if (that == null) {
+            return false;
+        }
+        if (getClass() != that.getClass()) {
+            return false;
+        }
+        Comment other = (Comment) that;
+        return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
+            && (this.getThingId() == null ? other.getThingId() == null : this.getThingId().equals(other.getThingId()))
+            && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
+            && (this.getContent() == null ? other.getContent() == null : this.getContent().equals(other.getContent()))
+            && (this.getCreateDateTime() == null ? other.getCreateDateTime() == null : this.getCreateDateTime().equals(other.getCreateDateTime()));
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (thingId != null ? thingId.hashCode() : 0);
-        result = 31 * result + (userId != null ? userId.hashCode() : 0);
-        result = 31 * result + (content != null ? content.hashCode() : 0);
-        result = 31 * result + (createDateTime != null ? createDateTime.hashCode() : 0);
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
+        result = prime * result + ((getThingId() == null) ? 0 : getThingId().hashCode());
+        result = prime * result + ((getUserId() == null) ? 0 : getUserId().hashCode());
+        result = prime * result + ((getContent() == null) ? 0 : getContent().hashCode());
+        result = prime * result + ((getCreateDateTime() == null) ? 0 : getCreateDateTime().hashCode());
         return result;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", thingId=").append(thingId);
+        sb.append(", userId=").append(userId);
+        sb.append(", content=").append(content);
+        sb.append(", createDateTime=").append(createDateTime);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }

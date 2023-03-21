@@ -2,17 +2,18 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.uchain.cip.dao.CommentMapper">
+<mapper namespace="com.uchain.cip.mapper.CommentMapper">
 
     <resultMap id="BaseResultMap" type="com.uchain.cip.pojo.Comment">
             <id property="id" column="id" jdbcType="BIGINT"/>
             <result property="thingId" column="thing_id" jdbcType="BIGINT"/>
             <result property="userId" column="user_id" jdbcType="BIGINT"/>
             <result property="content" column="content" jdbcType="VARCHAR"/>
+            <result property="createDateTime" column="create_date_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         id,thing_id,user_id,
-        content
+        content,create_date_time
     </sql>
 </mapper>
