@@ -30,6 +30,9 @@ public class ChatGPTServiceImpl implements ChatGPTService {
     @Value("${chatGPT.proxyPort}")
     private int proxyPort;
 
+    /**
+     * 实现方法1
+     * */
     @Override
     public String putQuest1(String prompt) {
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(new OpenAILogger());
@@ -61,6 +64,9 @@ public class ChatGPTServiceImpl implements ChatGPTService {
         return context;
     }
 
+    /**
+     * 实现方法2
+     * */
     @Override
     public String putQuest2(String prompt) {
         //国内需要代理 国外不需要

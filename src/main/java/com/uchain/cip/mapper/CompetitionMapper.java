@@ -2,6 +2,7 @@ package com.uchain.cip.mapper;
 
 import com.uchain.cip.pojo.Competition;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Repository;
 * @createDate 2023-03-21 18:37:49
 * @Entity com.uchain.cip.pojo.Competition
 */
-@Repository
+@Mapper
 public interface CompetitionMapper extends BaseMapper<Competition> {
 
 }
