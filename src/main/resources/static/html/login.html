@@ -7,18 +7,21 @@
 </head>
 
 <body>
-    <div class="container">
-        <h1>登录</h1>
-        <form method="post" action="http://localhost:8099/cip/users/login" >
-            <label for="nickNameOrEmail">昵称或邮箱</label>
-            <input type="text" id="nickNameOrEmail" name="nickNameOrEmail" placeholder="请输入用户名或邮箱">
+<div class="container">
+    <h1>登录</h1>
+    <form id="login-form" method="post" action="http://localhost:8099/cip/users/login">
+        <label for="nickNameOrEmail">昵称或邮箱</label>
+        <input type="text" id="nickNameOrEmail" name="nickNameOrEmail" placeholder="请输入用户名或邮箱">
 
-            <label for="password">密码</label>
-            <input type="password" id="password" name="password" placeholder="请输入密码">
+        <label for="password">密码</label>
+        <input type="password" id="password" name="password" placeholder="请输入密码">
 
-            <button type="submit">登录</button>
-        </form>
-        <p>还没有账号？<a href="http://localhost:8099/cip/html/register.html">立即注册</a></p>
-    </div>
+        <button type="submit">登录</button>
+    </form>
+    <p>还没有账号？<a href="http://localhost:8099/cip/html/register.html">立即注册</a></p>
+    <div class="message"></div>
+</div>
+
+<script src="../js/login.js"></script>
 </body>
 </html>

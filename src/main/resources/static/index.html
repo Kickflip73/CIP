@@ -1,61 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>智慧校园互助平台</title>
-    <link rel="stylesheet" type="text/css" href="css/index.css">
     <meta charset="UTF-8">
+    <title>网站首页</title>
+    <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
-<nav>
-    <ul>
-        <li><a href="#">资源共享</a>
-            <ul>
-                <li><a href="#">找资源</a></li>
-                <li><a href="#">分享资源</a></li>
-                <li><a href="#">我的资源</a></li>
-                <li><a href="#">我的收藏</a></li>
-            </ul>
-        </li>
-        <li><a href="#">竞赛组队</a>
-            <ul>
-                <li><a href="#">发起组队</a></li>
-                <li><a href="#">参与组队</a></li>
-                <li><a href="#">我的组队</a></li>
-                <li><a href="#">我的申请</a></li>
-            </ul>
-        </li>
-        <li><a href="#">GPT问答</a>
-            <ul>
-                <li><a href="#">提问</a></li>
-                <li><a href="#">回答</a></li>
-                <li><a href="#">我的提问</a></li>
-                <li><a href="#">我的回答</a></li>
-            </ul>
-        </li>
-        <li id="user-info">
-            <div id="avatar"></div>
-            <div id="nickname">用户名</div>
-            <ul>
-                <li><a href="#">个人信息</a></li>
-                <li><a href="#">我的消息</a></li>
-                <li><a href="#">退出登录</a></li>
-            </ul>
-        </li>
-    </ul>
-</nav>
-<div class="content">
-    <div class="module">
-        <h2>资源共享</h2>
-        <p>这里是资源共享的内容</p>
+<header>
+    <nav>
+        <ul>
+            <li><a href="#" class="active" id="resources">资源分享</a></li>
+            <li><a href="#" id="team">竞赛组队</a></li>
+            <li><a href="#" id="gpt">GPT问答</a></li>
+            <li class="user-info">
+                <span id="username">用户昵称</span>
+                <img src="avatar.jpg" alt="用户头像">
+            </li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <div id="welcome">
+        <h1>欢迎来到网站首页</h1>
+        <p>请点击导航栏中的模块来查看对应的内容</p>
     </div>
-    <div class="module">
-        <h2>竞赛组队</h2>
-        <p>这里是竞赛组队的内容</p>
+    <div id="resources-content" class="hidden">
+        <div class="content-container">
+            <!-- 嵌套资源分享页面的代码 -->
+            <h2>资源分享</h2>
+        </div>
     </div>
-    <div class="module">
-        <h2>GPT问答</h2>
-        <p>这里是GPT问答的内容</p>
+
+    <div id="team-content" class="hidden">
+        <div class="content-container">
+            <!-- 嵌套竞赛组队页面的代码 -->
+            <h2>竞赛组队</h2>
+        </div>
     </div>
-</div>
+
+    <div id="gpt-content" class="hidden">
+        <div class="content-container">
+            <!-- 嵌套GPT问答页面的代码 -->
+            <iframe src="html/chatGpt.html"></iframe>
+        </div>
+    </div>
+</main>
+<script src="js/index.js"></script>
 </body>
 </html>

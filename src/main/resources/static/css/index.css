@@ -1,191 +1,108 @@
-/* 导航栏样式 */
-nav {
+/* 全局样式 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f7f7f7;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+}
+
+/* 头部导航栏 */
+header {
     background-color: #333;
-    height: 60px;
+    color: #fff;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
 }
 
 nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 nav li {
-    position: relative;
+    margin: 0 10px;
 }
 
 nav a {
-    display: block;
     color: #fff;
-    text-align: center;
-    padding: 20px 25px;
-    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
 }
 
 nav a:hover {
-    background-color: #555;
-}
-
-nav ul ul {
-    display: none;
-    position: absolute;
-    top: 60px;
-}
-
-nav ul li:hover > ul {
-    display: inherit;
-}
-
-nav ul ul li {
-    width: 200px;
-    float: none;
-    display: list-item;
-    position: relative;
-}
-
-nav ul ul ul li {
-    position: relative;
-    top: -60px;
-    left: 200px;
-}
-
-/* 用户信息样式 */
-#user-info {
-    margin-left: auto;
-}
-
-#avatar {
-    width: 40px;
-    height: 40px;
     background-color: #fff;
-    border-radius: 50%;
-    display: inline-block;
-    margin-right: 10px;
+    color: #333;
 }
 
-#nickname {
-    display: inline-block;
-    color: #fff;
+nav a.active {
+    background-color: #fff;
+    color: #333;
+    border-bottom: 2px solid #333;
 }
 
-#user-info ul {
-    display: none;
-    position: absolute;
-    background-color: #333;
-    border-radius: 5px;
-    padding: 10px;
-    top: 60px;
-    right: 0;
-}
-
-#user-info:hover ul {
-    display: block;
-}
-
-#user-info ul li {
-    margin: 10px 0;
-}
-
-/* 页面主体样式 */
-.content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+.user-info {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    align-items: center;
 }
 
-.module {
-    width: 31%;
+.user-info img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-left: 10px;
+}
+
+/* 页面内容 */
+main {
+    padding-top: 80px;
+}
+
+#welcome {
+    margin-left: 40%;
+}
+
+.content-container {
+    width: 100%;
+    height: 1000px;
+    padding: 50px;
     background-color: #fff;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.module h2 {
-    font-size: 24px;
-    margin: 0;
-    margin-bottom: 10px;
+.hidden {
+    display: none;
 }
 
-.module p {
-    font-size: 16px;
-    line-height: 1.5;
-}
-
-/* 响应式设计 */
-@media (max-width: 1024px) {
-    .content {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .module {
-        width: 100%;
-    }
-}
-
-@media (max-width: 768px) {
-    nav ul {
-        flex-direction: column;
-        align-items: center;
-        height: auto;
-    }
-
-    nav li {
-        position: static;
-        margin-bottom: 5px;
-    }
-
-    nav ul ul {
-        position: static;
-        display: none;
-        margin-left: 20px;
-    }
-
-    nav ul ul li {
-        width: 100%;
-        display: block;
-    }
-
-    #user-info {
-        margin-left: 0;
-        margin-right: 20px;
-    }
-
-    #user-info ul {
-        position: static;
-        display: none;
-        margin-top: 10px;
-        right:0;
-    }
-
-    #user-info:hover ul {
-        display: block;
-    }
-}
-
-@media (max-width: 480px) {
-    nav a {
-        padding: 10px 15px;
-    }
-
-    #avatar {
-        width: 30px;
-        height: 30px;
-    }
-
-    #nickname {
-        font-size: 14px;
-    }
-
-    .module {
-        width: 100%;
-        margin-bottom: 10px;
-    }
+iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
 }
