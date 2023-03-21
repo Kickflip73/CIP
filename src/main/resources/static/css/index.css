@@ -12,7 +12,7 @@ body {
 
 a {
     text-decoration: none;
-    color: #333;
+    color: #b5ff00;
 }
 
 ul {
@@ -25,7 +25,7 @@ img {
 
 /* 头部导航栏 */
 header {
-    background-color: #333;
+    background-color: rgba(174, 255, 0, 0.57);
     color: #fff;
     padding: 20px;
     position: fixed;
