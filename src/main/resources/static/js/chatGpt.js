@@ -31,7 +31,7 @@ async function getResponse(userInput) {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ userInput })
+        body: JSON.stringify(userInput)
     });
 
     // Parse response as text
@@ -52,10 +52,10 @@ function handleSubmit(event) {
     inputField.value = '';
 
     // Display user input in chat window
-    displayMessage(userInput, 'sent');
+    displayMessage(userInput, '发送');
 
     // Display "Waiting for response" message in chat window
-    displayMessage('正在等待响应。。。', 'received');
+    displayMessage('正在处理中...', 'received');
 
     // Get response from backend
     getResponse(userInput);

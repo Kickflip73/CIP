@@ -6,37 +6,55 @@ import com.plexpt.chatgpt.entity.chat.ChatCompletionResponse;
 import com.plexpt.chatgpt.entity.chat.Message;
 import com.plexpt.chatgpt.util.Proxys;
 import com.uchain.cip.service.ChatGPTService;
+import com.uchain.cip.tools.InterNetUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.net.Proxy;
-import java.util.Arrays;
+import java.util.Collections;
+import java.util.Objects;
 
 @Service
+@Slf4j
 public class ChatGPTServiceImpl2 implements ChatGPTService {
-    private String apiEndpoint = "https://api.openai.com/v1/completions";
+    @Value("${chatGPT.openAiApiBaseUrl}")
+    private String openAiApiBaseUrl;
     @Value("${chatGPT.openAiApiKey}")
     private String openAiApiKey;
     @Value("${chatGPT.proxyHostName}")
     private String proxyHostName;
-    @Value("${chatGPT.proxyHostIp}")
-    private String proxyHostIp;
     @Value("${chatGPT.proxyPort}")
     private int proxyPort;
 
     public String putQuest(String prompt) {
+        //国内需要代理 国外不需要
+        String proxyHostIp = InterNetUtil.domainNameToIp(proxyHostName);
+        if (Objects.equals(proxyHostIp, "unknown")) {
+            return "代理服务器域名解析失败";
+        }
         Proxy proxy = Proxys.http(proxyHostIp, proxyPort);
 
         ChatGPT chatGPT = ChatGPT.builder()
                 .apiKey(openAiApiKey)
                 .proxy(proxy)
-                .apiHost("https://api.openai.com/") //反向代理地址
+                .timeout(50000)
+                .apiHost(openAiApiBaseUrl)
                 .build()
                 .init();
 
-        String res = chatGPT.chat(prompt);
-        System.out.println(res);
+        Message message = Message.of(prompt);
 
-        return res;
+        ChatCompletion chatCompletion = ChatCompletion.builder()
+                .model(ChatCompletion.Model.GPT_3_5_TURBO.getName())
+                .messages(Collections.singletonList(message))
+                .maxTokens(3000)
+                .temperature(0.9)
+                .build();
+        ChatCompletionResponse response = chatGPT.chatCompletion(chatCompletion);
+        Message res = response.getChoices().get(0).getMessage();
+        System.out.println("user：" + prompt + "\nGPT：" + res.getContent());
+
+        return res.getContent();
     }
 }

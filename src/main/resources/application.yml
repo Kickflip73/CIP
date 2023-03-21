@@ -31,8 +31,7 @@ server:
 
 chatGPT:
   openAiApiBaseUrl: https://api.openai.com/
-  openAiApiKey: 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
+  openAiApiKey: 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
   #代理
   proxyHostName: kaolacode.f3322.net
-  proxyHostIp: 115.216.106.90
   proxyPort: 10809
