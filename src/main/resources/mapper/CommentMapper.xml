@@ -6,6 +6,7 @@
 
     <resultMap id="BaseResultMap" type="com.uchain.cip.pojo.Comment">
             <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="thingType" column="thing_type" jdbcType="INTEGER"/>
             <result property="thingId" column="thing_id" jdbcType="BIGINT"/>
             <result property="userId" column="user_id" jdbcType="BIGINT"/>
             <result property="content" column="content" jdbcType="VARCHAR"/>
@@ -13,7 +14,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,thing_id,user_id,
-        content,create_date_time
+        id,thing_type,thing_id,
+        user_id,content,create_date_time
     </sql>
 </mapper>

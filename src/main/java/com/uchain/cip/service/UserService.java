@@ -5,6 +5,7 @@ import com.uchain.cip.pojo.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.uchain.cip.vo.ResultVO;
 import org.springframework.http.HttpRequest;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,7 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 * @description 针对表【user】的数据库操作Service
 * @createDate 2023-03-16 10:21:50
 */
-public interface UserService extends IService<User> {
+@Transactional
+public interface UserService {
 
     public ResultVO getUserById(long id);
 

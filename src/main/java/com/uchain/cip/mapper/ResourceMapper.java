@@ -14,7 +14,3 @@ import org.apache.ibatis.annotations.Mapper;
 public interface ResourceMapper extends BaseMapper<Resource> {
 
 }
-
-
-
-

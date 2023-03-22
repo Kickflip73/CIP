@@ -1,6 +1,5 @@
 package com.uchain.cip.service.impl;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.uchain.cip.enums.ResultEnum;
 import com.uchain.cip.mapper.UserMapper;
 import com.uchain.cip.pojo.User;
@@ -21,9 +20,7 @@ import java.util.Random;
 * @createDate 2023-03-16 10:21:50
 */
 @Service
-public class UserServiceImpl extends ServiceImpl<UserMapper, User>
-    implements UserService {
-
+public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
 

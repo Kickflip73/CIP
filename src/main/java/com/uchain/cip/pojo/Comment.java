@@ -22,6 +22,11 @@ public class Comment implements Serializable {
     private Long id;
 
     /**
+     * 帖子类型（1：资源帖 / 2：比赛帖）
+     */
+    private Integer thingType;
+
+    /**
      * 所属帖子id
      */
     private Long thingId;
@@ -57,6 +62,7 @@ public class Comment implements Serializable {
         }
         Comment other = (Comment) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
+            && (this.getThingType() == null ? other.getThingType() == null : this.getThingType().equals(other.getThingType()))
             && (this.getThingId() == null ? other.getThingId() == null : this.getThingId().equals(other.getThingId()))
             && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
             && (this.getContent() == null ? other.getContent() == null : this.getContent().equals(other.getContent()))
@@ -68,6 +74,7 @@ public class Comment implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
+        result = prime * result + ((getThingType() == null) ? 0 : getThingType().hashCode());
         result = prime * result + ((getThingId() == null) ? 0 : getThingId().hashCode());
         result = prime * result + ((getUserId() == null) ? 0 : getUserId().hashCode());
         result = prime * result + ((getContent() == null) ? 0 : getContent().hashCode());
@@ -82,6 +89,7 @@ public class Comment implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
+        sb.append(", thingType=").append(thingType);
         sb.append(", thingId=").append(thingId);
         sb.append(", userId=").append(userId);
         sb.append(", content=").append(content);
