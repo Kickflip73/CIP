@@ -30,6 +30,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     @Autowired
     EmailUtil emailUtil;
 
+    /**
+     * 依据id查询单个用户
+     * */
     @Override
     public ResultVO getUserById(long id) {
         User user = userMapper.selectById(id);
@@ -40,6 +43,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         }
     }
 
+    /**
+     * 查询所有用户
+     * */
     @Override
     public ResultVO getAllUser() {
         List<User> users = userMapper.selectList(null);
@@ -50,6 +56,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         }
     }
 
+    /**
+     * 验证账户信息，发送验证码
+     * */
     @Override
     public ResultEnum formatValidationAndSendVerifyCode(User user, HttpServletRequest request) {
         //验证信息是否重合
@@ -71,9 +80,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             return ResultEnum.EMAIL_SEN_FAIL;
         }
 
-        return ResultEnum.SUCCESS;
+        return ResultEnum.EMAIL_SEN_SUCCESS;
     }
 
+    /**
+     * 插入用户到数据库
+     * */
     @Override
     public ResultVO saveUser(User user) {
         //插入数据库
@@ -90,6 +102,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         }
     }
 
+    /**
+     * 用户登录
+     * */
     @Override
     public ResultVO login(String nickNameOrEmail, String password) {
         User user = userMapper.getUserByNickNameOrEmail(nickNameOrEmail);

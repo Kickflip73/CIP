@@ -15,7 +15,10 @@ public enum ResultEnum {
     REGISTER_SUCCESS(1071, "注册成功"),
     REGISTER_FAIL(1070, "验证码错误"),
     EMAIL_SEN_FAIL(1080, "邮件发送失败，请检查邮箱是否正确"),
+    EMAIL_SEN_SUCCESS(1081, "验证码发送成功，请注意查收"),
     VERIFY_CODE_ERROR(1090, "验证码错误"),
+    DATA_QUERY_SUCCESS(2001, "数据查询成功"),
+    DATA_QUERY_FAIL(2000, "数据查询失败"),
     UNKNOWN_ERROR(9999, "未知错误，请刷新页面后重试")
     ;
 

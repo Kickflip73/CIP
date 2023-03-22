@@ -15,6 +15,7 @@
             <result property="createDateTime" column="create_date_time" jdbcType="TIMESTAMP"/>
             <result property="views" column="views" jdbcType="INTEGER"/>
             <result property="comments" column="comments" jdbcType="INTEGER"/>
+            <result property="hot" column="hot" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="Base_Column_List">

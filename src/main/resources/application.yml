@@ -32,7 +32,12 @@ server:
 
 chatGPT:
   openAiApiBaseUrl: https://api.openai.com/
-  openAiApiKey: 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
+  openAiApiKey: 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
   #代理
   proxyHostName: kaolacode.f3322.net
   proxyPort: 10809
+
+mybatis-plus:
+  configuration:
+    #日志打印sql
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
