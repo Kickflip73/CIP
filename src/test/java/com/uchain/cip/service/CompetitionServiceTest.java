@@ -1,8 +1,7 @@
-package com.uchain.cip.server;
+package com.uchain.cip.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.uchain.cip.pojo.Competition;
-import com.uchain.cip.service.CompetitionService;
 import com.uchain.cip.tools.CompetitionCondition;
 import com.uchain.cip.vo.ResultVO;
 import org.junit.jupiter.api.Test;

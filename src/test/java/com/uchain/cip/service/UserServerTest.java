@@ -1,8 +1,7 @@
-package com.uchain.cip.server;
+package com.uchain.cip.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.uchain.cip.pojo.User;
-import com.uchain.cip.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

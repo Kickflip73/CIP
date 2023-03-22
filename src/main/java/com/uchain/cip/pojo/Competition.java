@@ -27,7 +27,7 @@ public class Competition implements Serializable {
     private Long ownerId;
 
     /**
-     * 帖子类型（找队伍/找队友）
+     * 帖子类型（1：找队伍 / 2：找队友）
      */
     private Integer postType;
 

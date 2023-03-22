@@ -27,7 +27,7 @@ public class Resource implements Serializable {
     private Long ownerId;
 
     /**
-     * 帖子类型（找队伍/找队友）
+     * 帖子类型（1：分享资源帖子 / 2：求资源帖子）
      */
     private Integer postType;
 
