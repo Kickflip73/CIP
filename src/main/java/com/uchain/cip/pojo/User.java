@@ -79,7 +79,7 @@ public class User implements Serializable {
     /**
      * 注册时间
      */
-    private Date registerrDateTime;
+    private Date registerDateTime;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
@@ -108,7 +108,7 @@ public class User implements Serializable {
             && (this.getDepartment() == null ? other.getDepartment() == null : this.getDepartment().equals(other.getDepartment()))
             && (this.getMajor() == null ? other.getMajor() == null : this.getMajor().equals(other.getMajor()))
             && (this.getGpa() == null ? other.getGpa() == null : this.getGpa().equals(other.getGpa()))
-            && (this.getRegisterrDateTime() == null ? other.getRegisterrDateTime() == null : this.getRegisterrDateTime().equals(other.getRegisterrDateTime()));
+            && (this.getRegisterDateTime() == null ? other.getRegisterDateTime() == null : this.getRegisterDateTime().equals(other.getRegisterDateTime()));
     }
 
     @Override
@@ -127,7 +127,7 @@ public class User implements Serializable {
         result = prime * result + ((getDepartment() == null) ? 0 : getDepartment().hashCode());
         result = prime * result + ((getMajor() == null) ? 0 : getMajor().hashCode());
         result = prime * result + ((getGpa() == null) ? 0 : getGpa().hashCode());
-        result = prime * result + ((getRegisterrDateTime() == null) ? 0 : getRegisterrDateTime().hashCode());
+        result = prime * result + ((getRegisterDateTime() == null) ? 0 : getRegisterDateTime().hashCode());
         return result;
     }
 
@@ -149,7 +149,7 @@ public class User implements Serializable {
         sb.append(", department=").append(department);
         sb.append(", major=").append(major);
         sb.append(", gpa=").append(gpa);
-        sb.append(", registerrDateTime=").append(registerrDateTime);
+        sb.append(", registerDateTime=").append(registerDateTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
