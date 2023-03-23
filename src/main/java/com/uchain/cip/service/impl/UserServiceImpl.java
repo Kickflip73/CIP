@@ -64,44 +64,44 @@ public class UserServiceImpl implements UserService {
      * */
     @Override
     public ResultVO register(User user, String verifyCode) {
-//        //未输入验证码
-//        if (Objects.equals(verifyCode, "none")) {
-//            //检测邮箱是否已被注册
-//            LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
-//            wrapper.eq(User::getEmail, user.getEmail());
-//            Long count = userMapper.selectCount(wrapper);
-//            if (count > 0) {
-//                //邮箱已被注册
-//                return new ResultVO(ResultEnum.EMAIL_ALREADY_EXISTS.getCode(), ResultEnum.EMAIL_ALREADY_EXISTS.getMessage(), null);
-//            }
-//
-//            //发送验证码邮件
-//            try {
-//                String sendVerifyCode = String.format("%04d", new Random().nextInt(9999 - 1000 + 1) + 1000);
-//                String text = "您正在注册智慧校园互助平台账户\n昵称：" + user.getNickName() + "\n\t验证码：" + sendVerifyCode + "\n若非本人操作，请忽略此条信息~";
-//                emailUtil.sendSimpleMailMessage(user.getEmail(), "智慧校园互助平台", text);
-//                //验证码对应注册的邮箱号
-//                verifyCodeMap.put(verifyCode, user.getEmail());
-//            } catch (Exception e) {
-//                //发送失败
-//                return new ResultVO(ResultEnum.EMAIL_SEN_FAIL.getCode(), ResultEnum.EMAIL_SEN_FAIL.getMessage(), null);
-//            }
-//
-//            //发送成功
-//            return new ResultVO(ResultEnum.EMAIL_SEN_SUCCESS.getCode(), ResultEnum.EMAIL_SEN_SUCCESS.getMessage(), null);
-//        } else {
-//            //有验证码
-//            String email = verifyCodeMap.get(verifyCode);
-//            if (email != null && Objects.equals(email, user.getEmail())) {
-//                //注册成功
-//                verifyCodeMap.remove(verifyCode);
-//                return new ResultVO(ResultEnum.REGISTER_SUCCESS.getCode(), ResultEnum.EMAIL_SEN_SUCCESS.getMessage(), user);
-//            } else {
-//                //验证码错误
-//                return new ResultVO(ResultEnum.VERIFY_CODE_ERROR.getCode(), ResultEnum.VERIFY_CODE_ERROR.getMessage(), null);
-//            }
-//        }
-        return new ResultVO(1,"s",null);
+        //未输入验证码
+        if (verifyCode == null || Objects.equals(verifyCode, "null") || verifyCode.length() != 4) {
+            //检测邮箱是否已被注册
+            LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
+            wrapper.eq(User::getEmail, user.getEmail());
+            Long count = userMapper.selectCount(wrapper);
+            if (count > 0) {
+                //邮箱已被注册
+                return new ResultVO(ResultEnum.EMAIL_ALREADY_EXISTS.getCode(), ResultEnum.EMAIL_ALREADY_EXISTS.getMessage(), null);
+            }
+
+            //发送验证码邮件
+            try {
+                //生成四位数随机验证码
+                String sendVerifyCode = String.format("%04d", new Random().nextInt(9999 - 1000 + 1) + 1000);
+                String text = "您正在注册智慧校园互助平台账户\n昵称：" + user.getNickName() + "\n\t验证码：" + sendVerifyCode + "\n若非本人操作，请忽略此条信息~";
+                emailUtil.sendSimpleMailMessage(user.getEmail(), "智慧校园互助平台", text);
+                //将验证码和邮箱放入map
+                verifyCodeMap.put(sendVerifyCode, user.getEmail());
+            } catch (Exception e) {
+                //发送失败
+                return new ResultVO(ResultEnum.EMAIL_SEN_FAIL.getCode(), ResultEnum.EMAIL_SEN_FAIL.getMessage(), null);
+            }
+
+            //发送成功
+            return new ResultVO(ResultEnum.EMAIL_SEN_SUCCESS.getCode(), ResultEnum.EMAIL_SEN_SUCCESS.getMessage(), null);
+        } else {
+            //有验证码
+            String email = verifyCodeMap.get(verifyCode);
+            if (email != null && Objects.equals(email, user.getEmail())) {
+                //注册成功
+                verifyCodeMap.remove(verifyCode);
+                return saveUser(user);
+            } else {
+                //验证码错误
+                return new ResultVO(ResultEnum.VERIFY_CODE_ERROR.getCode(), ResultEnum.VERIFY_CODE_ERROR.getMessage(), null);
+            }
+        }
     }
 
     /**
@@ -200,6 +200,5 @@ public class UserServiceImpl implements UserService {
             return new ResultVO(ResultEnum.LOGIN_FAIL.getCode(), ResultEnum.LOGIN_FAIL.getMessage(), null);
         }
     }
-
 
 }

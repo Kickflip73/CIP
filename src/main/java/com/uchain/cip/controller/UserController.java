@@ -34,7 +34,7 @@ public class UserController {
     }
 
     /**
-     * 验证账户信息，发送验证码
+     * 注册用户
      * */
     @PostMapping("/register")
     public ResultVO register(@RequestBody User user, @RequestParam String verifyCode) {
