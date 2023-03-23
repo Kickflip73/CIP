@@ -32,9 +32,11 @@ public class CompetitionServiceImpl implements CompetitionService {
         Competition competition = competitionMapper.selectById(id);
 
         if (competition != null) {
+            //浏览量+1
+            competitionMapper.addViews(id);
             return new ResultVO(ResultEnum.COMPETITION_DATA_QUERY_SUCCESS.getCode(), ResultEnum.COMPETITION_DATA_QUERY_SUCCESS.getMessage(), competition);
         } else {
-            return new ResultVO(ResultEnum.COMPETITION_NOT_EXIST.getCode(), ResultEnum.COMPETITION_NOT_EXIST.getMessage(), null);
+            return new ResultVO(ResultEnum.THING_NOT_EXIST.getCode(), ResultEnum.THING_NOT_EXIST.getMessage(), null);
         }
     }
 
@@ -84,6 +86,10 @@ public class CompetitionServiceImpl implements CompetitionService {
         Page<Competition> resultPage = competitionMapper.selectPage(page, wrapper);
 
         if (resultPage != null) {
+            //将查询到的帖子浏览量都+1
+            for (Competition competition : resultPage.getRecords()) {
+                competitionMapper.addViews(competition.getId());
+            }
             return new ResultVO(ResultEnum.COMPETITION_DATA_QUERY_SUCCESS.getCode(), ResultEnum.COMPETITION_DATA_QUERY_SUCCESS.getMessage(), resultPage);
         } else {
             return new ResultVO(ResultEnum.COMPETITION_DATA_QUERY_FAIL.getCode(), ResultEnum.COMPETITION_DATA_QUERY_FAIL.getMessage(), null);
@@ -119,7 +125,7 @@ public class CompetitionServiceImpl implements CompetitionService {
         Long selectCount = competitionMapper.selectCount(wrapper);
         if (selectCount != 1) {
             //未查询到此id对应有帖子，返回
-            return new ResultVO(ResultEnum.COMPETITION_NOT_EXIST.getCode(), ResultEnum.COMPETITION_NOT_EXIST.getMessage(), null);
+            return new ResultVO(ResultEnum.THING_NOT_EXIST.getCode(), ResultEnum.THING_NOT_EXIST.getMessage(), null);
         }
 
         //删除帖子，返回影响行数
@@ -143,7 +149,7 @@ public class CompetitionServiceImpl implements CompetitionService {
         Long selectCount = competitionMapper.selectCount(wrapper);
         if (selectCount != 1) {
             //未查询到此id对应有帖子，返回
-            return new ResultVO(ResultEnum.COMPETITION_NOT_EXIST.getCode(), ResultEnum.COMPETITION_NOT_EXIST.getMessage(), null);
+            return new ResultVO(ResultEnum.THING_NOT_EXIST.getCode(), ResultEnum.THING_NOT_EXIST.getMessage(), null);
         }
 
         //修改帖子，返回影响行数

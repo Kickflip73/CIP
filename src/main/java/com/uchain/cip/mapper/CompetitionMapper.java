@@ -12,5 +12,28 @@ import org.apache.ibatis.annotations.Mapper;
 */
 @Mapper
 public interface CompetitionMapper extends BaseMapper<Competition> {
+    /**
+     * 浏览量+1
+     * */
+    public void addViews(long id);
 
+    /**
+     * 评论数+1
+     * */
+    public void addComments(long id);
+
+    /**
+     * 收藏数+1
+     * */
+    public void addStars(long id);
+
+    /**
+     * 评论数-1
+     * */
+    public void reduceComments(long id);
+
+    /**
+     * 收藏数-1
+     * */
+    public void reduceStars(long id);
 }

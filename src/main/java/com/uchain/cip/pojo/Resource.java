@@ -77,7 +77,12 @@ public class Resource implements Serializable {
     private Integer comments;
 
     /**
-     * 热度（浏览量 + 评论数*5）
+     * 收藏数
+     * */
+    private Integer stars;
+
+    /**
+     * 热度（浏览量 + 评论数*3 + 收藏数*5）
      */
     private Integer hot;
 

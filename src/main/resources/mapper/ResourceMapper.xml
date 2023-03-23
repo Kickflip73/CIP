@@ -17,6 +17,7 @@
             <result property="createDateTime" column="create_date_time" jdbcType="TIMESTAMP"/>
             <result property="views" column="views" jdbcType="INTEGER"/>
             <result property="comments" column="comments" jdbcType="INTEGER"/>
+            <result property="stars" column="stars" jdbcType="INTEGER"/>
             <result property="hot" column="hot" jdbcType="INTEGER"/>
     </resultMap>
 
@@ -27,4 +28,24 @@
         create_date_time,views,comments,
         hot
     </sql>
+
+    <update id="addViews">
+    UPDATE resource SET views = views+1 WHERE id = #{id};
+    </update>
+
+    <update id="addComments">
+    UPDATE resource SET comments = comments+1 WHERE id = #{id};
+    </update>
+
+    <update id="addStars">
+    UPDATE resource SET stars = stars+1 WHERE id = #{id};
+    </update>
+
+    <update id="reduceComments">
+        UPDATE resource SET comments = comments-1 WHERE id = #{id};
+    </update>
+
+    <update id="reduceStars">
+        UPDATE resource SET stars = stars-1 WHERE id = #{id};
+    </update>
 </mapper>

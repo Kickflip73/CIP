@@ -16,6 +16,7 @@
             <result property="createDateTime" column="create_date_time" jdbcType="TIMESTAMP"/>
             <result property="views" column="views" jdbcType="INTEGER"/>
             <result property="comments" column="comments" jdbcType="INTEGER"/>
+            <result property="stars" column="stars" jdbcType="INTEGER"/>
             <result property="hot" column="hot" jdbcType="INTEGER"/>
     </resultMap>
 
@@ -23,6 +24,27 @@
         id,owner_id,post_type,
         title,competition_name,competition_type,
         description,contact_information,create_date_time,
-        views,comments,hot
+        views,comments,stars,hot
     </sql>
+
+    <update id="addViews">
+        UPDATE competition SET views = views+1 WHERE id = #{id};
+    </update>
+
+    <update id="addComments">
+        UPDATE competition SET comments = comments+1 WHERE id = #{id};
+    </update>
+
+    <update id="addStars">
+        UPDATE competition SET stars = stars+1 WHERE id = #{id};
+    </update>
+
+    <update id="reduceComments">
+        UPDATE competition SET comments = comments-1 WHERE id = #{id};
+    </update>
+
+    <update id="reduceStars">
+        UPDATE competition SET stars = stars-1 WHERE id = #{id};
+    </update>
+
 </mapper>
