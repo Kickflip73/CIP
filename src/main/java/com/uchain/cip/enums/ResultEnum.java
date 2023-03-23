@@ -17,8 +17,6 @@ public enum ResultEnum {
      * */
     LOGIN_SUCCESS(1011, "登陆成功"),
     LOGIN_FAIL(1020, "账号或密码错误，请检查后重试"),
-    NOT_FIND_USER(1030, "未找到相应用户"),
-    PASSWORD_ERROR(1040, "密码错误"),
 
     /**
      * 注册相关
@@ -30,6 +28,13 @@ public enum ResultEnum {
     EMAIL_SEN_SUCCESS(1091, "验证码发送成功，请注意查收"),
     EMAIL_SEN_FAIL(1090, "邮件发送失败，请检查邮箱是否正确"),
     VERIFY_CODE_ERROR(1100, "验证码错误"),
+
+    /**
+     * 账户相关
+     * */
+    USER_NOT_EXIST(1500, "此账户不存在"),
+    UPDATE_USER_SUCCESS(1601, "修改信息成功"),
+    UPDATE_USER_FAIL(1600, "修改信息失败"),
 
     /**
      * 比赛帖子相关

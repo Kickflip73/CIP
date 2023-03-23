@@ -23,7 +23,12 @@ public interface UserService {
 
     public ResultVO login(String nickNameOrEmail, String password);
 
-    public ResultEnum formatValidationAndSendVerifyCode(User user, HttpServletRequest request);
+    public ResultVO register(User user, String verifyCode);
 
     public ResultVO saveUser(User user);
+
+    public ResultVO updateById(User user);
+
+    public ResultVO deleteById(long id);
+
 }
