@@ -1,5 +1,6 @@
 package com.uchain.cip.service.impl;
 
+import cn.hutool.core.collection.EnumerationIter;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.uchain.cip.enums.ResultEnum;
 import com.uchain.cip.mapper.CommentMapper;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 /**
 * @author 30652
@@ -120,5 +122,18 @@ public class CommentServiceImpl implements CommentService {
         }
         //删除成功
         return new ResultVO(ResultEnum.COMMENT_DELETE_SUCCESS.getCode(), ResultEnum.COMMENT_DELETE_SUCCESS.getMessage(), null);
+    }
+
+    /**
+     * 获取帖子的全部评论
+     * */
+    @Override
+    public ResultVO getCommentList(int thingType, long thingId) {
+        LambdaQueryWrapper<Comment> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Comment::getThingType, thingType)
+                .eq(Comment::getThingId, thingId);
+        List<Comment> comments = commentMapper.selectList(wrapper);
+
+        return new ResultVO(ResultEnum.SUCCESS.getCode(), ResultEnum.SUCCESS.getMessage(), comments);
     }
 }
