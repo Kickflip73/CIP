@@ -1,10 +1,15 @@
 package com.uchain.cip.controller;
 
+import com.uchain.cip.pojo.Star;
 import com.uchain.cip.pojo.User;
+import com.uchain.cip.service.StarService;
 import com.uchain.cip.service.UserService;
+import com.uchain.cip.service.impl.StarServiceImpl;
 import com.uchain.cip.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 
 /**
  * author: kickflip
@@ -63,5 +68,11 @@ public class UserController {
     @PostMapping("/login")
     public ResultVO login(@RequestParam String  nickNameOrEmail, @RequestParam String password) {
         return userService.login(nickNameOrEmail, password);
+    }
+    @Resource
+    StarServiceImpl starServiceimpl;
+    @PostMapping("/star")
+    public ResultVO addThing(@RequestBody Star star){
+        return   starServiceimpl.addThing(star);
     }
 }

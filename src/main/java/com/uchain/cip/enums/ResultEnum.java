@@ -47,22 +47,14 @@ public enum ResultEnum {
     DELETE_COMPETITION_FAIL(2020, "删除比赛信息失败"),
     UPDATE_COMPETITION_SUCCESS(2031, "修改比赛信息成功"),
     UPDATE_COMPETITION_FAIL(2030, "修改比赛信息失败"),
-    THING_NOT_EXIST(2040, "该帖子不存在"),
-
-    /**
-     * 评论相关
-     * */
-    COMMENT_ON_SUCCESS(4001, "评论成功"),
-    COMMENT_ON_FAIL(4000, "评论失败"),
-    COMMENT_NOT_EXIST(4010, "评论不存在"),
-    COMMENT_DELETE_SUCCESS(4021, "删除评论成功"),
-    COMMENT_DELETE_FAIL(4020, "删除评论失败"),
+    COMPETITION_NOT_EXIST(2040, "该帖子不存在"),
 
     /**
      * 其他
      * */
-    UNKNOWN_ERROR(9999, "未知错误，请刷新页面后重试")
-    ;
+    UNKNOWN_ERROR(9999, "未知错误，请刷新页面后重试"),
+    THING_NOT_EXIST(0,"帖子不存在" ), COMMENT_ON_FAIL(0,"评论失败" ), START_SUCCESS(1,"收藏成功" ), START_FAIL(0,"收藏失败" ), COMMENT_ON_SUCCESS(1,"评论成功" ),
+    COMMENT_NOT_EXIST(0 ,"帖子不存在"), COMMENT_DELETE_FAIL(0,"删除失败" ), COMMENT_DELETE_SUCCESS(1,"删除成功" );
 
     private final int code;
     private final String message;

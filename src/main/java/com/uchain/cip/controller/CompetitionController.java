@@ -56,4 +56,5 @@ public class CompetitionController {
     public ResultVO updateCompetitionById(@RequestBody Competition competition) {
         return competitionService.updateCompetitionById(competition);
     }
+
 }
