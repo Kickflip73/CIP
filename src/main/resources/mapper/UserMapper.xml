@@ -17,7 +17,7 @@
             <result property="department" column="department" jdbcType="VARCHAR"/>
             <result property="major" column="major" jdbcType="VARCHAR"/>
             <result property="gpa" column="GPA" jdbcType="DOUBLE"/>
-            <result property="registerDateTime" column="register_date_time" jdbcType="TIMESTAMP"/>
+            <result property="registerrDateTime" column="registerr_date_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -25,7 +25,7 @@
         password,type,head_picture,
         gender,description,grade,
         department,major,GPA,
-        register_date_time
+        registerr_date_time
     </sql>
 
     <select id="getUserByNickNameOrEmail" resultType="com.uchain.cip.pojo.User">

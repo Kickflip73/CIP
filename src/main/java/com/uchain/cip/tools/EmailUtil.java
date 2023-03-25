@@ -5,9 +5,6 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 
-/**
- * 邮件发送工具类
- * */
 @Component
 public class EmailUtil {
     @Autowired

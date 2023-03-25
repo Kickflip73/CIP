@@ -5,16 +5,12 @@ spring:
     url: jdbc:mysql://106.12.129.219:3306/cip?serverTimezone=Asia/Shanghai&useSSL=false
     username: root
     password: 20020329@mysql
-    druid:
-      transaction-query-timeout: 10
-
 
   #邮件发送相关
   mail:
     host: smtp.qq.com
     port: 465
     username: '3065242502@qq.com'
-
     #授权码
     password: 'neaymokwnojhdfad'
     properties:
@@ -45,5 +41,3 @@ mybatis-plus:
   configuration:
     #日志打印sql
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-
-

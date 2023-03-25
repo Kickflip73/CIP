@@ -1,6 +1,8 @@
-package com.uchain.cip.service;
+package com.uchain.cip.server;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.uchain.cip.pojo.User;
+import com.uchain.cip.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,7 +14,10 @@ public class UserServerTest {
 
     @Test
     public void testGetUserById() {
-        User user = (User) userService.getUserById(1).getData();
+        LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(User::getId, 1);
+
+        User user = userService.getOne(wrapper);
         System.out.println(user);
     }
 

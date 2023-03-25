@@ -9,42 +9,19 @@
             <result property="ownerId" column="owner_id" jdbcType="BIGINT"/>
             <result property="postType" column="post_type" jdbcType="INTEGER"/>
             <result property="title" column="title" jdbcType="VARCHAR"/>
+            <result property="description" column="description" jdbcType="VARCHAR"/>
             <result property="competitionName" column="competition_name" jdbcType="VARCHAR"/>
             <result property="competitionType" column="competition_type" jdbcType="VARCHAR"/>
-            <result property="description" column="description" jdbcType="VARCHAR"/>
-            <result property="contactInformation" column="contact_information" jdbcType="VARCHAR"/>
             <result property="createDateTime" column="create_date_time" jdbcType="TIMESTAMP"/>
             <result property="views" column="views" jdbcType="INTEGER"/>
             <result property="comments" column="comments" jdbcType="INTEGER"/>
-            <result property="stars" column="stars" jdbcType="INTEGER"/>
             <result property="hot" column="hot" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         id,owner_id,post_type,
-        title,competition_name,competition_type,
-        description,contact_information,create_date_time,
-        views,comments,stars,hot
+        title,description,competition_name,
+        competition_type,create_date_time,views,
+        comments
     </sql>
-
-    <update id="addViews">
-        UPDATE competition SET views = views+1 WHERE id = #{id};
-    </update>
-
-    <update id="addComments">
-        UPDATE competition SET comments = comments+1 WHERE id = #{id};
-    </update>
-
-    <update id="addStars">
-        UPDATE competition SET stars = stars+1 WHERE id = #{id};
-    </update>
-
-    <update id="reduceComments">
-        UPDATE competition SET comments = comments-1 WHERE id = #{id};
-    </update>
-
-    <update id="reduceStars">
-        UPDATE competition SET stars = stars-1 WHERE id = #{id};
-    </update>
-
 </mapper>

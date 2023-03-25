@@ -1,15 +1,14 @@
 package com.uchain.cip.controller;
 
-import com.uchain.cip.pojo.Star;
+import com.uchain.cip.enums.ResultEnum;
 import com.uchain.cip.pojo.User;
-import com.uchain.cip.service.StarService;
 import com.uchain.cip.service.UserService;
-import com.uchain.cip.service.impl.StarServiceImpl;
 import com.uchain.cip.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.util.Objects;
 
 /**
  * author: kickflip
@@ -39,11 +38,25 @@ public class UserController {
     }
 
     /**
-     * 注册用户
+     * 验证账户信息，发送验证码
      * */
     @PostMapping("/register")
-    public ResultVO register(@RequestBody User user, @RequestParam String verifyCode) {
-        return userService.register(user, verifyCode);
+    public ResultVO register(@RequestBody User user, HttpServletRequest request) {
+        ResultEnum resultEnum = userService.formatValidationAndSendVerifyCode(user, request);
+        return new ResultVO(resultEnum.getCode(), resultEnum.getMessage(), user);
+    }
+
+
+    /**
+     * 验证验证码，注册用户
+     * */
+    @PostMapping("/verification")
+    public ResultVO verification(@RequestParam String verifyCode, HttpServletRequest request) {
+        if (Objects.equals(request.getSession().getAttribute("verifyCode"), verifyCode)) {
+            return userService.saveUser((User) request.getSession().getAttribute("user"));
+        } else {
+            return new ResultVO(ResultEnum.VERIFY_CODE_ERROR.getCode(), ResultEnum.VERIFY_CODE_ERROR.getMessage(), (User) request.getSession().getAttribute("user"));
+        }
     }
 
     /**
@@ -51,7 +64,11 @@ public class UserController {
      * */
     @PutMapping
     public ResultVO update(@RequestBody User user) {
-        return userService.updateById(user);
+        if (userService.updateById(user)) {
+            return new ResultVO(ResultEnum.SUCCESS.getCode(), ResultEnum.SUCCESS.getMessage(), null);
+        } else {
+            return new ResultVO(ResultEnum.FAIL.getCode(), ResultEnum.FAIL.getMessage(), null);
+        }
     }
 
     /**
@@ -59,7 +76,11 @@ public class UserController {
      * */
     @DeleteMapping("/{id}")
     public ResultVO deleteById(@PathVariable long id) {
-        return userService.deleteById(id);
+        if (userService.removeById(id)) {
+            return new ResultVO(ResultEnum.SUCCESS.getCode(), ResultEnum.SUCCESS.getMessage(), null);
+        } else {
+            return new ResultVO(ResultEnum.FAIL.getCode(), ResultEnum.FAIL.getMessage(), null);
+        }
     }
 
     /**
@@ -68,11 +89,5 @@ public class UserController {
     @PostMapping("/login")
     public ResultVO login(@RequestParam String  nickNameOrEmail, @RequestParam String password) {
         return userService.login(nickNameOrEmail, password);
-    }
-    @Resource
-    StarServiceImpl starServiceimpl;
-    @PostMapping("/star")
-    public ResultVO addThing(@RequestBody Star star){
-        return   starServiceimpl.addThing(star);
     }
 }

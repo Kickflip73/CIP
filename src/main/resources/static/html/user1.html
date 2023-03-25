@@ -1,85 +1,84 @@
 <!DOCTYPE html>
-<html lang="zh_CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://labfile.oss.aliyuncs.com/courses/3774/jquery-3.6.0.min.js"></script>
     <style>
         .userrow {
             float: left;
             display: inline-block;
             height: 400px;
             width: 300px;
-            /* background-color: orange; */
-            background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
-            margin-top: 50px;
+            background-color: orange;
+            margin-top: 20px;
         }
         .userclo {
             display: inline-block;
             width: 600px;
             height: 1000px;
-            /* background-color: rgb(199, 204, 176); */
-            /* background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%); */
-            background-image: linear-gradient(to top, #fddb92 0%, #d1fdff 100%);
+            background-color: skyblue;
             padding: 50px;
             margin: 50px;
         }
-        /* #userinformation ul li, */
+        #userinformation ul li,
         #userpassword ul li{
             list-style: none;
         }
-        #userinformation label {
-            display: block;
-            margin: 0px;
-        }
-        #userinformation label>span ,
-        #userpassword label>span{
+        #userinformation label,
+        #userpassword label {
+            font-size: 20px;
+            display: inline-block;
             float: left;
-            width: 20%;
-            text-align: right;
-            padding-right: 10px;
-            color: #888;
-        }
-        
-        #userinformation input[type="text"], #userinformation input[type="email"], #userinformation textarea,#userpassword input[type="password"] {
-            border: 1px solid #DADADA;
-            color: #888;
             height: 30px;
-            margin-bottom: 20px;
-            margin-right: 6px;
-            margin-top: -5px;
-            outline: 0 none;
-            padding: 3px 3px 3px 5px;
-            width: 70%;
-            font-size: 12px;
-            line-height:15px;
-            box-shadow: inset 0px 1px 4px #ECECEC;
-            -moz-box-shadow: inset 0px 1px 4px #ECECEC;
-            -webkit-box-shadow: inset 0px 1px 4px #ECECEC;
+            width: 100px;
+            text-align: right;
         }
-        #userinformation textarea{
-            padding: 19px 3px 3px 5px;
+        #userinformation input[type="text"],
+        #userpassword input[type="password"] {
+            outline-style: none;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 13px 14px;
+            width: 400px;
+            font-size: 14px;
+            margin-top: 8px;
+            text-align: right;
         }
+        #userinformation input[type="textarea"] {
+            outline-style: none;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 13px 14px;
+            width: 400px;
+            font-size: 14px;
+            margin-top: 8px;
+            text-align: right;
+            
+        }
+       /*  input[type="radio"] {
+            font-size: 20px;
+            margin-top: 15px;
         
+        }
+        .female {
+            margin-left: 100px;
+        } */
+        /* input:focus{
+            border-color: #66afe9;
+            outline: 0;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)
+        } */
         .userbtn {
-            /* width: 200px;
+            width: 200px;
             height: 42px;
             background-color: greenyellow;
             font-size: 20px;
             color: #fff;
-            margin: 30px 0  0 230px; */
-            background: #E27575;
-            border: none;
-            padding: 10px 25px 10px 25px;
-            margin: 30px 50px 50px 300px;
-            color: #FFF;
-            box-shadow: 1px 1px 5px #B6B6B6;
-            border-radius: 3px;
-            text-shadow: 1px 1px 1px #9E3F3F;
-            cursor: pointer;
+            margin: 30px 0  0 230px;
         }
     </style>
 </head>
@@ -98,7 +97,7 @@
                 <!-- <div style="margin-top:50px;margin-left:110px;"><button type="text" style="font-size:15px;color:#4D4D4D;"  @click="infomationClick()">个人信息<span style="color:#B0E0E6;" v-show="infomationShow" class="el-icon-s-promotion"></span></button></div> -->
                 <!-- <div style="margin-top:50px;margin-left:110px;"><button type="text" style="font-size:15px;color:#4D4D4D;" @click="passwordClick()">修改密码<span style="color:#B0E0E6;" v-show="passwordShow" class="el-icon-s-promotion"></span></button></div> -->
                 
-                <div style="margin-top:50px;margin-left:110px;"><button type="text" style="font-size:15px;color:#4D4D4D;"  @click="informationClick()">个人信息</button></div>
+                <div style="margin-top:50px;margin-left:110px;"><button type="text" style="font-size:15px;color:#4D4D4D;"  @click="infomationClick()">个人信息</button></div>
                 <div style="margin-top:50px;margin-left:110px;"><button type="text" style="font-size:15px;color:#4D4D4D;" @click="passwordClick()">修改密码</button></div>
 
             </div>
@@ -115,76 +114,67 @@
 
                 <div class="userclo">
                     <!-- 个人信息 -->
-                    <div v-if="informationShow" id="userinformation">
-                        <h2 class="text-center" style="margin-left: 300px;margin-top: -20px;">信息修改</h2>
-                            <label>
-                                <span>  用户名：</span> 
-                                <input type="text" id="user_nick_name"/>
-                            </label>
+                    <div v-show="informationShow" id="userinformation">
+                        <ul>
+                            <li><label for style="font-size: 20px;">  用户名：</label> <input type="text" id="user_nick_name"/></li>
                             <!-- <li><label for>性别：</label>
                                 <input type="radio" name="gender" id="male"/>
                                 <label for="male" class="sex">男</label>
                                 <input type="radio" name="gender" id="female"/>
                                 <label for="female" class="sex">女</label>
                             </li> -->
-                            <label>
-                                <span>性别：</span>
-                                <input type="text" id="usergender"/>
-                            </label>
-                            <label>
-                                <span>年级：</span>
-                                <input type="text" id="usergrade"/>
-                            </label>
-                            <label>
-                                <span>公寓：</span>
-                                <input type="text" id="userdepartment"/>
-                            </label>
-                            <label>
-                                <span>专业：</span>
-                                <input type="text" id="usermajor"/>
-                            </label>
-                            <label>
-                                <span>GPA： </span>
-                                <input type="text" id="userGPA"/>
-                            </label>
-                            <label>
-                                <span>邮箱：</span>
-                                <input type="email" id="useremail"/>
-                            </label>
-                            <label>
-                                <span>个人简介：</span>
-                                <textarea id="userdescription"></textarea> 
-                            </label>
-                        
+                            <li><label for>性别：</label><input type="text" id="usergender"/></li>
+                            <li><label for>年级：</label><input type="text" id="usergrade"/></li>
+                            <li><label for>公寓：</label><input type="text" id="userdepartment"/></li>
+                            <li><label for>专业：</label><input type="text" id="usermajor"/></li>
+                            <li><label for>GPA： </label><input type="text" id="userGPA"/></li>
+                            <li><label for>邮箱：</label><input type="text" id="useremail"/></li>
+                            <li><label for>个人简介：</label><input type="textarea" id="userdescription"> </li>
+                        </ul>
                         <button class="userbtn">修改信息</button>
                     </div>
                     <!-- 修改密码 -->
-                    <div v-if="passwordShow" id="userpassword">
-                        <h2 class="text-center" style="margin-left: 300px;">密码修改</h2>
+                    <div v-show="passwordShow" id="userpassword">
+                        <h2 class="text-center" style="margin-left: 300px;">修改用户密码</h2>
                         <ul>
-                            <label>
-                                <span>原密码:</span>
+                            <li>
+                                <label for="oldPassword">原密码:</label>
                                 <input type="password" id="oldPassword"/>
-                            </label>
-                            <label>
-                                <span>新密码:</span>
+                            </li>
+                            <li>
+                                <label for="newPassword">新密码:</label>
                                 <input type="password" id="newPassword"/>
-                            </label>
-                            <label>
-                                <span>确认密码:</span>
+                            </li>
+                            <li>
+                                <label for="makesure">确认密码:</label>
                                 <input type="password" id="makesure" placeholder='确认密码必须与新密码一致'/>
                     
-                            </label>
+                            </li>
                             <button class="userbtn" id="btn">修改</button>
                         </ul>
                         
+                        <!-- <div>
+                            <label for="oldPassword">原密码:</label>
+                            <input type="password" id="oldPassword"/>
+                        </div>
+                        <div>
+                            <label for="newPassword">新密码:</label>
+                            <input type="password" id="newPassword"/>
+                        </div>
+                        <div>
+                            <label for="makesure">确认密码：</label>
+                            <input type="password" id="makesure" placeholder='确认密码必须与新密码一致'/>
+                        </div>
+                        <div>
+                            <button class="userbtn">修改</button>
+                        </div> -->
                     </div>
                 </div>
                     
                 
         </div>
         <script>
-            /* document.getElementById("btn").onclick = function(){
+            document.getElementById("btn").onclick = function(){
                 var oldPassword = document.getElementById("oldPassword").value;
                 var newPassword = document.getElementById("newPassword").value;
                 var makesure = document.getElementById("makesure").value;
@@ -202,12 +192,12 @@
                         }
                     }
                 }
-            } */
+            }
             var app = new Vue({
                 el:'#app',
                 data:{
                     informationShow:true,
-                    passwordShow:false,
+                    passwordShow:false
                 },
                 methods:{
                     informationClick(){
@@ -220,40 +210,6 @@
                     }
                 }
             })
-            
-            /* $("#user_nick_name").blur(function(){
-                //1.接受参数
-                var uname=$(this).val();
-                console.log($(this).val())
-                //2.使用ajax发送请求
-                  $.ajax({
-                       url:"http://192.168.31.180:8099/cip/users/1",
-                       data:"uname="+uname,
-                       type:"post",
-                       dataType:"text",
-                       success:function (result) {//通过参数来接受服务器返回的内容
-                           $("#rs").html(result);
-                           console.log(result)
-                       }
-                       
-                   });
-                }) */
-                $.ajax({
-                    url: "http://192.168.31.180:8099/cip/users/1",
-                    method: "GET",
-                    dataType:'json',
-                    success: function(data) {
-                        console.log(data);
-                        console.log(data);
-                        var dataStr = JSON.stringify(data);
-                        data = $.parseJSON(dataStr);
-                        console.log(data)
-                    },
-                    error: function(error) {
-                        console.log(error);
-                    }1
-});
         </script>
 </body>
 </html>
-
