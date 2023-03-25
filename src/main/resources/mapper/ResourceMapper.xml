@@ -9,18 +9,43 @@
             <result property="ownerId" column="owner_id" jdbcType="BIGINT"/>
             <result property="postType" column="post_type" jdbcType="INTEGER"/>
             <result property="resourceName" column="resource_name" jdbcType="VARCHAR"/>
-            <result property="description" column="description" jdbcType="VARCHAR"/>
             <result property="resourceType" column="resource_type" jdbcType="VARCHAR"/>
+            <result property="description" column="description" jdbcType="VARCHAR"/>
+            <result property="contactInformation" column="contact_information" jdbcType="VARCHAR"/>
             <result property="money" column="money" jdbcType="DOUBLE"/>
+            <result property="interlink" column="interlink" jdbcType="VARCHAR"/>
             <result property="createDateTime" column="create_date_time" jdbcType="TIMESTAMP"/>
             <result property="views" column="views" jdbcType="INTEGER"/>
             <result property="comments" column="comments" jdbcType="INTEGER"/>
+            <result property="stars" column="stars" jdbcType="INTEGER"/>
+            <result property="hot" column="hot" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         id,owner_id,post_type,
-        resource_name,description,resource_type,
-        money,create_date_time,views,
-        comments
+        resource_name,resource_type,description,
+        contact_information,money,interlink,
+        create_date_time,views,comments,
+        hot
     </sql>
+
+    <update id="addViews">
+    UPDATE resource SET views = views+1 WHERE id = #{id};
+    </update>
+
+    <update id="addComments">
+    UPDATE resource SET comments = comments+1 WHERE id = #{id};
+    </update>
+
+    <update id="addStars">
+    UPDATE resource SET stars = stars+1 WHERE id = #{id};
+    </update>
+
+    <update id="reduceComments">
+        UPDATE resource SET comments = comments-1 WHERE id = #{id};
+    </update>
+
+    <update id="reduceStars">
+        UPDATE resource SET stars = stars-1 WHERE id = #{id};
+    </update>
 </mapper>

@@ -1,9 +1,6 @@
 package com.uchain.cip.service.impl;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.uchain.cip.pojo.Star;
 import com.uchain.cip.service.StarService;
-import com.uchain.cip.mapper.StarMapper;
 import org.springframework.stereotype.Service;
 
 /**

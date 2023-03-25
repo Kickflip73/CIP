@@ -3,6 +3,7 @@ package com.uchain.cip.enums;
 /**
  * 返回数据枚举类
  * */
+
 public enum ResultEnum {
 
     /**
@@ -63,8 +64,8 @@ public enum ResultEnum {
     UNKNOWN_ERROR(9999, "未知错误，请刷新页面后重试")
     ;
 
-    private int code;
-    private String message;
+    private final int code;
+    private final String message;
 
     ResultEnum(int code, String message) {
         this.code = code;

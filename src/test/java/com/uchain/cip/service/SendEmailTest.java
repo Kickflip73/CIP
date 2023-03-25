@@ -1,4 +1,4 @@
-package com.uchain.cip.server;
+package com.uchain.cip.service;
 
 import com.uchain.cip.tools.EmailUtil;
 import org.junit.jupiter.api.Test;
