@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .userrow {
+            float: left;
+            display: inline-block;
+            height: 400px;
+            width: 300px;
+            background-color: orange;
+            margin-top: 20px;
+        }
+        .userclo {
+            display: inline-block;
+            width: 600px;
+            height: 1000px;
+            background-color: skyblue;
+            padding: 50px;
+            margin: 50px;
+        }
+        #userinformation ul li,
+        #userpassword ul li{
+            list-style: none;
+        }
+        #userinformation label,
+        #userpassword label {
+            font-size: 20px;
+            display: inline-block;
+            float: left;
+            height: 30px;
+            width: 100px;
+            text-align: right;
+        }
+        #userinformation input[type="text"],
+        #userpassword input[type="password"] {
+            outline-style: none;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 13px 14px;
+            width: 400px;
+            font-size: 14px;
+            margin-top: 8px;
+            text-align: right;
+        }
+        #userinformation input[type="textarea"] {
+            outline-style: none;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 13px 14px;
+            width: 400px;
+            font-size: 14px;
+            margin-top: 8px;
+            text-align: right;
+            
+        }
+       /*  input[type="radio"] {
+            font-size: 20px;
+            margin-top: 15px;
+        
+        }
+        .female {
+            margin-left: 100px;
+        } */
+        /* input:focus{
+            border-color: #66afe9;
+            outline: 0;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)
+        } */
+        .userbtn {
+            width: 200px;
+            height: 42px;
+            background-color: greenyellow;
+            font-size: 20px;
+            color: #fff;
+            margin: 30px 0  0 230px;
+        }
+    </style>
+</head>
+<body>
+    <div style="background-color:#FCFCFC;font-family:'宋体';height:100%;" id="app">
+       <!--  <div>
+            <my-bread level1='个人中心' level2='修改密码' :level3="levelName"></my-bread>
+        </div> -->
+        <!-- <div class="userrow" style="margin-top:15px;margin-left:80px;background-color: skyblue;">           -->
+            <div class="userrow">
+                <div style="background-color:pink;width:80px;height:80px;display:inline-block;border-radius:50%;overflow:hidden;margin-top: 30px;margin-left: 100px;">
+                    <!-- <el-image :src="src" style="width:60px;height:60px;"></el-image> -->
+                    <img src="">
+                </div>
+                <div style="margin-top:20px;margin-left:110px;"><span>王某某</span></div>
+                <!-- <div style="margin-top:50px;margin-left:110px;"><button type="text" style="font-size:15px;color:#4D4D4D;"  @click="infomationClick()">个人信息<span style="color:#B0E0E6;" v-show="infomationShow" class="el-icon-s-promotion"></span></button></div> -->
+                <!-- <div style="margin-top:50px;margin-left:110px;"><button type="text" style="font-size:15px;color:#4D4D4D;" @click="passwordClick()">修改密码<span style="color:#B0E0E6;" v-show="passwordShow" class="el-icon-s-promotion"></span></button></div> -->
+                
+                <div style="margin-top:50px;margin-left:110px;"><button type="text" style="font-size:15px;color:#4D4D4D;"  @click="infomationClick()">个人信息</button></div>
+                <div style="margin-top:50px;margin-left:110px;"><button type="text" style="font-size:15px;color:#4D4D4D;" @click="passwordClick()">修改密码</button></div>
+
+            </div>
+       <!--  <div style="margin-top:25px;margin-left:80px;">
+            <el-row :gutter="10">
+                <el-col :span="2">
+                    <div style="background-color:#FFEBCD;width:60px;height:60px;display:inline-block;border-radius:50%;overflow:hidden;">
+                        <el-image :src="src" style="width:60px;height:60px;"></el-image>
+                    </div>
+                    <div style="margin-top:5px;margin-left:6px;"><span>王某某</span></div>
+                    <div style="margin-top:50px;margin-left:1px;"><el-button type="text" style="font-size:15px;color:#4D4D4D;"  @click="infomationClick()">个人信息<span style="color:#B0E0E6;" v-show="infomationShow" class="el-icon-s-promotion"></span></el-button></div>
+                    <div style="margin-top:5px;margin-left:1px;"><el-button type="text" style="font-size:15px;color:#4D4D4D;" @click="passwordClick()">修改密码<span style="color:#B0E0E6;" v-show="passwordShow" class="el-icon-s-promotion"></span></el-button></div>
+                </el-col> -->
+
+                <div class="userclo">
+                    <!-- 个人信息 -->
+                    <div v-show="informationShow" id="userinformation">
+                        <ul>
+                            <li><label for style="font-size: 20px;">  用户名：</label> <input type="text" id="user_nick_name"/></li>
+                            <!-- <li><label for>性别：</label>
+                                <input type="radio" name="gender" id="male"/>
+                                <label for="male" class="sex">男</label>
+                                <input type="radio" name="gender" id="female"/>
+                                <label for="female" class="sex">女</label>
+                            </li> -->
+                            <li><label for>性别：</label><input type="text" id="usergender"/></li>
+                            <li><label for>年级：</label><input type="text" id="usergrade"/></li>
+                            <li><label for>公寓：</label><input type="text" id="userdepartment"/></li>
+                            <li><label for>专业：</label><input type="text" id="usermajor"/></li>
+                            <li><label for>GPA： </label><input type="text" id="userGPA"/></li>
+                            <li><label for>邮箱：</label><input type="text" id="useremail"/></li>
+                            <li><label for>个人简介：</label><input type="textarea" id="userdescription"> </li>
+                        </ul>
+                        <button class="userbtn">修改信息</button>
+                    </div>
+                    <!-- 修改密码 -->
+                    <div v-show="passwordShow" id="userpassword">
+                        <h2 class="text-center" style="margin-left: 300px;">修改用户密码</h2>
+                        <ul>
+                            <li>
+                                <label for="oldPassword">原密码:</label>
+                                <input type="password" id="oldPassword"/>
+                            </li>
+                            <li>
+                                <label for="newPassword">新密码:</label>
+                                <input type="password" id="newPassword"/>
+                            </li>
+                            <li>
+                                <label for="makesure">确认密码:</label>
+                                <input type="password" id="makesure" placeholder='确认密码必须与新密码一致'/>
+                    
+                            </li>
+                            <button class="userbtn" id="btn">修改</button>
+                        </ul>
+                        
+                        <!-- <div>
+                            <label for="oldPassword">原密码:</label>
+                            <input type="password" id="oldPassword"/>
+                        </div>
+                        <div>
+                            <label for="newPassword">新密码:</label>
+                            <input type="password" id="newPassword"/>
+                        </div>
+                        <div>
+                            <label for="makesure">确认密码：</label>
+                            <input type="password" id="makesure" placeholder='确认密码必须与新密码一致'/>
+                        </div>
+                        <div>
+                            <button class="userbtn">修改</button>
+                        </div> -->
+                    </div>
+                </div>
+                    
+                
+        </div>
+        <script>
+            document.getElementById("btn").onclick = function(){
+                var oldPassword = document.getElementById("oldPassword").value;
+                var newPassword = document.getElementById("newPassword").value;
+                var makesure = document.getElementById("makesure").value;
+
+                if(oldPassword!=''&&newPassword!=''&&makesure!=''){
+                    if(oldPassword=='coco'){
+                        if(oldPassword!=newPassword){
+                            if(makesure==newPassword){
+                                user.password='cooc123';
+                            }else{
+                                alert("确认密码与新密码不一致，请检查")
+                            }
+                        }else{
+                            alert("新密码与原密码一致，请检查")
+                        }
+                    }
+                }
+            }
+            var app = new Vue({
+                el:'#app',
+                data:{
+                    informationShow:true,
+                    passwordShow:false
+                },
+                methods:{
+                    informationClick(){
+                        informationShow:true;
+                        passwordShow:false
+                    },
+                    passwordClick(){
+                        informationShow:false;
+                        passwordShow:true;
+                    }
+                }
+            })
+        </script>
+</body>
+</html>

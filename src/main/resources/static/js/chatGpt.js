@@ -4,8 +4,28 @@ const inputField = document.getElementById('user-input');
 const chatMessages = document.getElementById('chat-messages');
 
 // Function to display messages in chat window
-function displayMessage(message, type) {
+function displayMessageMe(message, type) {
+  const imgSrc = "../image/GPT.jfif";
+  // const imgSrc = "../image/背景图片1.jpg"
+  const messageDiv = document.createElement('div');
+  messageDiv.classList.add('message', type);
+  messageDiv.innerHTML = `
+  <img src="${imgSrc}" alt="avatar">
+  <div class="message-content">
+    <div class="message-text">
+      <p>${message}</p>
+    </div>
+    <div class="message-time">
+      <p>${new Date().toLocaleTimeString()}</p>
+    </div>
+  </div>
+`;
+  chatMessages.appendChild(messageDiv);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+function displayMessageGPT(message, type) {
     const imgSrc = "../image/chatGpt.png";
+    // const imgSrc = "../image/背景图片1.jpg"
     const messageDiv = document.createElement('div');
     messageDiv.classList.add('message', type);
     messageDiv.innerHTML = `
@@ -52,10 +72,10 @@ function handleSubmit(event) {
     inputField.value = '';
 
     // Display user input in chat window
-    displayMessage(userInput, '发送');
+    displayMessageMe(userInput, '发送');
 
     // Display "Waiting for response" message in chat window
-    displayMessage('正在处理中...', 'received');
+    displayMessageGPT('正在处理中...', 'received');
 
     // Get response from backend
     getResponse(userInput);
