@@ -63,6 +63,15 @@ public enum ResultEnum {
     RESOURCE_NOT_EXIST(2040, "该帖子不存在"),
 
     /**
+     * 评论相关
+     * */
+    COMMENT_ON_SUCCESS(4001, "评论成功"),
+    COMMENT_ON_FAIL(4000, "评论失败"),
+    COMMENT_NOT_EXIST(4010, "评论不存在"),
+    COMMENT_DELETE_SUCCESS(4021, "删除评论成功"),
+    COMMENT_DELETE_FAIL(4020, "删除评论失败"),
+
+    /**
      * 其他
      * */
     UNKNOWN_ERROR(9999, "未知错误，请刷新页面后重试")

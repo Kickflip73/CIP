@@ -47,7 +47,7 @@ public class CommentServiceImpl implements CommentService {
                 Long selectCount = resourceMapper.selectCount(wrapper);
                 if (selectCount != 1) {
                     //要评论的帖子不存在
-                    return new ResultVO(ResultEnum.THING_NOT_EXIST.getCode(), ResultEnum.THING_NOT_EXIST.getMessage(), null);
+                    return new ResultVO(ResultEnum.RESOURCE_NOT_EXIST.getCode(), ResultEnum.RESOURCE_NOT_EXIST.getMessage(), null);
                 }
 
                 //增加帖子评论数
@@ -59,7 +59,7 @@ public class CommentServiceImpl implements CommentService {
                 Long selectCount = competitionMapper.selectCount(wrapper);
                 if (selectCount != 1) {
                     //要评论的帖子不存在
-                    return new ResultVO(ResultEnum.THING_NOT_EXIST.getCode(), ResultEnum.THING_NOT_EXIST.getMessage(), null);
+                    return new ResultVO(ResultEnum.COMPETITION_NOT_EXIST.getCode(), ResultEnum.COMPETITION_NOT_EXIST.getMessage(), null);
                 }
 
                 //增加帖子评论数
@@ -95,7 +95,7 @@ public class CommentServiceImpl implements CommentService {
                 Resource resource = resourceMapper.selectById(comment.getThingId());
                 if (resource == null) {
                     //要评论的帖子不存在
-                    return new ResultVO(ResultEnum.THING_NOT_EXIST.getCode(), ResultEnum.THING_NOT_EXIST.getMessage(), null);
+                    return new ResultVO(ResultEnum.RESOURCE_NOT_EXIST.getCode(), ResultEnum.RESOURCE_NOT_EXIST.getMessage(), null);
                 }
 
                 //减少帖子评论数
@@ -106,7 +106,7 @@ public class CommentServiceImpl implements CommentService {
                 Competition competition = competitionMapper.selectById(comment.getThingId());
                 if (competition == null) {
                     //要评论的帖子不存在
-                    return new ResultVO(ResultEnum.THING_NOT_EXIST.getCode(), ResultEnum.THING_NOT_EXIST.getMessage(), null);
+                    return new ResultVO(ResultEnum.COMPETITION_NOT_EXIST.getCode(), ResultEnum.COMPETITION_NOT_EXIST.getMessage(), null);
                 }
 
                 //减少帖子评论数
