@@ -50,11 +50,23 @@ public enum ResultEnum {
     COMPETITION_NOT_EXIST(2040, "该帖子不存在"),
 
     /**
+     * 资源帖子相关
+     * */
+    RESOURCE_DATA_QUERY_SUCCESS(2001, "查询资源信息成功"),
+    RESOURCE_DATA_QUERY_FAIL(2000, "查询资源信息失败"),
+    CREATE_RESOURCE_SUCCESS(2011, "创建资源信息成功"),
+    CREATE_RESOURCE_FAIL(2010, "创建资源信息失败"),
+    DELETE_RESOURCE_SUCCESS(2021, "删除资源信息成功"),
+    DELETE_RESOURCE_FAIL(2020, "删除资源信息失败"),
+    UPDATE_RESOURCE_SUCCESS(2031, "修改资源信息成功"),
+    UPDATE_RESOURCE_FAIL(2030, "修改资源信息失败"),
+    RESOURCE_NOT_EXIST(2040, "该帖子不存在"),
+
+    /**
      * 其他
      * */
-    UNKNOWN_ERROR(9999, "未知错误，请刷新页面后重试"),
-    THING_NOT_EXIST(0,"帖子不存在" ), COMMENT_ON_FAIL(0,"评论失败" ), START_SUCCESS(1,"收藏成功" ), START_FAIL(0,"收藏失败" ), COMMENT_ON_SUCCESS(1,"评论成功" ),
-    COMMENT_NOT_EXIST(0 ,"帖子不存在"), COMMENT_DELETE_FAIL(0,"删除失败" ), COMMENT_DELETE_SUCCESS(1,"删除成功" );
+    UNKNOWN_ERROR(9999, "未知错误，请刷新页面后重试")
+    ;
 
     private final int code;
     private final String message;

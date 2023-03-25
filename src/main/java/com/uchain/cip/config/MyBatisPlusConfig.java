@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
  * MyBatisPlus配置类
  * */
 @Configuration
-public class MyBatisConfiguration {
+public class MyBatisPlusConfig {
     @Bean
     public MybatisPlusInterceptor mybatisPlusInterceptor() {
         MybatisPlusInterceptor mybatisPlusInterceptor = new MybatisPlusInterceptor();

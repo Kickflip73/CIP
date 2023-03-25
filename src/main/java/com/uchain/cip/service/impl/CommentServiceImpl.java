@@ -1,6 +1,5 @@
 package com.uchain.cip.service.impl;
 
-import cn.hutool.core.collection.EnumerationIter;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.uchain.cip.enums.ResultEnum;
 import com.uchain.cip.mapper.CommentMapper;
