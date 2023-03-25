@@ -12,6 +12,6 @@ import java.util.List;
 * @description 针对表【competition】的数据库操作Service
 * @createDate 2023-03-21 18:37:49
 */
-public interface CompetitionService extends IService<Competition> {
+public interface CompetitionService {
     public ResultVO getCompetitionPage(int pageIndex, int pageSize, CompetitionCondition condition);
 }

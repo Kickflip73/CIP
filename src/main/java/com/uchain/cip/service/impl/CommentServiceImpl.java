@@ -1,9 +1,6 @@
 package com.uchain.cip.service.impl;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.uchain.cip.pojo.Comment;
 import com.uchain.cip.service.CommentService;
-import com.uchain.cip.mapper.CommentMapper;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,11 +9,6 @@ import org.springframework.stereotype.Service;
 * @createDate 2023-03-21 18:37:56
 */
 @Service
-public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment>
-    implements CommentService{
+public class CommentServiceImpl implements CommentService{
 
 }
-
-
-
-

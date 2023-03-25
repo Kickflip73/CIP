@@ -2,7 +2,6 @@ package com.uchain.cip.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.uchain.cip.enums.ResultEnum;
 import com.uchain.cip.pojo.Competition;
 import com.uchain.cip.service.CompetitionService;
@@ -12,17 +11,13 @@ import com.uchain.cip.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Objects;
-
 /**
 * @author 30652
 * @description 针对表【competition】的数据库操作Service实现
 * @createDate 2023-03-21 18:37:49
 */
 @Service
-public class CompetitionServiceImpl extends ServiceImpl<CompetitionMapper, Competition>
-    implements CompetitionService{
+public class CompetitionServiceImpl implements CompetitionService{
 
     @Autowired
     CompetitionMapper competitionMapper;
@@ -72,5 +67,4 @@ public class CompetitionServiceImpl extends ServiceImpl<CompetitionMapper, Compe
             return new ResultVO(ResultEnum.DATA_QUERY_FAIL.getCode(), ResultEnum.DATA_QUERY_FAIL.getMessage(), null);
         }
     }
-
 }
