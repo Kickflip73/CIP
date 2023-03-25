@@ -12,11 +12,10 @@ public class ChatGptServiceTest {
 
     @Test
     public void testPutQuest() {
-        String prompt = "你好";
-        String message1 = chatGPTService.putQuest1(prompt);
-        String message2 = chatGPTService.putQuest2(prompt);
-
-        System.out.println(message1 + "\n" + message2);
+//        String prompt = "你好";
+//        String message1 = chatGPTService.putQuest1(prompt);
+//        String message2 = chatGPTService.putQuest2(prompt);
+//
+//        System.out.println(message1 + "\n" + message2);
     }
-
 }

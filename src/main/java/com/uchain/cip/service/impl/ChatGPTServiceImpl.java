@@ -95,5 +95,4 @@ public class ChatGPTServiceImpl implements ChatGPTService {
 
         return res.getContent();
     }
-
 }
