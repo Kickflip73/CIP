@@ -72,6 +72,12 @@ public enum ResultEnum {
     COMMENT_DELETE_FAIL(4020, "删除评论失败"),
 
     /**
+     * 搜藏相关
+     * */
+    STAR_SUCCESS(5001, "收藏成功"),
+    STAR_FAIL(5000, "收藏失败"),
+
+    /**
      * 其他
      * */
     UNKNOWN_ERROR(9999, "未知错误，请刷新页面后重试")

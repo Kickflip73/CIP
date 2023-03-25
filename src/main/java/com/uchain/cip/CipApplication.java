@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @SpringBootApplication
 @EnableTransactionManagement
-@EnableWebMvc//swagger相关
+//@EnableWebMvc//swagger相关
 public class CipApplication {
 
     public static void main(String[] args) {

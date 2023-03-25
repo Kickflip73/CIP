@@ -36,7 +36,7 @@ public class CompetitionServiceImpl implements CompetitionService {
             competitionMapper.addViews(id);
             return new ResultVO(ResultEnum.COMPETITION_DATA_QUERY_SUCCESS.getCode(), ResultEnum.COMPETITION_DATA_QUERY_SUCCESS.getMessage(), competition);
         } else {
-            return new ResultVO(ResultEnum.THING_NOT_EXIST.getCode(), ResultEnum.THING_NOT_EXIST.getMessage(), null);
+            return new ResultVO(ResultEnum.COMPETITION_NOT_EXIST.getCode(), ResultEnum.COMPETITION_NOT_EXIST.getMessage(), null);
         }
     }
 
@@ -125,7 +125,7 @@ public class CompetitionServiceImpl implements CompetitionService {
         Long selectCount = competitionMapper.selectCount(wrapper);
         if (selectCount != 1) {
             //未查询到此id对应有帖子，返回
-            return new ResultVO(ResultEnum.THING_NOT_EXIST.getCode(), ResultEnum.THING_NOT_EXIST.getMessage(), null);
+            return new ResultVO(ResultEnum.COMPETITION_NOT_EXIST.getCode(), ResultEnum.COMPETITION_NOT_EXIST.getMessage(), null);
         }
 
         //删除帖子，返回影响行数
@@ -149,7 +149,7 @@ public class CompetitionServiceImpl implements CompetitionService {
         Long selectCount = competitionMapper.selectCount(wrapper);
         if (selectCount != 1) {
             //未查询到此id对应有帖子，返回
-            return new ResultVO(ResultEnum.THING_NOT_EXIST.getCode(), ResultEnum.THING_NOT_EXIST.getMessage(), null);
+            return new ResultVO(ResultEnum.COMPETITION_NOT_EXIST.getCode(), ResultEnum.COMPETITION_NOT_EXIST.getMessage(), null);
         }
 
         //修改帖子，返回影响行数

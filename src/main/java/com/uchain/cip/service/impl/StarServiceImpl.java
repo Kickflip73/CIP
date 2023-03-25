@@ -15,9 +15,9 @@ public class StarServiceImpl implements StarService {
     @Override
     public ResultVO addThing(Star star) {
         if(starmapper.addThing(star)>0){
-            return  new ResultVO(ResultEnum.START_SUCCESS.getCode(),ResultEnum.START_SUCCESS.getMessage(),null);
+            return  new ResultVO(ResultEnum.STAR_SUCCESS.getCode(),ResultEnum.STAR_SUCCESS.getMessage(),null);
         }else{
-            return  new ResultVO(ResultEnum.START_FAIL.getCode(),ResultEnum.START_FAIL.getMessage(),null);
+            return  new ResultVO(ResultEnum.STAR_FAIL.getCode(),ResultEnum.STAR_FAIL.getMessage(),null);
         }
     }
 }
