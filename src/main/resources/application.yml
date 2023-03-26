@@ -31,6 +31,9 @@ spring:
     pathmatch:
       matching-strategy: ant_path_matcher
 
+  profiles:
+    active: dev
+
 server:
   port: 8099
   servlet:
