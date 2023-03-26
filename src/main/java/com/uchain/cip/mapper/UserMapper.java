@@ -14,4 +14,5 @@ import org.apache.ibatis.annotations.Mapper;
 public interface UserMapper extends BaseMapper<User> {
     User getUserByNickNameOrEmail(String email);
     int upDatepasswordById(int id,String newPassword);
+    int updateById(User user);
 }

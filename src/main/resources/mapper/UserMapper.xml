@@ -30,6 +30,9 @@
     <update id="upDatepasswordById">
         update user set password = #{param2} where id=#{param1};
     </update>
+    <update id="updateById">
+        update user set   nick_name = #{nickName},grade = #{grade},department=#{department},major=#{major},email=#{email},description=#{description},gpa=#{gpa} where id=#{id};
+    </update>
 
     <select id="getUserByNickNameOrEmail" resultType="com.uchain.cip.pojo.User">
         SELECT * FROM user WHERE nick_name = #{nickNameOrEmail} OR email = #{nickNameOrEmail};
