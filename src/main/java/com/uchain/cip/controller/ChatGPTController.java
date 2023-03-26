@@ -8,6 +8,7 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/GPT")
+@CrossOrigin
 public class ChatGPTController {
     @Autowired
     private ChatGPTServiceImpl chatGPTService;

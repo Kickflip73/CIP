@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
  * */
 @RestController
 @RequestMapping("/competitions")
+@CrossOrigin
 public class CompetitionController {
     @Autowired
     CompetitionService competitionService;
