@@ -27,6 +27,18 @@ public class UserServiceImpl implements UserService {
 
     private final Map<String, String> verifyCodeMap = new HashMap<>();
 
+    @Override
+    public ResultVO  upDatepasswordById(int id, String newPassword,String password) {
+        User user = userMapper.selectById(id);
+        if(user==null)return new ResultVO(0,"未查询到用户信息",null);
+        if(user.getPassword().equals(password)){
+            return new ResultVO(userMapper.upDatepasswordById(id,newPassword),"修改成功",null);
+        }
+        else{
+            return  new ResultVO(0,"修改失败",null);
+        }
+    }
+
     /**
      * 依据id查询单个用户
      * */
