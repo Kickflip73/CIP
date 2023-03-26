@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/competitions")
 @CrossOrigin
-@Api(tags = "比赛帖子")
+@Api(tags = "比赛帖子接口")
 public class CompetitionController {
     @Autowired
     CompetitionService competitionService;
