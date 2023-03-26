@@ -46,7 +46,8 @@ public class UserController {
      * 修改用户信息
      * */
     @PutMapping
-    public ResultVO update(@RequestBody User user) {
+    public ResultVO update( User user) {
+
         return userService.updateById(user);
     }
 

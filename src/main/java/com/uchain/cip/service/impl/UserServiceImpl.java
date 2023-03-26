@@ -32,10 +32,15 @@ public class UserServiceImpl implements UserService {
         User user = userMapper.selectById(id);
         if(user==null)return new ResultVO(0,"未查询到用户信息",null);
         if(user.getPassword().equals(password)){
-            return new ResultVO(userMapper.upDatepasswordById(id,newPassword),"修改成功",null);
+            if(userMapper.upDatepasswordById(id,newPassword)>0){
+                return new ResultVO(1,"密码修改成功",null);
+            }else{
+                return  new ResultVO(2,"服务器故障，请重试",null);
+            }
+
         }
         else{
-            return  new ResultVO(0,"修改失败",null);
+            return  new ResultVO(0,"原密码错误",null);
         }
     }
 
