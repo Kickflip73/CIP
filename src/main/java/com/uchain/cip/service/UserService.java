@@ -31,4 +31,7 @@ public interface UserService {
 
     public ResultVO deleteById(long id);
 
+    /*用户密码修改*/
+    ResultVO upDatepasswordById(int id,String newPassword,String password);
+
 }

@@ -65,4 +65,13 @@ public class UserController {
     public ResultVO login(@RequestParam String  nickNameOrEmail, @RequestParam String password) {
         return userService.login(nickNameOrEmail, password);
     }
+    /*
+    * 用户密码修改
+    *
+    * */
+    @GetMapping("/upd")
+    public ResultVO updatepassword(Integer id,String newPassword,String password){
+    return userService.upDatepasswordById(id,newPassword,password);
+    }
+
 }

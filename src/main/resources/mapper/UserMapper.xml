@@ -27,6 +27,9 @@
         department,major,GPA,
         register_date_time
     </sql>
+    <update id="upDatepasswordById">
+        update user set password = #{param2} where id=#{param1};
+    </update>
 
     <select id="getUserByNickNameOrEmail" resultType="com.uchain.cip.pojo.User">
         SELECT * FROM user WHERE nick_name = #{nickNameOrEmail} OR email = #{nickNameOrEmail};
