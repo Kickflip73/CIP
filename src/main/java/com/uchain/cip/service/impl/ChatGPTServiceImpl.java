@@ -5,6 +5,7 @@ import com.plexpt.chatgpt.entity.chat.ChatCompletion;
 import com.plexpt.chatgpt.entity.chat.ChatCompletionResponse;
 import com.plexpt.chatgpt.entity.chat.Message;
 import com.plexpt.chatgpt.util.Proxys;
+import com.uchain.cip.enums.ResultEnum;
 import com.uchain.cip.service.ChatGPTService;
 import com.uchain.cip.tools.InterNetUtil;
 import com.unfbx.chatgpt.OpenAiClient;
@@ -35,31 +36,36 @@ public class ChatGPTServiceImpl implements ChatGPTService {
      * */
     @Override
     public String putQuest1(String prompt) {
-        HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(new OpenAILogger());
-        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        String context = null;
+        try {
+            HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(new OpenAILogger());
+            httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-        Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyHostName, proxyPort));
-        OpenAiClient openAiClient = OpenAiClient.builder()
-                .apiKey(openAiApiKey)
-                .connectTimeout(100)
-                .writeTimeout(100)
-                .readTimeout(100)
-                .interceptor(Collections.singletonList(httpLoggingInterceptor))
-                .proxy(proxy)
-                .apiHost(openAiApiBaseUrl)
-                .build();
+            Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyHostName, proxyPort));
+            OpenAiClient openAiClient = OpenAiClient.builder()
+                    .apiKey(openAiApiKey)
+                    .connectTimeout(100)
+                    .writeTimeout(100)
+                    .readTimeout(100)
+                    .interceptor(Collections.singletonList(httpLoggingInterceptor))
+                    .proxy(proxy)
+                    .apiHost(openAiApiBaseUrl)
+                    .build();
 //        openAiClient.model("gpt-3.5-turbo");
-        CompletionResponse completions = openAiClient.completions(prompt);
+            CompletionResponse completions = openAiClient.completions(prompt);
 
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Choice choice : completions.getChoices()) {
-            stringBuilder.append(choice);
+            StringBuilder stringBuilder = new StringBuilder();
+            for (Choice choice : completions.getChoices()) {
+                stringBuilder.append(choice);
+            }
+            context = stringBuilder.toString();
+            String prefix = "Choice(text= ";
+            String suffix = ", index=0, logprobs=null, finishReason=stop)";
+            context = context.substring(prefix.length());
+            context = context.substring(0, context.length() - suffix.length());
+        } catch (Exception e) {
+            return ResultEnum.CONNECT_TIME_OUT.getMessage();
         }
-        String context = stringBuilder.toString();
-        String prefix = "Choice(text= ";
-        String suffix = ", index=0, logprobs=null, finishReason=stop)";
-        context = context.substring(prefix.length());
-        context = context.substring(0, context.length() - suffix.length());
 
         return context;
     }
@@ -69,31 +75,35 @@ public class ChatGPTServiceImpl implements ChatGPTService {
      * */
     @Override
     public String putQuest2(String prompt) {
-        //国内需要代理 国外不需要
-        String proxyHostIp = InterNetUtil.domainNameToIp(proxyHostName);
-        Proxy proxy = Proxys.http(proxyHostIp, proxyPort);
+        Message res = null;
+        try {
+            //国内需要代理 国外不需要
+            String proxyHostIp = InterNetUtil.domainNameToIp(proxyHostName);
+            Proxy proxy = Proxys.http(proxyHostIp, proxyPort);
 
-        ChatGPT chatGPT = ChatGPT.builder()
-                .apiKey(openAiApiKey)
-                .proxy(proxy)
-                .timeout(5000)
-                //反向代理地址
-                .apiHost(openAiApiBaseUrl)
-                .build()
-                .init();
+            ChatGPT chatGPT = ChatGPT.builder()
+                    .apiKey(openAiApiKey)
+                    .proxy(proxy)
+                    .timeout(5000)
+                    //反向代理地址
+                    .apiHost(openAiApiBaseUrl)
+                    .build()
+                    .init();
 
-        Message message = Message.of(prompt);
+            Message message = Message.of(prompt);
 
-        ChatCompletion chatCompletion = ChatCompletion.builder()
-                .model(ChatCompletion.Model.GPT_3_5_TURBO.getName())
-                .messages(Collections.singletonList(message))
-                .maxTokens(3000)
-                .temperature(0.9)
-                .build();
-        ChatCompletionResponse response = chatGPT.chatCompletion(chatCompletion);
-        Message res = response.getChoices().get(0).getMessage();
+            ChatCompletion chatCompletion = ChatCompletion.builder()
+                    .model(ChatCompletion.Model.GPT_3_5_TURBO.getName())
+                    .messages(Collections.singletonList(message))
+                    .maxTokens(3000)
+                    .temperature(0.9)
+                    .build();
+            ChatCompletionResponse response = chatGPT.chatCompletion(chatCompletion);
+            res = response.getChoices().get(0).getMessage();
+        } catch (Exception e) {
+            return ResultEnum.CONNECT_TIME_OUT.getMessage();
+        }
 
         return res.getContent();
     }
-
 }

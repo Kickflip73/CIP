@@ -59,6 +59,11 @@ public enum ResultEnum {
     COMMENT_DELETE_FAIL(4020, "删除评论失败"),
 
     /**
+     * ChatGPT相关
+     * */
+    CONNECT_TIME_OUT(7000, "连接超时"),
+
+    /**
      * 其他
      * */
     UNKNOWN_ERROR(9999, "未知错误，请刷新页面后重试")
