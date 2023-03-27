@@ -11,7 +11,7 @@ spring:
   #邮件发送相关
   mail:
     host: smtp.qq.com
-    port: 465
+    port: 4658099
     username: '3065242502@qq.com'
     #授权码
     password: 'neaymokwnojhdfad'
