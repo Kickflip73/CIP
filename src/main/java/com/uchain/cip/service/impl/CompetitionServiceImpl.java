@@ -158,8 +158,7 @@ public class CompetitionServiceImpl implements CompetitionService {
         if (count == 1) {
             return new ResultVO(ResultEnum.UPDATE_COMPETITION_SUCCESS.getCode(), ResultEnum.UPDATE_COMPETITION_SUCCESS.getMessage(), competition);
         } else {
-            return new ResultVO(ResultEnum.UPDATE_COMPETITION_FAIL.getCode(), ResultEnum.UPDATE_COMPETITION_FAIL.getMessage(), competition);
+            return new ResultVO(ResultEnum.UPDATE_COMPETITION_FAIL.getCode(), ResultEnum.UPDATE_COMPETITION_FAIL.getMessage(), null);
         }
     }
-
 }

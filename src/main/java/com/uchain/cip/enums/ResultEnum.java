@@ -50,6 +50,18 @@ public enum ResultEnum {
     THING_NOT_EXIST(2040, "该帖子不存在"),
 
     /**
+     * 资源帖子相关
+     * */
+    RESOURCE_DATA_QUERY_SUCCESS(2001, "查询资源信息成功"),
+    RESOURCE_DATA_QUERY_FAIL(2000, "查询资源信息失败"),
+    CREATE_RESOURCE_SUCCESS(2011, "创建资源信息成功"),
+    CREATE_RESOURCE_FAIL(2010, "创建资源信息失败"),
+    DELETE_RESOURCE_SUCCESS(2021, "删除资源信息成功"),
+    DELETE_RESOURCE_FAIL(2020, "删除资源信息失败"),
+    UPDATE_RESOURCE_SUCCESS(2031, "修改资源信息成功"),
+    UPDATE_RESOURCE_FAIL(2030, "修改资源信息失败"),
+
+    /**
      * 评论相关
      * */
     COMMENT_ON_SUCCESS(4001, "评论成功"),
