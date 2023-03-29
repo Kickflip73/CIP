@@ -1,9 +1,6 @@
 package com.uchain.cip.service;
 
-import com.uchain.cip.pojo.Competition;
 import com.uchain.cip.pojo.Resource;
-import com.baomidou.mybatisplus.extension.service.IService;
-import com.uchain.cip.tools.CompetitionCondition;
 import com.uchain.cip.tools.ResourceCondition;
 import com.uchain.cip.vo.ResultVO;
 
@@ -22,4 +19,8 @@ public interface ResourceService {
     ResultVO deleteResourceById(long id);
 
     ResultVO updateResourceById(Resource resource);
+
+    ResultVO getMyResources(long userId);
+
+    ResultVO report(long userId, long thingId);
 }

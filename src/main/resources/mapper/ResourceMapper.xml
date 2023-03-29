@@ -48,4 +48,8 @@
     <update id="reduceStars">
         UPDATE resource SET stars = stars-1 WHERE id = #{id};
     </update>
+
+    <select id="selectResourcesByUserId" resultType="com.uchain.cip.pojo.Resource">
+        SELECT * FROM resource WHERE owner_id = #{userId};
+    </select>
 </mapper>

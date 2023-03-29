@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 /**
 * @author 30652
@@ -160,5 +161,31 @@ public class ResourceServiceImpl implements ResourceService {
         } else {
             return new ResultVO(ResultEnum.UPDATE_RESOURCE_FAIL.getCode(), ResultEnum.UPDATE_RESOURCE_FAIL.getMessage(), null);
         }
+    }
+
+    /**
+     * 依旧id获取用户的所有帖子
+     * */
+    @Override
+    public ResultVO getMyResources(long userId) {
+        List<Resource> resourcesList = resourceMapper.selectResourcesByUserId(userId);
+
+        if (resourcesList != null) {
+            //将查询到的帖子浏览量都+1
+            for (Resource resource : resourcesList) {
+                resourceMapper.addViews(resource.getId());
+            }
+            return new ResultVO(ResultEnum.RESOURCE_DATA_QUERY_SUCCESS.getCode(), ResultEnum.RESOURCE_DATA_QUERY_SUCCESS.getMessage(), resourcesList);
+        } else {
+            return new ResultVO(ResultEnum.RESOURCE_DATA_QUERY_FAIL.getCode(), ResultEnum.RESOURCE_DATA_QUERY_FAIL.getMessage(), null);
+        }
+    }
+
+    /**
+     * 举报帖子
+     * */
+    @Override
+    public ResultVO report(long userId, long thingId) {
+        return null;
     }
 }

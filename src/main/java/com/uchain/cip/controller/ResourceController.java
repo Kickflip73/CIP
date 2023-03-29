@@ -79,4 +79,21 @@ public class ResourceController {
         return resourceService.updateResourceById(resource);
     }
 
+    /**
+     * 根据用户的id查找属于此用户的资源帖子
+     * */
+    @GetMapping("/mine/{userId}")
+    @ApiOperation(value = "我发布的帖子", notes = "根据用户的id查找属于此用户的资源帖子")
+    public ResultVO getMyResources(@PathVariable long userId) {
+        return resourceService.getMyResources(userId);
+    }
+
+    /**
+     * 举报帖子
+     * */
+    @PostMapping("/{userId}/{thingId}")
+    @ApiOperation(value = "我发布的帖子", notes = "根据用户的id查找属于此用户的资源帖子")
+    public ResultVO report(@PathVariable long userId, @PathVariable long thingId) {
+        return resourceService.report(userId, thingId);
+    }
 }

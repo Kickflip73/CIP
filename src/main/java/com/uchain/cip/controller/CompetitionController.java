@@ -1,6 +1,7 @@
 package com.uchain.cip.controller;
 
 import com.uchain.cip.pojo.Competition;
+import com.uchain.cip.pojo.User;
 import com.uchain.cip.service.CompetitionService;
 import com.uchain.cip.tools.CompetitionCondition;
 import com.uchain.cip.vo.ResultVO;
@@ -81,5 +82,14 @@ public class CompetitionController {
     @ApiOperation(value = "依据id修改帖子", notes = "依据id修改帖子")
     public ResultVO updateCompetitionById(@RequestBody Competition competition) {
         return competitionService.updateCompetitionById(competition);
+    }
+
+    /**
+     * 比赛大厅推荐帖子
+     * */
+    @GetMapping
+    @ApiOperation(value = "比赛帖子推荐", notes = "传入用户信息，返回推荐给此用户的帖子")
+    public ResultVO recommend(User user) {
+        return null;
     }
 }
