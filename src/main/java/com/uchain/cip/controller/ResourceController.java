@@ -1,6 +1,7 @@
 package com.uchain.cip.controller;
 
 import com.uchain.cip.pojo.Resource;
+import com.uchain.cip.pojo.User;
 import com.uchain.cip.service.ResourceService;
 import com.uchain.cip.tools.ResourceCondition;
 import com.uchain.cip.vo.ResultVO;
@@ -31,17 +32,19 @@ public class ResourceController {
     /**
      * 分页条件查询资源帖子
      * */
-    @GetMapping("/{pageIndex}/{pageSize}")
+    @GetMapping("/search/{pageIndex}/{pageSize}")
     @ApiOperation(value = "分页条件查询资源帖子", notes = "依据传入的索引和页面大小以及筛选条件来查询一批资源帖子")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "pageIndex",
+            @ApiImplicitParam(
+                    name = "pageIndex",
                     value = "当前页下标（从1开始）",
                     required = true,
                     dataType = "int",
                     paramType = "path"
             ),
 
-            @ApiImplicitParam(name = "pageSize",
+            @ApiImplicitParam(
+                    name = "pageSize",
                     value = "页面大小，即每页展示的条目数",
                     required = true,
                     dataType = "int",
@@ -92,8 +95,50 @@ public class ResourceController {
      * 举报帖子
      * */
     @PostMapping("/{userId}/{thingId}")
-    @ApiOperation(value = "我发布的帖子", notes = "根据用户的id查找属于此用户的资源帖子")
+    @ApiOperation(value = "举报帖子", notes = "传入当前用户的id和要举报的帖子的id")
+    @ApiImplicitParams({
+            @ApiImplicitParam(
+                    name = "userId",
+                    value = "当前用户的id",
+                    required = true,
+                    dataType = "long",
+                    paramType = "path"
+            ),
+            @ApiImplicitParam(
+                    name = "thingId",
+                    value = "要举报的帖子的id",
+                    required = true,
+                    dataType = "long",
+                    paramType = "path"
+            )
+    })
     public ResultVO report(@PathVariable long userId, @PathVariable long thingId) {
         return resourceService.report(userId, thingId);
+    }
+
+    /**
+     * 资源大厅推荐帖子
+     * */
+    @GetMapping("/{pageIndex}/{pageSize}")
+    @ApiOperation(value = "资源帖子推荐", notes = "传入用户信息，返回推荐给此用户的帖子，采用分页模式")
+    @ApiImplicitParams({
+            @ApiImplicitParam(
+                    name = "pageIndex",
+                    value = "当前页下标（从1开始）",
+                    required = true,
+                    dataType = "int",
+                    paramType = "path"
+            ),
+
+            @ApiImplicitParam(
+                    name = "pageSize",
+                    value = "页面大小，即每页展示的条目数",
+                    required = true,
+                    dataType = "int",
+                    paramType = "path"
+            )
+    })
+    public ResultVO recommend(@PathVariable int pageIndex, @PathVariable int pageSize, @RequestBody User user) {
+        return resourceService.recommend(pageIndex, pageSize, user);
     }
 }

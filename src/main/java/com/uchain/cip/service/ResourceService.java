@@ -1,6 +1,7 @@
 package com.uchain.cip.service;
 
 import com.uchain.cip.pojo.Resource;
+import com.uchain.cip.pojo.User;
 import com.uchain.cip.tools.ResourceCondition;
 import com.uchain.cip.vo.ResultVO;
 
@@ -23,4 +24,6 @@ public interface ResourceService {
     ResultVO getMyResources(long userId);
 
     ResultVO report(long userId, long thingId);
+
+    ResultVO recommend(int pageIndex, int pageSize, User user);
 }

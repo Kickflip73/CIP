@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.uchain.cip.enums.ResultEnum;
 import com.uchain.cip.mapper.ResourceMapper;
 import com.uchain.cip.pojo.Resource;
+import com.uchain.cip.pojo.User;
 import com.uchain.cip.service.ResourceService;
 import com.uchain.cip.tools.ResourceCondition;
 import com.uchain.cip.vo.ResultVO;
@@ -187,5 +188,25 @@ public class ResourceServiceImpl implements ResourceService {
     @Override
     public ResultVO report(long userId, long thingId) {
         return null;
+    }
+
+    /**
+     * 获取推荐帖子
+     * */
+    @Override
+    public ResultVO recommend(int pageIndex, int pageSize, User user) {
+        /**
+         * 推荐算法
+         * */
+
+        /**
+         * 临时顶凑的
+         * */
+        ResourceCondition resourceCondition = new ResourceCondition();
+        resourceCondition.setSearchInfo(null);
+        resourceCondition.setPostType(3);
+        resourceCondition.setOrderBy(2);
+        resourceCondition.setAscOrDesc(2);
+        return this.getResourcePage(pageIndex, pageSize, resourceCondition);
     }
 }
