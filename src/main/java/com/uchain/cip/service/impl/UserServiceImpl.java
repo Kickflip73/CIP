@@ -84,7 +84,7 @@ public class UserServiceImpl implements UserService {
      * */
     @Override
     public ResultVO verifyEmail(String email, String verifyCode) {
-        if (verifyCode != null) {
+        if (verifyCode != null && verifyCode.length() == 4) {
             //有验证码，验证验证码是否正确，从redis里依据邮箱地址取验证码
             if (Objects.equals(verifyCode, stringRedisTemplate.opsForValue().get(email))) {
                 //验证码正确
@@ -111,7 +111,7 @@ public class UserServiceImpl implements UserService {
                 String text = "您正在注册智慧校园互助平台账户\n\t验证码：" + sendVerifyCode + "\n若非本人操作，请忽略此条信息~";
                 emailUtil.sendSimpleMailMessage(email, "智慧校园互助平台", text);
                 //将邮箱和验证码放入redis
-                stringRedisTemplate.opsForValue().set(email, verifyCode);
+                stringRedisTemplate.opsForValue().set(email, sendVerifyCode);
             } catch (Exception e) {
                 //发送失败
                 return new ResultVO(ResultEnum.EMAIL_SEN_FAIL.getCode(), ResultEnum.EMAIL_SEN_FAIL.getMessage(), null);

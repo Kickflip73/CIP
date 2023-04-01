@@ -14,7 +14,7 @@ spring:
     port: 4658099
     username: '3065242502@qq.com'
     #授权码
-    password: 'neaymokwnojhdfad'
+    password: 'ntjmesynmcasddde'
     properties:
       mail:
         smtp:
@@ -36,7 +36,7 @@ spring:
 
   # redis相关
   redis:
-    host: 127.0.0.1
+    host: 106.12.129.219
     port: 6379
     client-type: lettuce
 
@@ -59,6 +59,7 @@ chatGPT:
 
 mybatis-plus:
   configuration:
-    #日志打印sql
+    # 日志打印sql
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
 #http://localhost:8099/cip/html/login.html 登录网址
