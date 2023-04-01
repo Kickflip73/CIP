@@ -23,9 +23,7 @@ public interface UserService {
 
     public ResultVO login(String nickNameOrEmail, String password);
 
-    public ResultVO register(User user, String verifyCode);
-
-    public ResultVO saveUser(User user);
+    public ResultVO register(User user);
 
     public ResultVO updateById(User user);
 
@@ -34,4 +32,5 @@ public interface UserService {
     /*用户密码修改*/
     ResultVO upDatepasswordById(int id,String newPassword,String password);
 
+    ResultVO verifyEmail(String email, String verifyCode);
 }

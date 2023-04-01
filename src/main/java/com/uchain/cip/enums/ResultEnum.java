@@ -28,6 +28,7 @@ public enum ResultEnum {
     EMAIL_SEN_SUCCESS(1091, "验证码发送成功，请注意查收"),
     EMAIL_SEN_FAIL(1090, "邮件发送失败，请检查邮箱是否正确"),
     VERIFY_CODE_ERROR(1100, "验证码错误"),
+    VERIFY_CODE_SUCCESS(1101, "验证码正确"),
 
     /**
      * 账户相关
