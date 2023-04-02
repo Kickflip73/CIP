@@ -43,4 +43,5 @@ public interface ResourceMapper extends BaseMapper<Resource> {
      * 依据用户的id获取此用户发表的资源帖子
      * */
      public List<Resource> selectResourcesByUserId(long userId);
+
 }

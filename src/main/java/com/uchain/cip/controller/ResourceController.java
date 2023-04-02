@@ -9,12 +9,14 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/resources")
 @CrossOrigin
+@Slf4j
 @Api(tags = "资源帖子接口")
 public class ResourceController {
     @Autowired
@@ -61,6 +63,7 @@ public class ResourceController {
     @PostMapping
     @ApiOperation(value = "创建资源帖子", notes = "创建资源帖子")
     public ResultVO createResource(@RequestBody Resource resource) {
+        log.info(resource.toString());
         return resourceService.saveResource(resource);
     }
 
@@ -88,6 +91,7 @@ public class ResourceController {
     @GetMapping("/mine/{userId}")
     @ApiOperation(value = "我发布的帖子", notes = "根据用户的id查找属于此用户的资源帖子")
     public ResultVO getMyResources(@PathVariable long userId) {
+
         return resourceService.getMyResources(userId);
     }
 
