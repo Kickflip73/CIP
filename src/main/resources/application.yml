@@ -40,10 +40,10 @@ spring:
     port: 6379
     client-type: lettuce
 
-  # mongodb相关
-  data:
-    mongodb:
-      uri: mongodb://localhost/first_db
+#  # mongodb相关
+#  data:
+#    mongodb:
+#      uri: mongodb://106.12.129.219/first_db
 
 server:
   port: 8099
