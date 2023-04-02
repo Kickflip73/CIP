@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://labfile.oss.aliyuncs.com/courses/3774/jquery-3.6.0.min.js"></script>
+    <style>
+        #app {
+            /* background-image: linear-gradient(to right, #ffecd2 0%, #fcb69f 100%); */
+            /* background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%); */
+            /* background-image: linear-gradient(to top, #fdcbf1 0%, #fdcbf1 1%, #e6dee9 100%); */
+            /* background: url("https://ts1.cn.mm.bing.net/th/id/R-C.bdcab1805f43e50400e9975ad8fef8ee?rik=%2bkJyltn%2fRp8Jdg&riu=http%3a%2f%2fbpic.588ku.com%2fback_pic%2f04%2f04%2f35%2f285809df81af6b7.jpg!%2ffh%2f300%2fquality%2f90%2funsharp%2ftrue%2fcompress%2ftrue&ehk=j%2fDkKK8VCGvV1ySlS46S7JFiZQwiQe1Gp42ocvZzyPo%3d&risl=&pid=ImgRaw&r=0");  */
+            background-image: url("https://pic2.zhimg.com/v2-05fb72c2ef9144fb9020614d0adaa182_r.jpg?source=1940ef5c");
+        }
+        .userrow {
+            float: left;
+            display: inline-block;
+            height: 400px;
+            width: 300px;
+            /* background-color: orange; */
+            background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+            margin-top: 50px;
+            margin-left: 50px;
+            opacity: 0.9;
+        }
+        .userclo {
+            display: inline-block;
+            width: 600px;
+            height: 610px;
+            /* background-color: rgb(199, 204, 176); */
+            /* background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%); */
+            /* background-image: linear-gradient(to top, #fddb92 0%, #d1fdff 100%); */
+            /* background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);white */
+            /* background-image: linear-gradient(to top, #d299c2 0%, #fef9d7 100%); */
+            /* background-image: linear-gradient(to top, #fddb92 0%, #d1fdff 100%); */
+            /* background-image: linear-gradient(to top, #accbee 0%, #e7f0fd 100%); */
+            background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
+            padding: 50px;
+            margin-left: 62px;
+            margin-top: 50px;
+            opacity: 0.9;
+        }
+        #form1 {
+            margin-top: 80px;
+        }
+        #userpassword {
+            margin-top: 50px;
+        }
+        #userinformation label {
+            display: block;
+            margin: 0px;
+        }
+        #userinformation label>span 
+        {
+            float: left;
+            width: 20%;
+            text-align: right;
+            padding-right: 10px;
+            color: #888;
+        }
+        #userpassword label>span {
+            float: left;
+            width: 20%;
+            text-align: right;
+            padding-right: 10px;
+            color: #888;
+            margin-top: 35px;
+        }
+        #userinformation input[type="text"], #userinformation input[type="email"], #userinformation textarea {
+            border: 1px solid #DADADA;
+            color: #888;
+            height: 30px;
+            margin-bottom: 20px;
+            margin-right: 6px;
+            margin-top: -5px;
+            outline: 0 none;
+            padding: 3px 3px 3px 5px;
+            width: 70%;
+            font-size: 16px;
+            line-height:15px;
+            box-shadow: inset 0px 1px 4px #ECECEC;
+            -moz-box-shadow: inset 0px 1px 4px #ECECEC;
+            -webkit-box-shadow: inset 0px 1px 4px #ECECEC;
+        }
+        #userinformation textarea{
+            padding: 19px 3px 3px 5px;
+        }
+        #userpassword input[type="password"] {
+            border: 1px solid #DADADA;
+            color: #888;
+            height: 30px;
+            margin-bottom: 20px;
+            margin-right: 6px;
+            margin-top: 25px;
+            outline: 0 none;
+            padding: 3px 3px 3px 5px;
+            width: 70%;
+            font-size: 16px;
+            line-height:15px;
+            box-shadow: inset 0px 1px 4px #ECECEC;
+            -moz-box-shadow: inset 0px 1px 4px #ECECEC;
+            -webkit-box-shadow: inset 0px 1px 4px #ECECEC;
+        }
+        #button1,#button2 {
+            display: inline-block;
+            border-radius: 4px;
+            background-color: #a8d2ed;
+            border: none;
+            color: #FFFFFF;
+            text-align: center;
+            font-size: 5px;
+            padding: 5px;
+            width: 90px;
+            transition: all 0.5s;
+            cursor: pointer;
+            margin: 1px;
+            vertical-align:middle;
+            }
+            
+            #button1 span,
+            #button2 span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+            }
+
+            #button1 span:after,
+            #button2 span:after {
+            content: '»';
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            right: -20px;
+            transition: 0.5s;
+            }
+
+            #button1:hover span ,
+            #button2:hover span{
+            padding-right: 25px;
+            }
+
+            #button1:hover span:after,
+            #button2:hover span:after {
+            opacity: 1;
+            right: 0;
+            }
+
+
+
+            .userbtn1,.userbtn2 {
+                background: #E27575;
+                border: none;
+                padding: 10px 25px 10px 25px;
+                margin: 30px 50px 50px 300px;
+                color: #FFF;
+                box-shadow: 1px 1px 5px #B6B6B6;
+                border-radius: 3px;
+                text-shadow: 1px 1px 1px #9E3F3F;
+                cursor: pointer;
+            }
+
+          /* 遮罩层 */
+            #overlay {
+                position: fixed;
+                left: 0px;
+                top: 0px;
+                width: 100%;
+                height: 100%;
+                font-size: 16px;
+                /* IE9以下不支持rgba模式 */
+                background-color: rgba(0, 0, 0, 0.5);
+                /* 兼容IE8及以下 */
+                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#7f000000,endColorstr=#7f000000);
+                display: none;
+            }
+            /* 弹出框主体 */
+            .popup {
+                background-color: #ffffff;
+                max-width: 400px;
+                min-width: 200px;
+                height: 240px;
+                border-radius: 5px;
+                margin: 200px auto;
+                text-align: center;
+            }
+            /* 弹出框的标题 */
+            .popup_title {
+                height: 60px;
+                line-height: 60px;
+                border-bottom: solid 1px #cccccc;
+            }
+            /* 弹出框的内容 */
+            .popup_content {
+                height: 50px;
+                line-height: 50px;
+                padding: 15px 20px;
+            }
+            /* 弹出框的按钮栏 */
+            .popup_btn {
+                padding-bottom: 10px;
+            }
+            /* 弹出框的按钮 */
+            .popup_btn button {
+                color: #778899;
+                width: 40%;
+                height: 40px;
+                cursor: pointer;
+                border: solid 1px #cccccc;
+                border-radius: 5px;
+                margin: 5px 10px;
+                color: #ffffff;
+                background-color: #e27575;
+            }
+
+    </style>
+</head>
+<body>
+    <div style="background-color:#FCFCFC;font-family:'宋体';height:100%;" id="app">
+            <div class="userrow">
+                <div style="background-color:pink;width:80px;height:80px;display:inline-block;border-radius:50%;overflow:hidden;margin-top: 30px;margin-left: 115px;">
+                    <img src="../image/chatGpt.png">
+                </div>
+                <div style="margin-top:20px;margin-left:130px;"><span>{{userNickname}}</span></div>
+                <div style="margin-top:50px;margin-left:110px;"><button id="button2"  v-on:click="change"><span>个人信息</span></button></div>
+                <div style="margin-top:50px;margin-left:110px;"><button id="button2" v-on:click="change"><span>修改密码</span></button></div>
+                
+            </div>
+
+
+                <div class="userclo">
+                    <!-- 个人信息 -->
+                    <div v-if="flag" id="userinformation" name="item1">
+                        <h2 class="text-center" style="margin-left: 280px;margin-top: -10px; ">修改信息</h2>
+                        <div id="form1">
+                            <label>
+                                <span>用户名：</span> 
+                                <input type="text" id="userNickname" v-model='userNickname'/>
+                            </label>
+                            <label>
+                                <span>年级：</span>
+                                <input type="text" id="usergrade" v-model="usergrade"/>
+                            </label>
+                            <label>
+                                <span>院系：</span>
+                                <input type="text" id="userdepartment" v-model="userdepartment"/>
+                            </label>
+                            <label>
+                                <span>专业：</span>
+                                <input type="text" id="usermajor" v-model="usermajor"/>
+                            </label>
+                            <label>
+                                <span>GPA： </span>
+                                <input type="text" id="usergpa" v-model="usergpa"/>
+                            </label>
+                            <label>
+                                <span>邮箱：</span>
+                                <input type="email" id="useremail" v-model="useremail"/>
+                            </label>
+                            <label>
+                                <span>个人简介：</span>
+                                <textarea id="userdescription" v-model="userdescription"></textarea> 
+                            </label>
+                        </div>
+                         
+                        <button class="userbtn1" @click="informationchange()">确认修改</button>
+                    </div>
+                    <!-- 修改密码 -->
+                    <div v-if="!flag" id="userpassword" id="item2">
+                        <h2 class="text-center" style="margin-left: 280px;">密码修改</h2>
+                       
+                            <label>
+                                <span>原密码:</span>
+                                <!-- zxc -->
+                                <input v-model:value="password" type="password" id="oldPassword" />
+                            </label>
+                            <label>
+                                <span>新密码:</span>
+                                <input v-model:value="newPassword1" type="password" id="newPassword" />
+                            </label>
+            
+                            <label>
+                                <span>确认密码:</span>
+                                <input v-model:value="newPassword2" type="password" id="makesure" placeholder='确认密码必须与新密码一致' />
+                            </label>
+            
+                            <button class="userbtn2" id="btn" @click="passwordchange()">修改</button>                        
+                    </div>
+                </div>
+                <!-- 弹出框   -->
+                <div id="overlay">
+                    <div class="popup">
+                      <p class="popup_title">提示</p>
+                      <p class="popup_content" id="p"></p>
+                      <div class="popup_btn">
+                        <button class="confirmBtn" @click="hidePopup()">确认</button>
+                      </div>
+                    </div>
+                  </div>    
+        </div>
+        <script>
+            //    向后端发送请求获取数据,用户信息
+                var app = new Vue({
+    
+                    el:'#app',
+                    data:{
+                        flag:true,
+                        userNickname:'',
+                        usergrade:'',
+                        userdepartment:'',
+                        usermajor:'',
+                        usergpa:'',
+                        useremail:'',
+                        userdescription:'',
+                        userpassword:'',
+                        //zxc
+                        userId: parseInt(window.localStorage.getItem("id")),
+                        password: "",
+                        newPassword1: "",
+                        newPassword2: "",
+                    },
+                    //根据不同的id动态获取数据并渲染页面
+                    created() {
+                        $.ajax({
+                            url:"http://zxckk.natapp1.cc/cip/users/"+this.userId,
+                            // url:"http://zxckk.natapp1.cc/cip/users/"+id,
+                            method: "GET",
+                            dataType:'json',
+                            success: function(res) {
+                                $('#userNickname').val(res.data.nickName),
+                                $('#usergrade').val(res.data.grade),
+                                $('#userdepartment').val(res.data.department),
+                                $('#usermajor').val(res.data.major),
+                                $('#usergpa').val(res.data.gpa),
+                                $('#useremail').val(res.data.email),
+                                $('#userdescription').val(res.data.description)
+                            },
+                            error: function(error) {
+                                alert("加载数据失败");
+                                console.log(error);
+                            }
+                        })
+                    },
+                    methods:{
+                        
+                        hidePopup(){
+                            var overlay = document.getElementById("overlay");
+                            overlay.style.display = "none";
+                        },
+                        // 点击修改信息按钮
+                        informationchange(){
+                           
+                            var data = {
+                                // id:1,
+                                id:parseInt(window.localStorage.getItem("id")),
+                                nickName:this.userNickname,
+                                grade:this.usergrade,
+                                department:this.userdepartment,
+                                major:this.usermajor,
+                                gpa:this.usergpa,
+                                email:this.useremail,
+                                description:this.userdescription,
+                            }
+                            // 向后端接口发送修改后的信息
+                            $.ajax({
+                            type: 'PUT',
+                            url: "http://zxckk.natapp1.cc/cip/users",
+                            data: data,
+                            dataType: 'json',
+                            success(result) {
+                                console.log(result);
+                                document.getElementById("p").innerHTML = "信息修改成功";
+                                var overlay = document.getElementById("overlay");
+                                overlay.style.display = "block";
+                            },
+                            error(result) {
+                                document.getElementById("p").innerHTML = "信息修改失败"
+                                var overlay = document.getElementById("overlay");
+                                overlay.style.display = "block";
+                            }
+                        })
+                              
+                        },
+                        // 点击修改密码按钮
+                        passwordchange(){
+                           
+                            if (this.newPassword1 === this.newPassword2) {
+                            $.ajax({
+                                type: 'GET',
+                                url: "http://zxckk.natapp1.cc/cip/users/upd",
+                                data: {
+                                    id: this.userId,
+                                    newPassword: this.newPassword1,
+                                    password: this.password
+                                },
+                                dataType: 'json',
+                                success(result) {
+                                    console.log(result);
+                                    document.getElementById("p").innerHTML = result.message;
+                                    var overlay = document.getElementById("overlay");
+                                    overlay.style.display = "block";
+                                }
+    
+                            })
+                        } else {
+                            document.getElementById("p").innerHTML = "确认密码和新密码不一致，请重试"
+                            var overlay = document.getElementById("overlay");
+                            overlay.style.display = "block";
+                        }
+                        },
+                        change:function(){
+                            this.flag = !this.flag;
+                        }
+    
+                    }
+                })           
+            </script>
+</body>
+</html>

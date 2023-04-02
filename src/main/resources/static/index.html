@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能校园互助系统</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="icon" type="image/png" href="path/to/your/icon.png">
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li><a href="#" class="active" id="resources">资源分享</a></li>
+            <li><a href="#" id="team">竞赛组队</a></li>
+            <li><a href="#" id="gpt">GPT问答</a></li>
+            <li class="user-info">
+                <span id="username"><a href="./html/user.html">用户昵称</a></span>
+
+                <img src="./image/chatGpt.png" alt="用户头像">
+            </li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <div id="welcome">
+        <h1>欢迎来到网站首页</h1>
+        <p>请点击导航栏中的模块来查看对应的内容</p>
+    </div>
+    <div id="resources-content" class="hidden">
+        <div class="content-container">
+            <!-- 嵌套资源分享页面的代码 -->
+            <h2>资源分享</h2>
+        </div>
+    </div>
+
+    <div id="team-content" class="hidden">
+        <div class="content-container">
+            <!-- 嵌套竞赛组队页面的代码 -->
+            <h2>竞赛组队</h2>
+        </div>
+    </div>
+
+    <div id="gpt-content" class="hidden">
+        <div class="content-container">
+            <!-- 嵌套GPT问答页面的代码 -->
+            <iframe src="html/chatGpt.html"></iframe>
+        </div>
+    </div>
+</main>
+<script src="js/index.js"></script>
+</body>
+</html>
