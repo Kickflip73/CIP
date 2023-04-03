@@ -5,9 +5,11 @@ import com.uchain.cip.enums.ResultEnum;
 import com.uchain.cip.mapper.UserMapper;
 import com.uchain.cip.pojo.User;
 import com.uchain.cip.service.UserService;
+import com.uchain.cip.tools.CacheUtil;
 import com.uchain.cip.tools.EmailUtil;
 import com.uchain.cip.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.config.annotation.RedirectViewControllerRegistration;
@@ -25,10 +27,10 @@ public class UserServiceImpl implements UserService {
     UserMapper userMapper;
 
     @Autowired
-    EmailUtil emailUtil;
+    StringRedisTemplate stringRedisTemplate;
 
     @Autowired
-    StringRedisTemplate stringRedisTemplate;
+    CacheUtil cacheUtil;
 
     @Override
     public ResultVO  upDatepasswordById(int id, String newPassword,String password) {
@@ -84,9 +86,9 @@ public class UserServiceImpl implements UserService {
      * */
     @Override
     public ResultVO verifyEmail(String email, String verifyCode) {
-        if (verifyCode != null && verifyCode.length() == 4) {
+        if (verifyCode != null && verifyCode.length() != 0) {
             //有验证码，验证验证码是否正确，从redis里依据邮箱地址取验证码
-            if (Objects.equals(verifyCode, stringRedisTemplate.opsForValue().get(email))) {
+            if (verifyCode.length() == 4 && Objects.equals(verifyCode, cacheUtil.getVerifyCode(email))) {
                 //验证码正确
                 return new ResultVO(ResultEnum.VERIFY_CODE_SUCCESS.getCode(), ResultEnum.VERIFY_CODE_SUCCESS.getMessage(), null);
             } else {
@@ -104,14 +106,9 @@ public class UserServiceImpl implements UserService {
                 return new ResultVO(ResultEnum.EMAIL_ALREADY_EXISTS.getCode(), ResultEnum.EMAIL_ALREADY_EXISTS.getMessage(), null);
             }
 
-            //发送验证码邮件
+            //发送验证码邮件，存入缓存
             try {
-                //生成四位数随机验证码
-                String sendVerifyCode = String.format("%04d", new Random().nextInt(9999 - 1000 + 1) + 1000);
-                String text = "您正在注册智慧校园互助平台账户\n\t验证码：" + sendVerifyCode + "\n若非本人操作，请忽略此条信息~";
-                emailUtil.sendSimpleMailMessage(email, "智慧校园互助平台", text);
-                //将邮箱和验证码放入redis
-                stringRedisTemplate.opsForValue().set(email, sendVerifyCode);
+                cacheUtil.setVerifyCode(email);
             } catch (Exception e) {
                 //发送失败
                 return new ResultVO(ResultEnum.EMAIL_SEN_FAIL.getCode(), ResultEnum.EMAIL_SEN_FAIL.getMessage(), null);
@@ -226,5 +223,4 @@ public class UserServiceImpl implements UserService {
             return new ResultVO(ResultEnum.LOGIN_FAIL.getCode(), ResultEnum.LOGIN_FAIL.getMessage(), null);
         }
     }
-
 }

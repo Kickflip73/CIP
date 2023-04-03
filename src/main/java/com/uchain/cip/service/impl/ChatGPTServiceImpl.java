@@ -12,6 +12,7 @@ import com.unfbx.chatgpt.OpenAiClient;
 import com.unfbx.chatgpt.entity.common.Choice;
 import com.unfbx.chatgpt.entity.completions.CompletionResponse;
 import com.unfbx.chatgpt.interceptor.OpenAILogger;
+import lombok.extern.slf4j.Slf4j;
 import okhttp3.logging.HttpLoggingInterceptor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,7 @@ import java.net.Proxy;
 import java.util.Collections;
 
 @Service
+@Slf4j
 public class ChatGPTServiceImpl implements ChatGPTService {
     @Value("${chatGPT.openAiApiBaseUrl}")
     private String openAiApiBaseUrl;
@@ -36,6 +38,8 @@ public class ChatGPTServiceImpl implements ChatGPTService {
      * */
     @Override
     public String putQuest1(String prompt) {
+        log.info("用户提问：" + prompt);
+
         String context = null;
         try {
             HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(new OpenAILogger());
@@ -67,6 +71,8 @@ public class ChatGPTServiceImpl implements ChatGPTService {
             return ResultEnum.CONNECT_TIME_OUT.getMessage();
         }
 
+        log.info("ChatGPT回答：" + context);
+
         return context;
     }
 
@@ -75,6 +81,8 @@ public class ChatGPTServiceImpl implements ChatGPTService {
      * */
     @Override
     public String putQuest2(String prompt) {
+        log.info("用户提问：" + prompt);
+
         Message res = null;
         try {
             //国内需要代理 国外不需要
@@ -84,7 +92,7 @@ public class ChatGPTServiceImpl implements ChatGPTService {
             ChatGPT chatGPT = ChatGPT.builder()
                     .apiKey(openAiApiKey)
                     .proxy(proxy)
-                    .timeout(5000)
+                    .timeout(3000)
                     //反向代理地址
                     .apiHost(openAiApiBaseUrl)
                     .build()
@@ -93,7 +101,7 @@ public class ChatGPTServiceImpl implements ChatGPTService {
             Message message = Message.of(prompt);
 
             ChatCompletion chatCompletion = ChatCompletion.builder()
-                    .model(ChatCompletion.Model.GPT_3_5_TURBO.getName())
+                    .model(ChatCompletion.Model.GPT_3_5_TURBO_0301.getName())
                     .messages(Collections.singletonList(message))
                     .maxTokens(3000)
                     .temperature(0.9)
@@ -103,6 +111,8 @@ public class ChatGPTServiceImpl implements ChatGPTService {
         } catch (Exception e) {
             return ResultEnum.CONNECT_TIME_OUT.getMessage();
         }
+
+        log.info("ChatGPT回答：" + res.getContent());
 
         return res.getContent();
     }

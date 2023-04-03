@@ -91,7 +91,6 @@ public class ResourceController {
     @GetMapping("/mine/{userId}")
     @ApiOperation(value = "我发布的帖子", notes = "根据用户的id查找属于此用户的资源帖子")
     public ResultVO getMyResources(@PathVariable long userId) {
-
         return resourceService.getMyResources(userId);
     }
 

@@ -40,6 +40,16 @@ spring:
     port: 6379
     client-type: lettuce
 
+  # 缓存相关
+  cache:
+    type: redis
+    redis:
+      use-key-prefix: true
+      key-prefix: cip_
+      time-to-live: 300s
+      cache-null-values: true
+
+
 #  # mongodb相关
 #  data:
 #    mongodb:
@@ -52,7 +62,7 @@ server:
 
 chatGPT:
   openAiApiBaseUrl: https://api.openai.com/
-  openAiApiKey: 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
+  openAiApiKey: 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
   #代理
   proxyHostName: kaolacode.f3322.net
   proxyPort: 10809
