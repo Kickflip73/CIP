@@ -1,7 +1,7 @@
 package com.uchain.cip.controller;
 
 import com.uchain.cip.pojo.Comment;
-import com.uchain.cip.service.CommentService;
+import com.uchain.cip.service.ActionOnThingService;
 import com.uchain.cip.vo.ResultVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -11,12 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/comments")
+@RequestMapping("/action")
 @CrossOrigin
-@Api(tags = "评论接口")
-public class CommentController {
+@Api(tags = "对帖子进行操作的接口")
+public class ActionOnThingController {
     @Autowired
-    CommentService commentService;
+    ActionOnThingService actionOnThingService;
 
     /**
      * 获取帖子的全部评论
@@ -40,7 +40,7 @@ public class CommentController {
             )
     })
     public ResultVO getCommentList(@PathVariable int thingType, @PathVariable long thingId) {
-        return commentService.getCommentList(thingType, thingId);
+        return actionOnThingService.getCommentList(thingType, thingId);
     }
 
     /**
@@ -49,7 +49,7 @@ public class CommentController {
     @PostMapping
     @ApiOperation(value = "新增评论", notes = "传入评论对象，新增一个评论")
     public ResultVO commentOn(@RequestBody Comment comment) {
-        return commentService.commentOn(comment);
+        return actionOnThingService.commentOn(comment);
     }
 
     /**
@@ -67,7 +67,7 @@ public class CommentController {
             )
     )
     public ResultVO deleteComment(@PathVariable long id) {
-        return commentService.deleteComment(id);
+        return actionOnThingService.deleteComment(id);
     }
 
 }

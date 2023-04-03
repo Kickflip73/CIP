@@ -32,23 +32,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
     CacheUtil cacheUtil;
 
-    @Override
-    public ResultVO  upDatepasswordById(int id, String newPassword,String password) {
-        User user = userMapper.selectById(id);
-        if(user==null)return new ResultVO(0,"未查询到用户信息",null);
-        if(user.getPassword().equals(password)){
-            if(userMapper.upDatepasswordById(id,newPassword)>0){
-                return new ResultVO(1,"密码修改成功",null);
-            }else{
-                return  new ResultVO(2,"服务器故障，请重试",null);
-            }
-
-        }
-        else{
-            return  new ResultVO(0,"原密码错误",null);
-        }
-    }
-
     /**
      * 依据id查询单个用户
      * */
@@ -87,7 +70,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResultVO verifyEmail(String email, String verifyCode) {
         if (verifyCode != null && verifyCode.length() != 0) {
-            //有验证码，验证验证码是否正确，从redis里依据邮箱地址取验证码
+            //有验证码，验证验证码是否正确，从redis缓存里依据邮箱地址取验证码
             if (verifyCode.length() == 4 && Objects.equals(verifyCode, cacheUtil.getVerifyCode(email))) {
                 //验证码正确
                 return new ResultVO(ResultEnum.VERIFY_CODE_SUCCESS.getCode(), ResultEnum.VERIFY_CODE_SUCCESS.getMessage(), null);
@@ -106,7 +89,7 @@ public class UserServiceImpl implements UserService {
                 return new ResultVO(ResultEnum.EMAIL_ALREADY_EXISTS.getCode(), ResultEnum.EMAIL_ALREADY_EXISTS.getMessage(), null);
             }
 
-            //发送验证码邮件，存入缓存
+            //发送验证码邮件，存入redis缓存
             try {
                 cacheUtil.setVerifyCode(email);
             } catch (Exception e) {
@@ -179,6 +162,28 @@ public class UserServiceImpl implements UserService {
         } else {
             //修改失败
             return new ResultVO(ResultEnum.UPDATE_USER_FAIL.getCode(), ResultEnum.UPDATE_USER_FAIL.getMessage(), user);
+        }
+    }
+
+    /**
+     * 依据用户id修改密码
+     * */
+    @Override
+    public ResultVO  upDatepasswordById(int id, String newPassword,String password) {
+        User user = userMapper.selectById(id);
+        if(user==null) {
+            return new ResultVO(0,"未查询到用户信息",null);
+        }
+        if(user.getPassword().equals(password)){
+            if(userMapper.upDatepasswordById(id,newPassword)>0){
+                return new ResultVO(1,"密码修改成功",null);
+            }else{
+                return  new ResultVO(2,"服务器故障，请重试",null);
+            }
+
+        }
+        else{
+            return  new ResultVO(0,"原密码错误",null);
         }
     }
 

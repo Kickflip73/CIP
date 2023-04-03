@@ -8,7 +8,7 @@ import com.uchain.cip.mapper.ResourceMapper;
 import com.uchain.cip.pojo.Comment;
 import com.uchain.cip.pojo.Competition;
 import com.uchain.cip.pojo.Resource;
-import com.uchain.cip.service.CommentService;
+import com.uchain.cip.service.ActionOnThingService;
 import com.uchain.cip.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,13 +16,8 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 
-/**
-* @author 30652
-* @description 针对表【comment】的数据库操作Service实现
-* @createDate 2023-03-21 18:37:56
-*/
 @Service
-public class CommentServiceImpl implements CommentService {
+public class ActionOnThingServiceImpl implements ActionOnThingService {
     @Autowired
     CommentMapper commentMapper;
 
@@ -31,6 +26,19 @@ public class CommentServiceImpl implements CommentService {
 
     @Autowired
     ResourceMapper resourceMapper;
+
+    /**
+     * 获取帖子的全部评论
+     * */
+    @Override
+    public ResultVO getCommentList(int thingType, long thingId) {
+        LambdaQueryWrapper<Comment> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Comment::getThingType, thingType)
+                .eq(Comment::getThingId, thingId);
+        List<Comment> comments = commentMapper.selectList(wrapper);
+
+        return new ResultVO(ResultEnum.SUCCESS.getCode(), ResultEnum.SUCCESS.getMessage(), comments);
+    }
 
     /**
      * 新增评论
@@ -121,18 +129,5 @@ public class CommentServiceImpl implements CommentService {
         }
         //删除成功
         return new ResultVO(ResultEnum.COMMENT_DELETE_SUCCESS.getCode(), ResultEnum.COMMENT_DELETE_SUCCESS.getMessage(), null);
-    }
-
-    /**
-     * 获取帖子的全部评论
-     * */
-    @Override
-    public ResultVO getCommentList(int thingType, long thingId) {
-        LambdaQueryWrapper<Comment> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(Comment::getThingType, thingType)
-                .eq(Comment::getThingId, thingId);
-        List<Comment> comments = commentMapper.selectList(wrapper);
-
-        return new ResultVO(ResultEnum.SUCCESS.getCode(), ResultEnum.SUCCESS.getMessage(), comments);
     }
 }
