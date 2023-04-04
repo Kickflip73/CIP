@@ -5,21 +5,29 @@ import com.uchain.cip.enums.ResultEnum;
 import com.uchain.cip.mapper.CommentMapper;
 import com.uchain.cip.mapper.CompetitionMapper;
 import com.uchain.cip.mapper.ResourceMapper;
+import com.uchain.cip.mapper.StarMapper;
 import com.uchain.cip.pojo.Comment;
 import com.uchain.cip.pojo.Competition;
 import com.uchain.cip.pojo.Resource;
+import com.uchain.cip.pojo.Star;
 import com.uchain.cip.service.ActionOnThingService;
 import com.uchain.cip.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import java.util.Date;
 import java.util.List;
 
 @Service
+@Transactional
 public class ActionOnThingServiceImpl implements ActionOnThingService {
     @Autowired
     CommentMapper commentMapper;
+
+    @Autowired
+    StarMapper starMapper;
 
     @Autowired
     CompetitionMapper competitionMapper;
@@ -45,7 +53,7 @@ public class ActionOnThingServiceImpl implements ActionOnThingService {
      * */
     @Override
     public ResultVO commentOn(Comment comment) {
-        comment.setCreateDateTime(new Date());
+        comment.setCommentDateTime(new Date());
         try {
             //判断评论帖子的类型
             if (comment.getThingType() == 1) {
@@ -59,7 +67,7 @@ public class ActionOnThingServiceImpl implements ActionOnThingService {
                 }
 
                 //增加帖子评论数
-                resourceMapper.addComments(comment.getUserId());
+                resourceMapper.addComments(comment.getThingId());
             } else {
                 //2.比赛贴
                 LambdaQueryWrapper<Competition> wrapper = new LambdaQueryWrapper<>();
@@ -78,6 +86,7 @@ public class ActionOnThingServiceImpl implements ActionOnThingService {
             commentMapper.insert(comment);
         } catch (Exception e) {
             //评论失败
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return new ResultVO(ResultEnum.COMMENT_ON_FAIL.getCode(), ResultEnum.COMMENT_ON_FAIL.getMessage(), null);
         }
         //评论成功
@@ -101,33 +110,146 @@ public class ActionOnThingServiceImpl implements ActionOnThingService {
             if (comment.getThingType() == 1) {
                 //1.资源帖
                 Resource resource = resourceMapper.selectById(comment.getThingId());
-                if (resource == null) {
-                    //要评论的帖子不存在
-                    return new ResultVO(ResultEnum.THING_NOT_EXIST.getCode(), ResultEnum.THING_NOT_EXIST.getMessage(), null);
+                if (resource != null) {
+                    //评论的帖子存在
+                    //减少帖子评论数
+                    resourceMapper.reduceComments(comment.getThingId());
                 }
-
-                //减少帖子评论数
-                resourceMapper.reduceComments(comment.getUserId());
             } else {
                 //2.比赛贴
-                //判断要评论的帖子是否存在
                 Competition competition = competitionMapper.selectById(comment.getThingId());
-                if (competition == null) {
-                    //要评论的帖子不存在
-                    return new ResultVO(ResultEnum.THING_NOT_EXIST.getCode(), ResultEnum.THING_NOT_EXIST.getMessage(), null);
+                if (competition != null) {
+                    //评论的帖子存在
+                    //减少帖子评论数
+                    competitionMapper.reduceComments(comment.getThingId());
                 }
-
-                //减少帖子评论数
-                competitionMapper.reduceComments(comment.getUserId());
             }
 
             //删除评论
             commentMapper.deleteById(id);
         } catch (Exception e) {
             //删除失败
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return new ResultVO(ResultEnum.COMMENT_DELETE_FAIL.getCode(), ResultEnum.COMMENT_DELETE_FAIL.getMessage(), null);
         }
         //删除成功
         return new ResultVO(ResultEnum.COMMENT_DELETE_SUCCESS.getCode(), ResultEnum.COMMENT_DELETE_SUCCESS.getMessage(), null);
+    }
+
+    /**
+     * 获取用户该类型帖子的所有收藏
+     * */
+    @Override
+    public ResultVO getUsersStars(int thingType, long userId) {
+        List<Star> stars = starMapper.selectUsersStars(thingType, userId);
+
+        if (stars != null) {
+            return new ResultVO(ResultEnum.SUCCESS.getCode(), ResultEnum.SUCCESS.getMessage(), stars);
+        } else {
+            return new ResultVO(ResultEnum.FAIL.getCode(), ResultEnum.FAIL.getMessage(), null);
+        }
+    }
+
+    /**
+     * 新增收藏
+     * */
+    @Override
+    public ResultVO star(Star star) {
+        //判断是否已经被收藏过
+        if (starMapper.isExist(star) > 0) {
+            return new ResultVO(ResultEnum.STAR_REPEAT.getCode(), ResultEnum.STAR_REPEAT.getMessage(), null);
+        }
+
+        star.setStarDateTime(new Date());
+        try {
+            //判断评论帖子的类型
+            if (star.getThingType() == 1) {
+                //1.资源帖
+                LambdaQueryWrapper<Resource> wrapper = new LambdaQueryWrapper<>();
+                wrapper.eq(Resource::getId, star.getThingId());
+                Long selectCount = resourceMapper.selectCount(wrapper);
+                if (selectCount != 1) {
+                    //要搜藏的帖子不存在
+                    return new ResultVO(ResultEnum.THING_NOT_EXIST.getCode(), ResultEnum.THING_NOT_EXIST.getMessage(), null);
+                }
+
+                //增加帖子收藏数
+                resourceMapper.addStars(star.getThingId());
+            } else {
+                //2.比赛贴
+                LambdaQueryWrapper<Competition> wrapper = new LambdaQueryWrapper<>();
+                wrapper.eq(Competition::getId, star.getThingId());
+                Long selectCount = competitionMapper.selectCount(wrapper);
+                if (selectCount != 1) {
+                    //要收藏的帖子不存在
+                    return new ResultVO(ResultEnum.THING_NOT_EXIST.getCode(), ResultEnum.THING_NOT_EXIST.getMessage(), null);
+                }
+
+                //增加帖子收藏数
+                competitionMapper.addStars(star.getThingId());
+            }
+
+            //插入收藏
+            starMapper.insert(star);
+        } catch (Exception e) {
+            e.printStackTrace();
+            //收藏失败
+            return new ResultVO(ResultEnum.STAR_FAIL.getCode(), ResultEnum.STAR_FAIL.getMessage(), null);
+        }
+        //收藏成功
+        return new ResultVO(ResultEnum.STAR_SUCCESS.getCode(), ResultEnum.STAR_SUCCESS.getMessage(), null);
+    }
+
+    /**
+     * 取消收藏
+     * */
+    @Override
+    public ResultVO deleteStar(Star star) {
+        try {
+            //判断收藏是否存在
+            if (starMapper.isExist(star) == 0) {
+                //不存在此收藏，返回取消收藏成功
+                return new ResultVO(ResultEnum.STAR_DELETE_SUCCESS.getCode(), ResultEnum.STAR_DELETE_SUCCESS.getMessage(), null);
+            }
+
+            //判断收藏帖子的类型
+            if (star.getThingType() == 1) {
+                //1.资源帖
+                Resource resource = resourceMapper.selectById(star.getThingId());
+                if (resource != null) {
+                    //收藏的帖子存在
+                    //减少帖子收藏数
+                    resourceMapper.reduceStars(star.getThingId());
+                }
+            } else {
+                //2.比赛贴
+                Competition competition = competitionMapper.selectById(star.getThingId());
+                if (competition != null) {
+                    //收藏的帖子存在
+                    //减少帖子收藏数
+                    competitionMapper.reduceStars(star.getThingId());
+                }
+            }
+
+            //删除收藏
+            starMapper.deleteStar(star);
+        } catch (Exception e) {
+            //取消收藏失败
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return new ResultVO(ResultEnum.STAR_DELETE_FAIL.getCode(), ResultEnum.STAR_DELETE_FAIL.getMessage(), null);
+        }
+        //取消收藏成功
+        return new ResultVO(ResultEnum.STAR_DELETE_SUCCESS.getCode(), ResultEnum.STAR_DELETE_SUCCESS.getMessage(), null);
+    }
+
+    /**
+     * 举报帖子
+     * */
+    @Override
+    public ResultVO report(long userId, int thingType, long thingId) {
+        //给管理员用户发送举报消息
+
+
+        return new ResultVO(ResultEnum.REPORT_SUCCESS.getCode(), ResultEnum.REGISTER_FAIL.getMessage(), null);
     }
 }

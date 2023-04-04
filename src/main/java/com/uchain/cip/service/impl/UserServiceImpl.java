@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.config.annotation.RedirectViewControllerRegistration;
 
 import java.util.*;
@@ -22,6 +23,7 @@ import java.util.*;
 * @createDate 2023-03-16 10:21:50
 */
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;

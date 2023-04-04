@@ -2,6 +2,10 @@ package com.uchain.cip.mapper;
 
 import com.uchain.cip.pojo.Star;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
 * @author 30652
@@ -9,6 +13,11 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @createDate 2023-03-25 17:58:01
 * @Entity com.uchain.cip.pojo.Star
 */
+@Mapper
 public interface StarMapper extends BaseMapper<Star> {
+    List<Star> selectUsersStars(int thingType, long userId);
 
+    int isExist(Star star);
+
+    void deleteStar(Star star);
 }

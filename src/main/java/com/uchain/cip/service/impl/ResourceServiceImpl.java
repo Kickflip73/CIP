@@ -11,6 +11,7 @@ import com.uchain.cip.tools.ResourceCondition;
 import com.uchain.cip.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -21,6 +22,7 @@ import java.util.List;
 * @createDate 2023-03-21 18:37:40
 */
 @Service
+@Transactional
 public class ResourceServiceImpl implements ResourceService {
     @Autowired
     ResourceMapper resourceMapper;
@@ -180,14 +182,6 @@ public class ResourceServiceImpl implements ResourceService {
         } else {
             return new ResultVO(ResultEnum.RESOURCE_DATA_QUERY_FAIL.getCode(), ResultEnum.RESOURCE_DATA_QUERY_FAIL.getMessage(), null);
         }
-    }
-
-    /**
-     * 举报帖子
-     * */
-    @Override
-    public ResultVO report(long userId, long thingId) {
-        return null;
     }
 
     /**

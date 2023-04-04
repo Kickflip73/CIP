@@ -23,7 +23,5 @@ public interface ResourceService {
 
     ResultVO getMyResources(long userId);
 
-    ResultVO report(long userId, long thingId);
-
     ResultVO recommend(int pageIndex, int pageSize, User user);
 }

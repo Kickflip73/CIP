@@ -95,31 +95,6 @@ public class ResourceController {
     }
 
     /**
-     * 举报帖子
-     * */
-    @PostMapping("/{userId}/{thingId}")
-    @ApiOperation(value = "举报帖子", notes = "传入当前用户的id和要举报的帖子的id")
-    @ApiImplicitParams({
-            @ApiImplicitParam(
-                    name = "userId",
-                    value = "当前用户的id",
-                    required = true,
-                    dataType = "long",
-                    paramType = "path"
-            ),
-            @ApiImplicitParam(
-                    name = "thingId",
-                    value = "要举报的帖子的id",
-                    required = true,
-                    dataType = "long",
-                    paramType = "path"
-            )
-    })
-    public ResultVO report(@PathVariable long userId, @PathVariable long thingId) {
-        return resourceService.report(userId, thingId);
-    }
-
-    /**
      * 资源大厅推荐帖子
      * */
     @GetMapping("/{pageIndex}/{pageSize}")

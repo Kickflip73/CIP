@@ -23,7 +23,7 @@ public class Comment implements Serializable {
      * id
      */
     @TableId(type = IdType.AUTO)
-    @ApiModelProperty(value = "评论id", example = "1")
+    @ApiModelProperty(value = "评论id")
     private Long id;
 
     /**
@@ -54,7 +54,7 @@ public class Comment implements Serializable {
      * 发布日期时间
      */
     @ApiModelProperty(value = "发布日期时间")
-    private Date createDateTime;
+    private Date commentDateTime;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

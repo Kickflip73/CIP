@@ -13,13 +13,13 @@ public enum ResultEnum {
     FAIL(1000, "失败"),
 
     /**
-     * 登录相关
+     * 登录
      * */
     LOGIN_SUCCESS(1011, "登陆成功"),
     LOGIN_FAIL(1020, "账号或密码错误，请检查后重试"),
 
     /**
-     * 注册相关
+     * 注册
      * */
     REGISTER_SUCCESS(1051, "注册成功"),
     REGISTER_FAIL(1050, "注册失败"),
@@ -31,14 +31,14 @@ public enum ResultEnum {
     VERIFY_CODE_SUCCESS(1101, "验证码正确"),
 
     /**
-     * 账户相关
+     * 账户
      * */
     USER_NOT_EXIST(1500, "此账户不存在"),
     UPDATE_USER_SUCCESS(1601, "修改信息成功"),
     UPDATE_USER_FAIL(1600, "修改信息失败"),
 
     /**
-     * 比赛帖子相关
+     * 比赛帖子
      * */
     COMPETITION_DATA_QUERY_SUCCESS(2001, "查询比赛信息成功"),
     COMPETITION_DATA_QUERY_FAIL(2000, "查询比赛信息失败"),
@@ -51,7 +51,7 @@ public enum ResultEnum {
     THING_NOT_EXIST(2040, "该帖子不存在"),
 
     /**
-     * 资源帖子相关
+     * 资源帖子
      * */
     RESOURCE_DATA_QUERY_SUCCESS(2001, "查询资源信息成功"),
     RESOURCE_DATA_QUERY_FAIL(2000, "查询资源信息失败"),
@@ -63,13 +63,29 @@ public enum ResultEnum {
     UPDATE_RESOURCE_FAIL(2030, "修改资源信息失败"),
 
     /**
-     * 评论相关
+     * 评论
      * */
     COMMENT_ON_SUCCESS(4001, "评论成功"),
     COMMENT_ON_FAIL(4000, "评论失败"),
     COMMENT_NOT_EXIST(4010, "评论不存在"),
     COMMENT_DELETE_SUCCESS(4021, "删除评论成功"),
     COMMENT_DELETE_FAIL(4020, "删除评论失败"),
+
+    /**
+     * 收藏
+     * */
+    STAR_SUCCESS(4031, "收藏成功"),
+    STAR_FAIL(4030, "收藏失败"),
+    STAR_NOT_EXIST(4040, "收藏不存在"),
+    STAR_DELETE_SUCCESS(4051, "取消搜藏成功"),
+    STAR_DELETE_FAIL(4050, "取消搜藏失败"),
+    STAR_REPEAT(4060, "该帖子已经存在收藏夹内了"),
+
+    /**
+     * 举报
+     * */
+    REPORT_SUCCESS(5001, "举报成功，管理员火速处理中"),
+    REPORT_FAIL(5000, "举报失败，请稍后重试"),
 
     /**
      * ChatGPT相关

@@ -10,6 +10,7 @@ import com.uchain.cip.tools.CompetitionCondition;
 import com.uchain.cip.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
@@ -19,6 +20,7 @@ import java.util.Date;
 * @createDate 2023-03-21 18:37:49
 */
 @Service
+@Transactional
 public class CompetitionServiceImpl implements CompetitionService {
     @Autowired
     CompetitionMapper competitionMapper;

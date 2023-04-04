@@ -7,13 +7,26 @@
     <resultMap id="BaseResultMap" type="com.uchain.cip.pojo.Star">
             <id property="id" column="id" jdbcType="BIGINT"/>
             <result property="userId" column="user_id" jdbcType="BIGINT"/>
+            <result property="thingType" column="thing_type" jdbcType="INTEGER"/>
             <result property="thingId" column="thing_id" jdbcType="BIGINT"/>
             <result property="starDateTime" column="star_date_time" jdbcType="TIMESTAMP"/>
-            <result property="thingType" column="thing_type" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,user_id,thing_id,
-        star_date_time,thing_type
+        id,user_id,thing_type,
+        thing_id,star_date_time
     </sql>
+
+    <select id="selectUsersStars" resultType="com.uchain.cip.pojo.Star">
+        SELECT * FROM star WHERE thing_type = #{thingType} AND user_id = #{userId};
+    </select>
+
+    <select id="isExist" resultType="java.lang.Integer">
+        SELECT COUNT(1) FROM star WHERE thing_type = #{thingType} AND thing_id = #{thingId} AND user_id = #{userId};
+    </select>
+
+    <delete id="deleteStar">
+        DELETE FROM star WHERE thing_type = #{thingType} AND thing_id = #{thingId} AND user_id = #{userId};
+    </delete>
+
 </mapper>
