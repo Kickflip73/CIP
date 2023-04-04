@@ -7,6 +7,7 @@ import com.uchain.cip.pojo.Competition;
 import com.uchain.cip.service.CompetitionService;
 import com.uchain.cip.mapper.CompetitionMapper;
 import com.uchain.cip.tools.CompetitionCondition;
+import com.uchain.cip.tools.ResourceCondition;
 import com.uchain.cip.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -162,5 +163,25 @@ public class CompetitionServiceImpl implements CompetitionService {
         } else {
             return new ResultVO(ResultEnum.UPDATE_COMPETITION_FAIL.getCode(), ResultEnum.UPDATE_COMPETITION_FAIL.getMessage(), null);
         }
+    }
+
+    /**
+     * 比赛大厅推荐帖子
+     * */
+    @Override
+    public ResultVO recommend(long userId) {
+        /**
+         * 推荐算法
+         * */
+
+        /**
+         * 临时顶凑的
+         * */
+        CompetitionCondition competitionCondition = new CompetitionCondition();
+        competitionCondition.setSearchInfo(null);
+        competitionCondition.setPostType(3);
+        competitionCondition.setOrderBy(2);
+        competitionCondition.setAscOrDesc(2);
+        return this.getCompetitionPage(1, 5, competitionCondition);
     }
 }

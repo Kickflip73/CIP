@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -141,12 +142,22 @@ public class ActionOnThingServiceImpl implements ActionOnThingService {
      * */
     @Override
     public ResultVO getUsersStars(int thingType, long userId) {
-        List<Star> stars = starMapper.selectUsersStars(thingType, userId);
+        List<Long> thingIdList = starMapper.selectUsersStars(thingType, userId);
 
-        if (stars != null) {
-            return new ResultVO(ResultEnum.SUCCESS.getCode(), ResultEnum.SUCCESS.getMessage(), stars);
+        if (thingType == 1) {
+            List<Resource> resources = new ArrayList<>();
+            for (Long thingId : thingIdList) {
+                Resource resource = resourceMapper.selectById(thingId);
+                resources.add(resource);
+            }
+            return new ResultVO(ResultEnum.SUCCESS.getCode(), ResultEnum.SUCCESS.getMessage(), resources);
         } else {
-            return new ResultVO(ResultEnum.FAIL.getCode(), ResultEnum.FAIL.getMessage(), null);
+            List<Competition> competitions = new ArrayList<>();
+            for (Long thingId : thingIdList) {
+                Competition competition = competitionMapper.selectById(thingId);
+                competitions.add(competition);
+            }
+            return new ResultVO(ResultEnum.SUCCESS.getCode(), ResultEnum.SUCCESS.getMessage(), competitions);
         }
     }
 

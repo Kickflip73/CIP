@@ -188,7 +188,7 @@ public class ResourceServiceImpl implements ResourceService {
      * 获取推荐帖子
      * */
     @Override
-    public ResultVO recommend(int pageIndex, int pageSize, User user) {
+    public ResultVO recommend(long userId) {
         /**
          * 推荐算法
          * */
@@ -201,6 +201,6 @@ public class ResourceServiceImpl implements ResourceService {
         resourceCondition.setPostType(3);
         resourceCondition.setOrderBy(2);
         resourceCondition.setAscOrDesc(2);
-        return this.getResourcePage(pageIndex, pageSize, resourceCondition);
+        return this.getResourcePage(1, 5, resourceCondition);
     }
 }

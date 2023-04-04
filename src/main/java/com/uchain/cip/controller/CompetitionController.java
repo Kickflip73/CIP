@@ -36,7 +36,7 @@ public class CompetitionController {
     /**
      * 分页条件查询比赛帖子
      * */
-    @GetMapping("/{pageIndex}/{pageSize}")
+    @PostMapping("search/{pageIndex}/{pageSize}")
     @ApiOperation(value = "分页条件查询比赛帖子", notes = "依据传入的索引和页面大小以及筛选条件来查询一批比赛帖子")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageIndex",
@@ -87,9 +87,18 @@ public class CompetitionController {
     /**
      * 比赛大厅推荐帖子
      * */
-    @GetMapping
-    @ApiOperation(value = "比赛帖子推荐", notes = "传入用户信息，返回推荐给此用户的帖子")
-    public ResultVO recommend(User user) {
-        return null;
+    @GetMapping("/{userId}")
+    @ApiOperation(value = "比赛帖子推荐", notes = "传入用户id，返回推荐给此用户的帖子")
+    @ApiImplicitParams({
+            @ApiImplicitParam(
+                    name = "userId",
+                    value = "当前用户id",
+                    required = true,
+                    dataType = "long",
+                    paramType = "path"
+            )
+    })
+    public ResultVO recommend(@PathVariable long userId) {
+        return competitionService.recommend(userId);
     }
 }

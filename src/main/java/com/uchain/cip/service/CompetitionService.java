@@ -24,4 +24,6 @@ public interface CompetitionService {
     ResultVO deleteCompetitionById(long id);
 
     ResultVO updateCompetitionById(Competition competition);
+
+    ResultVO recommend(long userId);
 }

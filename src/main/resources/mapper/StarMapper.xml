@@ -17,8 +17,8 @@
         thing_id,star_date_time
     </sql>
 
-    <select id="selectUsersStars" resultType="com.uchain.cip.pojo.Star">
-        SELECT * FROM star WHERE thing_type = #{thingType} AND user_id = #{userId};
+    <select id="selectUsersStars" resultType="java.lang.Long">
+        SELECT thing_id FROM star WHERE thing_type = #{thingType} AND user_id = #{userId};
     </select>
 
     <select id="isExist" resultType="java.lang.Integer">

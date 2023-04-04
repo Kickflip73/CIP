@@ -15,7 +15,7 @@ import java.util.List;
 */
 @Mapper
 public interface StarMapper extends BaseMapper<Star> {
-    List<Star> selectUsersStars(int thingType, long userId);
+    List<Long> selectUsersStars(int thingType, long userId);
 
     int isExist(Star star);
 
