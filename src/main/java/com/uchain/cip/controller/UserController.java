@@ -28,6 +28,15 @@ public class UserController {
     NoticeService noticeService;
 
     /**
+     * 依据id查询单个用户
+     * */
+    @GetMapping("/{id}")
+    @ApiOperation(value = "查询单个用户", notes = "依据id查询单个用户")
+    public ResultVO getUserById(@PathVariable long id) {
+        return userService.getUserById(id);
+    }
+
+    /**
      * 邮箱验证
      * */
     @PostMapping("/verifyEmail")

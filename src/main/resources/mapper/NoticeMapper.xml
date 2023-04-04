@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uchain.cip.mapper.NoticeMapper">
+
+    <resultMap id="BaseResultMap" type="com.uchain.cip.pojo.Notice">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="title" column="title" jdbcType="VARCHAR"/>
+            <result property="content" column="content" jdbcType="VARCHAR"/>
+            <result property="ownerId" column="owner_id" jdbcType="BIGINT"/>
+            <result property="views" column="views" jdbcType="INTEGER"/>
+            <result property="publishDateTime" column="publish_date_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,title,content,
+        owner_id,views,create_date_time
+    </sql>
+
+    <insert id="addViews">
+        UPDATE notice SET views = views + 1 WHERE id = #{id};
+    </insert>
+</mapper>
