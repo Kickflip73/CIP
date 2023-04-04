@@ -31,6 +31,12 @@ spring:
     pathmatch:
       matching-strategy: ant_path_matcher
 
+  jackson:
+    # 指定json解析时的日期格式
+    date-format: yyyy-MM-dd HH:mm
+    # 设置时区
+    time-zone: Asia/Shanghai
+
   profiles:
     active: dev
 

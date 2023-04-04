@@ -88,6 +88,18 @@ public enum ResultEnum {
     REPORT_FAIL(5000, "举报失败，请稍后重试"),
 
     /**
+     * 管理员相关
+     * */
+    PUBLISH_NOTICE_SUCCESS(6001, "公告发布成功"),
+    PUBLISH_NOTICE_FAIL(6000, "公告发布失败"),
+    UPDATE_NOTICE_SUCCESS(6011, "公告修改成功"),
+    UPDATE_NOTICE_FAIL(6010, "公告修改失败"),
+    NOTICE_NOT_EXIT(6020, "公告信息不存在"),
+    DELETE_NOTICE_SUCCESS(6031, "删除公告成功"),
+    DELETE_NOTICE_FAIL(6030, "删除公告失败"),
+
+
+    /**
      * ChatGPT相关
      * */
     CONNECT_TIME_OUT(7000, "连接超时"),

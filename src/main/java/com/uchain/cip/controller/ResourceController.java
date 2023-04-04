@@ -1,7 +1,6 @@
 package com.uchain.cip.controller;
 
 import com.uchain.cip.pojo.Resource;
-import com.uchain.cip.pojo.User;
 import com.uchain.cip.service.ResourceService;
 import com.uchain.cip.tools.ResourceCondition;
 import com.uchain.cip.vo.ResultVO;

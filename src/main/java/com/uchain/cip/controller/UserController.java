@@ -1,6 +1,7 @@
 package com.uchain.cip.controller;
 
 import com.uchain.cip.pojo.User;
+import com.uchain.cip.service.NoticeService;
 import com.uchain.cip.service.UserService;
 import com.uchain.cip.vo.ResultVO;
 import io.swagger.annotations.Api;
@@ -18,26 +19,13 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/users")
 @CrossOrigin
-@Api
+@Api(tags = "用户接口")
 public class UserController {
     @Autowired
     UserService userService;
 
-    /**
-     * 依据id查询单个用户
-     * */
-    @GetMapping("/{id}")
-    public ResultVO getUserById(@PathVariable long id) {
-        return userService.getUserById(id);
-    }
-
-    /**
-     * 查询所有用户
-     * */
-    @GetMapping()
-    public ResultVO getAllUser() {
-        return userService.getAllUser();
-    }
+    @Autowired
+    NoticeService noticeService;
 
     /**
      * 邮箱验证
@@ -75,33 +63,36 @@ public class UserController {
      * 修改用户信息
      * */
     @PutMapping
+    @ApiOperation(value = "修改用户信息", notes = "修改用户信息")
     public ResultVO update( User user) {
 
         return userService.updateById(user);
     }
 
     /**
-     * 删除用户信息
-     * */
-    @DeleteMapping("/{id}")
-    public ResultVO deleteById(@PathVariable long id) {
-        return userService.deleteById(id);
-    }
-
-    /**
      * 用户登录
      * */
     @PostMapping("/login")
+    @ApiOperation(value = "用户登录", notes = "用户登录")
     public ResultVO login(@RequestParam String  nickNameOrEmail, @RequestParam String password) {
         return userService.login(nickNameOrEmail, password);
     }
 
     /**
-     * 依据id查询单个用户
+     * 修改密码
      * */
     @GetMapping("/upd")
+    @ApiOperation(value = "修改密码", notes = "修改密码")
     public ResultVO updatepassword(Integer id,String newPassword,String password){
     return userService.upDatepasswordById(id,newPassword,password);
     }
 
+    /**
+     * 获取所有已发布的公告
+     * */
+    @GetMapping("/publishedNotice")
+    @ApiOperation(value = "获取已发布的公告", notes = "普通用户进入首页后，即可查看的已经发布的公告")
+    public ResultVO getPublishedNotices() {
+        return noticeService.getPublishedNotices();
+    }
 }

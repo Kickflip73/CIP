@@ -160,7 +160,7 @@ public class ResourceServiceImpl implements ResourceService {
         int count = resourceMapper.updateById(resource);
 
         if (count == 1) {
-            return new ResultVO(ResultEnum.UPDATE_RESOURCE_SUCCESS.getCode(), ResultEnum.UPDATE_RESOURCE_SUCCESS.getMessage(), resource);
+            return new ResultVO(ResultEnum.UPDATE_RESOURCE_SUCCESS.getCode(), ResultEnum.UPDATE_RESOURCE_SUCCESS.getMessage(), null);
         } else {
             return new ResultVO(ResultEnum.UPDATE_RESOURCE_FAIL.getCode(), ResultEnum.UPDATE_RESOURCE_FAIL.getMessage(), null);
         }
