@@ -1,14 +1,9 @@
 package com.uchain.cip.service;
 
-import com.uchain.cip.enums.ResultEnum;
 import com.uchain.cip.pojo.User;
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.uchain.cip.tools.LoginForm;
 import com.uchain.cip.vo.ResultVO;
-import org.springframework.http.HttpRequest;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
 * @author 30652
@@ -24,13 +19,13 @@ public interface UserService {
 
     public ResultVO login(LoginForm loginForm);
 
-    public ResultVO register(User user);
+    public ResultVO register(User user, String verifyCode);
 
     public ResultVO updateById(User user);
 
     public ResultVO deleteById(long id);
 
-    ResultVO upDatepasswordById(int id,String newPassword,String password);
+    public ResultVO upDatepasswordById(int id,String newPassword,String password);
 
-    ResultVO verifyEmail(String email, String verifyCode);
+    public ResultVO sendVerifyCode(String email);
 }

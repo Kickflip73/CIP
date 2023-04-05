@@ -6,15 +6,13 @@ import com.uchain.cip.mapper.UserMapper;
 import com.uchain.cip.pojo.User;
 import com.uchain.cip.service.UserService;
 import com.uchain.cip.tools.CacheUtil;
-import com.uchain.cip.tools.EmailUtil;
 import com.uchain.cip.tools.LoginForm;
 import com.uchain.cip.vo.ResultVO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.servlet.config.annotation.RedirectViewControllerRegistration;
 
 import java.util.*;
 
@@ -68,48 +66,42 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * 邮箱验证
+     * 发送验证码
      * */
     @Override
-    public ResultVO verifyEmail(String email, String verifyCode) {
-        if (verifyCode != null && verifyCode.length() != 0) {
-            //有验证码，验证验证码是否正确，从redis缓存里依据邮箱地址取验证码
-            if (verifyCode.length() == 4 && Objects.equals(verifyCode, cacheUtil.getVerifyCode(email))) {
-                //验证码正确
-                return new ResultVO(ResultEnum.VERIFY_CODE_SUCCESS.getCode(), ResultEnum.VERIFY_CODE_SUCCESS.getMessage(), null);
-            } else {
-                //验证码错误
-                return new ResultVO(ResultEnum.VERIFY_CODE_ERROR.getCode(), ResultEnum.VERIFY_CODE_ERROR.getMessage(), null);
-            }
-        } else {
-            //无验证码，发送验证邮箱
-            //检测邮箱是否已被注册
-            LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
-            wrapper.eq(User::getEmail, email);
-            Long count = userMapper.selectCount(wrapper);
-            if (count > 0) {
-                //邮箱已被注册
-                return new ResultVO(ResultEnum.EMAIL_ALREADY_EXISTS.getCode(), ResultEnum.EMAIL_ALREADY_EXISTS.getMessage(), null);
-            }
-
-            //发送验证码邮件，存入redis缓存
-            try {
-                cacheUtil.setVerifyCode(email);
-            } catch (Exception e) {
-                //发送失败
-                return new ResultVO(ResultEnum.EMAIL_SEN_FAIL.getCode(), ResultEnum.EMAIL_SEN_FAIL.getMessage(), null);
-            }
-
-            //发送成功
-            return new ResultVO(ResultEnum.EMAIL_SEN_SUCCESS.getCode(), ResultEnum.EMAIL_SEN_SUCCESS.getMessage(), null);
+    public ResultVO sendVerifyCode(String email) {
+        //检测邮箱是否已被注册
+        LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(User::getEmail, email);
+        Long count = userMapper.selectCount(wrapper);
+        if (count > 0) {
+            //邮箱已被注册
+            return new ResultVO(ResultEnum.EMAIL_ALREADY_EXISTS.getCode(), ResultEnum.EMAIL_ALREADY_EXISTS.getMessage(), null);
         }
+
+        //发送验证码邮件，存入redis缓存
+        try {
+            cacheUtil.setVerifyCode(email);
+        } catch (Exception e) {
+            //发送失败
+            return new ResultVO(ResultEnum.EMAIL_SEN_FAIL.getCode(), ResultEnum.EMAIL_SEN_FAIL.getMessage(), null);
+        }
+
+        //发送成功
+        return new ResultVO(ResultEnum.EMAIL_SEN_SUCCESS.getCode(), ResultEnum.EMAIL_SEN_SUCCESS.getMessage(), null);
     }
 
     /**
      * 注册账户
      * */
     @Override
-    public ResultVO register(User user) {
+    public ResultVO register(User user, String verifyCode) {
+        //有验证码，验证验证码是否正确，从redis缓存里依据邮箱地址取验证码
+        if (!(verifyCode.length() == 4 && Objects.equals(verifyCode, cacheUtil.getVerifyCode(user.getEmail())))) {
+            //验证码错误
+            return new ResultVO(ResultEnum.VERIFY_CODE_ERROR.getCode(), ResultEnum.VERIFY_CODE_ERROR.getMessage(), null);
+        }
+
         LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(User::getNickName, user.getNickName());
         Long count = userMapper.selectCount(wrapper);
@@ -129,7 +121,8 @@ public class UserServiceImpl implements UserService {
 
         if (insert == 1) {
             //插入成功
-            return new ResultVO(ResultEnum.REGISTER_SUCCESS.getCode(), ResultEnum.REGISTER_SUCCESS.getMessage(), user);
+            User newUser = userMapper.selectById(user.getId());
+            return new ResultVO(ResultEnum.REGISTER_SUCCESS.getCode(), ResultEnum.REGISTER_SUCCESS.getMessage(), newUser);
         } else {
             //插入失败
             return new ResultVO(ResultEnum.REGISTER_FAIL.getCode(), ResultEnum.REGISTER_FAIL.getMessage(), null);
