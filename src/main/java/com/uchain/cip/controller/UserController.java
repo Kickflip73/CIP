@@ -3,6 +3,7 @@ package com.uchain.cip.controller;
 import com.uchain.cip.pojo.User;
 import com.uchain.cip.service.NoticeService;
 import com.uchain.cip.service.UserService;
+import com.uchain.cip.tools.LoginForm;
 import com.uchain.cip.vo.ResultVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -83,8 +84,8 @@ public class UserController {
      * */
     @PostMapping("/login")
     @ApiOperation(value = "用户登录", notes = "用户登录")
-    public ResultVO login(@RequestParam String  nickNameOrEmail, @RequestParam String password) {
-        return userService.login(nickNameOrEmail, password);
+    public ResultVO login(@RequestBody LoginForm loginForm) {
+        return userService.login(loginForm);
     }
 
     /**

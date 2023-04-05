@@ -3,6 +3,7 @@ package com.uchain.cip.service;
 import com.uchain.cip.enums.ResultEnum;
 import com.uchain.cip.pojo.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.uchain.cip.tools.LoginForm;
 import com.uchain.cip.vo.ResultVO;
 import org.springframework.http.HttpRequest;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +22,7 @@ public interface UserService {
 
     public ResultVO getAllUser();
 
-    public ResultVO login(String nickNameOrEmail, String password);
+    public ResultVO login(LoginForm loginForm);
 
     public ResultVO register(User user);
 

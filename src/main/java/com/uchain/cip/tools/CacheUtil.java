@@ -19,7 +19,7 @@ public class CacheUtil {
     /**
      * 发送验证码，存入缓存，五分钟有效
      * */
-    @CachePut(value = "verifyCode", key = "#email")
+//    @CachePut(value = "verifyCode", key = "#email")
     public String setVerifyCode(String email) {
         //生成四位数随机验证码
         String sendVerifyCode = String.format("%04d", new Random().nextInt(9999 - 1000 + 1) + 1000);

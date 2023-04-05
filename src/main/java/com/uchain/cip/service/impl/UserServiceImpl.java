@@ -7,6 +7,7 @@ import com.uchain.cip.pojo.User;
 import com.uchain.cip.service.UserService;
 import com.uchain.cip.tools.CacheUtil;
 import com.uchain.cip.tools.EmailUtil;
+import com.uchain.cip.tools.LoginForm;
 import com.uchain.cip.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -218,7 +219,11 @@ public class UserServiceImpl implements UserService {
      * 用户登录
      * */
     @Override
-    public ResultVO login(String nickNameOrEmail, String password) {
+    public ResultVO login(LoginForm loginForm) {
+        //解析用户名和密码
+        String nickNameOrEmail = loginForm.getNickNameOrEmail();
+        String password = loginForm.getPassword();
+
         //依据昵称和邮箱查询用户
         User user = userMapper.getUserByNickNameOrEmail(nickNameOrEmail);
 
