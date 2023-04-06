@@ -11,6 +11,7 @@ import com.uchain.cip.pojo.Competition;
 import com.uchain.cip.pojo.Resource;
 import com.uchain.cip.pojo.Star;
 import com.uchain.cip.service.ActionOnThingService;
+import com.uchain.cip.tools.ReportForm;
 import com.uchain.cip.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * 对帖子的操作类
+ * */
 @Service
 @Transactional
 public class ActionOnThingServiceImpl implements ActionOnThingService {
@@ -257,10 +261,32 @@ public class ActionOnThingServiceImpl implements ActionOnThingService {
      * 举报帖子
      * */
     @Override
-    public ResultVO report(long userId, int thingType, long thingId) {
+    public ResultVO report(ReportForm reportForm) {
+        //判断帖子是否存在
+        //判断评论帖子的类型
+        if (reportForm.getThingType() == 1) {
+            //1.资源帖
+            LambdaQueryWrapper<Resource> wrapper = new LambdaQueryWrapper<>();
+            wrapper.eq(Resource::getId, reportForm.getThingId());
+            Long selectCount = resourceMapper.selectCount(wrapper);
+            if (selectCount != 1) {
+                //该帖子不存在
+                return new ResultVO(ResultEnum.THING_NOT_EXIST.getCode(), ResultEnum.THING_NOT_EXIST.getMessage(), null);
+            }
+        } else {
+            //2.比赛贴
+            LambdaQueryWrapper<Competition> wrapper = new LambdaQueryWrapper<>();
+            wrapper.eq(Competition::getId, reportForm.getThingId());
+            Long selectCount = competitionMapper.selectCount(wrapper);
+            if (selectCount != 1) {
+                //该帖子不存在
+                return new ResultVO(ResultEnum.THING_NOT_EXIST.getCode(), ResultEnum.THING_NOT_EXIST.getMessage(), null);
+            }
+        }
+
         //给管理员用户发送举报消息
 
 
-        return new ResultVO(ResultEnum.REPORT_SUCCESS.getCode(), ResultEnum.REGISTER_FAIL.getMessage(), null);
+        return new ResultVO(ResultEnum.REPORT_SUCCESS.getCode(), ResultEnum.REPORT_SUCCESS.getMessage(), null);
     }
 }

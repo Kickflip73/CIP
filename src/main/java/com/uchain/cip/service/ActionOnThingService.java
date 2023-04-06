@@ -2,11 +2,12 @@ package com.uchain.cip.service;
 
 import com.uchain.cip.pojo.Comment;
 import com.uchain.cip.pojo.Star;
+import com.uchain.cip.tools.ReportForm;
 import com.uchain.cip.vo.ResultVO;
 
 public interface ActionOnThingService {
     /**
-     * 评论相关
+     * 评论
      * */
     ResultVO getCommentList(int thingType, long thingId);
 
@@ -15,7 +16,7 @@ public interface ActionOnThingService {
     ResultVO deleteComment(long id);
 
     /**
-     * 搜藏相关
+     * 搜藏
      * */
     ResultVO getUsersStars(int thingType, long userId);
 
@@ -23,5 +24,8 @@ public interface ActionOnThingService {
 
     ResultVO deleteStar(Star star);
 
-    ResultVO report(long userId, int thingType, long thingId);
+    /**
+     * 举报
+     * */
+    ResultVO report(ReportForm reportForm);
 }

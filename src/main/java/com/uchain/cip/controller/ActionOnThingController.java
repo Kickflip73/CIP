@@ -3,6 +3,7 @@ package com.uchain.cip.controller;
 import com.uchain.cip.pojo.Comment;
 import com.uchain.cip.pojo.Star;
 import com.uchain.cip.service.ActionOnThingService;
+import com.uchain.cip.tools.ReportForm;
 import com.uchain.cip.vo.ResultVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -44,10 +45,10 @@ public class ActionOnThingController {
     }
 
     /**
-     * 新增评论
+     * 发表评论
      * */
     @PostMapping("/comment")
-    @ApiOperation(value = "新增评论", notes = "传入评论对象，新增一个评论")
+    @ApiOperation(value = "发表评论", notes = "传入评论对象，新增一个评论")
     public ResultVO commentOn(@RequestBody Comment comment) {
         return actionOnThingService.commentOn(comment);
     }
@@ -125,32 +126,9 @@ public class ActionOnThingController {
     /**
      * 举报帖子
      * */
-    @PostMapping("/report/{userId}/{thingType}/{thingId}")
-    @ApiOperation(value = "举报帖子", notes = "传入当前用户的id和要举报的帖子的id")
-    @ApiImplicitParams({
-            @ApiImplicitParam(
-                    name = "userId",
-                    value = "当前用户的id",
-                    required = true,
-                    dataType = "long",
-                    paramType = "path"
-            ),
-            @ApiImplicitParam(
-                    name = "thingType",
-                    value = "要举报的帖子的类型，1：资源帖，2：比赛帖",
-                    required = true,
-                    dataType = "int",
-                    paramType = "path"
-            ),
-            @ApiImplicitParam(
-                    name = "thingId",
-                    value = "要举报的帖子的id",
-                    required = true,
-                    dataType = "long",
-                    paramType = "path"
-            )
-    })
-    public ResultVO report(@PathVariable long userId, @PathVariable int thingType , @PathVariable long thingId) {
-        return actionOnThingService.report(userId, thingType, thingId);
+    @PostMapping("/report")
+    @ApiOperation(value = "举报帖子", notes = "传入举报表单对象")
+    public ResultVO report(@RequestBody ReportForm reportForm) {
+        return actionOnThingService.report(reportForm);
     }
 }
