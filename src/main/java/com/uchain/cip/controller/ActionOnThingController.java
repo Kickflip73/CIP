@@ -12,6 +12,9 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * 对帖子的操作类
+ * */
 @RestController
 @CrossOrigin
 @Api(tags = "对帖子进行操作的接口")

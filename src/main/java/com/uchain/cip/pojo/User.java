@@ -37,7 +37,7 @@ public class User implements Serializable {
     private String password;
 
     /**
-     * 账户类型
+     * 账户类型（1：管理员 / 2：普通用户）
      */
     private Integer type;
 

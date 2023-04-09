@@ -86,8 +86,8 @@ public class ChatGPTServiceImpl implements ChatGPTService {
         Message res = null;
         try {
             //国内需要代理 国外不需要
-            String proxyHostIp = InterNetUtil.domainNameToIp(proxyHostName);
-            Proxy proxy = Proxys.http(proxyHostIp, proxyPort);
+            String proxyHostIp = InterNetUtil.domainNameToIp("101.33.242.250");
+            Proxy proxy = Proxys.http(proxyHostIp, 8098);
 
             ChatGPT chatGPT = ChatGPT.builder()
                     .apiKey(openAiApiKey)

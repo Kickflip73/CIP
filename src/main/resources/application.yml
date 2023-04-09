@@ -3,7 +3,7 @@ spring:
   datasource:
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://106.12.129.219:3306/cip?serverTimezone=Asia/Shanghai&useSSL=false
+      url: jdbc:mysql://101.33.242.250/cip?serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
       username: root
       password: 20020329@mysql
       transaction-query-timeout: 10
@@ -11,10 +11,10 @@ spring:
   #邮件发送相关
   mail:
     host: smtp.qq.com
-    port: 4658099
-    username: '3065242502@qq.com'
+    username: 3065242502@qq.com
     #授权码
-    password: 'ntjmesynmcasddde'
+    password: ntjmesynmcasddde
+    default-encoding: utf-8
     properties:
       mail:
         smtp:
@@ -42,7 +42,7 @@ spring:
 
   # redis相关
   redis:
-    host: 106.12.129.219
+    host: 101.33.242.250
     port: 6379
     client-type: lettuce
 
@@ -68,7 +68,7 @@ server:
 
 chatGPT:
   openAiApiBaseUrl: https://api.openai.com/
-  openAiApiKey: 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
+  openAiApiKey: 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
   #代理
   proxyHostName: kaolacode.f3322.net
   proxyPort: 10809
