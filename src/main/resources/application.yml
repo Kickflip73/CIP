@@ -54,12 +54,14 @@ spring:
       key-prefix: cip_
       time-to-live: 300s
       cache-null-values: true
-
+  elasticsearch:
+    uris: http://101.33.242.250:9200
 
 #  # mongodb相关
 #  data:
 #    mongodb:
 #      uri: mongodb://106.12.129.219/first_db
+
 
 server:
   port: 8099
@@ -67,8 +69,8 @@ server:
     context-path: "/cip"
 
 chatGPT:
-  openAiApiBaseUrl: https://api.openai.com/
-  openAiApiKey: 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
+  openAiApiBaseUrl: http://dgr.life
+  openAiApiKey: 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
   #代理
   proxyHostName: kaolacode.f3322.net
   proxyPort: 10809

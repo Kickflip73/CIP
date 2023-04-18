@@ -23,6 +23,7 @@ import java.util.*;
 */
 @Service
 @Transactional
+@Slf4j
 public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
@@ -217,14 +218,18 @@ public class UserServiceImpl implements UserService {
         String nickNameOrEmail = loginForm.getNickNameOrEmail();
         String password = loginForm.getPassword();
 
+        log.info("用户登录，传入昵称或邮箱：" + nickNameOrEmail + ", 密码：" + password);
+
         //依据昵称和邮箱查询用户
         User user = userMapper.getUserByNickNameOrEmail(nickNameOrEmail);
 
         if (user != null && Objects.equals(user.getPassword(), password)) {
             //登陆成功
+            log.info("用户" + user.getNickName() + "登陆成功");
             return new ResultVO(ResultEnum.LOGIN_SUCCESS.getCode(), ResultEnum.LOGIN_SUCCESS.getMessage(), user);
         } else {
             //登陆失败
+            log.info("用户" + nickNameOrEmail + "登陆失败");
             return new ResultVO(ResultEnum.LOGIN_FAIL.getCode(), ResultEnum.LOGIN_FAIL.getMessage(), null);
         }
     }

@@ -45,14 +45,14 @@ public class ChatGPTServiceImpl implements ChatGPTService {
             HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(new OpenAILogger());
             httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-            Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyHostName, proxyPort));
+//            Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyHostName, proxyPort));
             OpenAiClient openAiClient = OpenAiClient.builder()
                     .apiKey(openAiApiKey)
                     .connectTimeout(100)
                     .writeTimeout(100)
                     .readTimeout(100)
                     .interceptor(Collections.singletonList(httpLoggingInterceptor))
-                    .proxy(proxy)
+//                    .proxy(proxy)
                     .apiHost(openAiApiBaseUrl)
                     .build();
 //        openAiClient.model("gpt-3.5-turbo");
@@ -86,12 +86,12 @@ public class ChatGPTServiceImpl implements ChatGPTService {
         Message res = null;
         try {
             //国内需要代理 国外不需要
-            String proxyHostIp = InterNetUtil.domainNameToIp("101.33.242.250");
-            Proxy proxy = Proxys.http(proxyHostIp, 8098);
+//            String proxyHostIp = InterNetUtil.domainNameToIp(proxyHostName);
+//            Proxy proxy = Proxys.http(proxyHostIp, proxyPort);
 
             ChatGPT chatGPT = ChatGPT.builder()
                     .apiKey(openAiApiKey)
-                    .proxy(proxy)
+//                    .proxy(proxy)
                     .timeout(3000)
                     //反向代理地址
                     .apiHost(openAiApiBaseUrl)
@@ -109,6 +109,7 @@ public class ChatGPTServiceImpl implements ChatGPTService {
             ChatCompletionResponse response = chatGPT.chatCompletion(chatCompletion);
             res = response.getChoices().get(0).getMessage();
         } catch (Exception e) {
+            e.printStackTrace();
             return ResultEnum.CONNECT_TIME_OUT.getMessage();
         }
 
