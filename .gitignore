@@ -1,33 +1,89 @@
-HELP.md
-target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+# Compiled class file
+*.class
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
+# Log files
+*.log
+/log/
+/logs/
 
-### IntelliJ IDEA ###
-.idea
-*.iws
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# virtual machine crash logs
+hs_err_pid*
+
+# IDE files
+.idea/
 *.iml
+*.iws
 *.ipr
-
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
-
-### VS Code ###
+.classpath
+.project
+.settings/
 .vscode/
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# Spring Boot
+application-*.properties
+application-*.yml
+!application.properties
+!application-example.yml
+!application-example.properties
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Sensitive information
+src/main/resources/application-dev.yml
+src/main/resources/application-prod.yml
+src/main/resources/application-test.yml
+src/main/resources/application-local.yml
+*.key
+*.pem
+*.p12
+*.pfx
+*.jks
+
+# Elasticsearch
+data/
+/data/
+
+# Redis dump file
+*.rdb
+
+# Temp files
+*.swp
+*.swo
+*~
