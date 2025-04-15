@@ -1,0 +1,70 @@
+spring:
+  #数据源
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/cip?serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+      username: your_username
+      password: your_password
+      transaction-query-timeout: 10
+
+  #邮件发送相关
+  mail:
+    host: smtp.qq.com
+    username: your_email@qq.com
+    password: your_email_auth_code
+    default-encoding: utf-8
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          ssl:
+            enable: true
+            socketFactory:
+              port: 465
+              class: javax.net.ssl.SSLSocketFactory
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm
+    time-zone: Asia/Shanghai
+
+  profiles:
+    active: dev
+
+  # redis相关
+  redis:
+    host: localhost
+    port: 6379
+    client-type: lettuce
+
+  # 缓存相关
+  cache:
+    type: redis
+    redis:
+      use-key-prefix: true
+      key-prefix: cip_
+      time-to-live: 300s
+      cache-null-values: true
+  
+  elasticsearch:
+    uris: http://localhost:9200
+
+server:
+  port: 8099
+  servlet:
+    context-path: "/cip"
+
+chatGPT:
+  openAiApiBaseUrl: your_api_base_url
+  openAiApiKey: your_api_key
+  proxyHostName: your_proxy_host
+  proxyPort: your_proxy_port
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
